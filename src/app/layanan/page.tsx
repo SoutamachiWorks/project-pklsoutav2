@@ -1,7 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { MedalIcon, SportIcon, UsersIcon, CalendarIcon, SettingsIcon, CheckIcon, NewsIcon, MegaphoneIcon, TargetIcon } from '@/components/Icons';
+import { MedalIcon, SportIcon, UsersIcon, CalendarIcon, SettingsIcon, NewsIcon, MegaphoneIcon, TargetIcon } from '@/components/Icons';
 
 export default function LayananPage() {
   const mainServices = [

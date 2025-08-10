@@ -34,7 +34,7 @@ const StatsSection = () => {
     setTimeout(() => clearInterval(timer), duration);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [finalNumbers.athletes, finalNumbers.medals, finalNumbers.events, finalNumbers.facilities]);
 
   const stats = [
     {
@@ -160,7 +160,7 @@ const StatsSection = () => {
               Visi
             </h3>
             <p className="text-gray-200 leading-relaxed">
-              "Terwujudnya Sumatera Barat yang unggul dalam bidang kepemudaan dan keolahragaan melalui pembinaan yang berkelanjutan dan prestasi yang membanggakan."
+              &quot;Terwujudnya Sumatera Barat yang unggul dalam bidang kepemudaan dan keolahragaan melalui pembinaan yang berkelanjutan dan prestasi yang membanggakan.&quot;
             </p>
           </div>
           
