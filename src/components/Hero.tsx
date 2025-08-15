@@ -92,7 +92,7 @@ const Hero = () => {
           <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
             <div className="max-w-2xl text-white">
               <div className="mb-4">
-                <span className="inline-block px-3 py-1 bg-white bg-opacity-20 rounded-full text-sm font-medium">
+                <span className="inline-block px-3 py-1 bg-white bg-opacity-20 rounded-full text-sm font-bold text-red-500">
                   {slide.subtitle}
                 </span>
               </div>

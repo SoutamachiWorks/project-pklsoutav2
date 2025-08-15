@@ -105,17 +105,17 @@ const StatsSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, index) => (
             <div key={index} className="relative group">
-              <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300">
+              <div className="bg-white bg-opacity-95 backdrop-blur-lg rounded-xl p-6 border border-gray-200 hover:bg-opacity-100 transition-all duration-300 shadow-lg">
                 <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${stat.color} rounded-full mb-4 text-white`}>
                   {stat.icon}
                 </div>
-                <div className="text-3xl md:text-4xl font-bold mb-2">
+                <div className="text-3xl md:text-4xl font-bold mb-2 text-gray-800">
                   {stat.number.toLocaleString()}+
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-white">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">
                   {stat.label}
                 </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {stat.description}
                 </p>
               </div>
@@ -124,27 +124,27 @@ const StatsSection = () => {
         </div>
 
         {/* Recent Achievements */}
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-20">
+        <div className="bg-white bg-opacity-95 backdrop-blur-lg rounded-2xl p-8 border border-gray-200 mb-16 shadow-lg">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-2">Prestasi Terbaru</h3>
-            <p className="text-gray-300">Pencapaian gemilang yang membanggakan Sumatera Barat</p>
+            <h3 className="text-2xl font-bold mb-2 text-gray-800">Prestasi Terbaru</h3>
+            <p className="text-gray-600">Pencapaian gemilang yang membanggakan Sumatera Barat</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {achievements.map((achievement, index) => (
-              <div key={index} className="bg-white bg-opacity-10 rounded-xl p-6 border border-white border-opacity-10">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-semibold">
+              <div key={index} className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:bg-gray-100 transition-all duration-300 shadow-sm">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+                  <span className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold inline-block w-fit">
                     {achievement.year}
                   </span>
-                  <span className="text-xs text-gray-300 uppercase tracking-wide">
+                  <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">
                     {achievement.category}
                   </span>
                 </div>
-                <h4 className="font-bold text-lg mb-2 leading-tight">
+                <h4 className="font-bold text-lg mb-3 leading-tight text-gray-800">
                   {achievement.title}
                 </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {achievement.description}
                 </p>
               </div>
@@ -153,34 +153,34 @@ const StatsSection = () => {
         </div>
 
         {/* Vision & Mission */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-8 border border-white border-opacity-20">
-            <h3 className="text-2xl font-bold mb-4 flex items-center">
-              <TargetIcon className="mr-3 w-6 h-6" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-white bg-opacity-95 backdrop-blur-lg rounded-xl p-8 border border-gray-200 hover:bg-opacity-100 transition-all duration-300 shadow-lg">
+            <h3 className="text-2xl font-bold mb-6 flex items-center text-gray-800">
+              <TargetIcon className="mr-3 w-6 h-6 text-red-600" />
               Visi
             </h3>
-            <p className="text-gray-200 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed text-base">
               &quot;Terwujudnya Sumatera Barat yang unggul dalam bidang kepemudaan dan keolahragaan melalui pembinaan yang berkelanjutan dan prestasi yang membanggakan.&quot;
             </p>
           </div>
           
-          <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-8 border border-white border-opacity-20">
-            <h3 className="text-2xl font-bold mb-4 flex items-center">
-              <StarIcon className="mr-3 w-6 h-6" />
+          <div className="bg-white bg-opacity-95 backdrop-blur-lg rounded-xl p-8 border border-gray-200 hover:bg-opacity-100 transition-all duration-300 shadow-lg">
+            <h3 className="text-2xl font-bold mb-6 flex items-center text-gray-800">
+              <StarIcon className="mr-3 w-6 h-6 text-red-600" />
               Misi
             </h3>
-            <ul className="space-y-3 text-gray-200">
+            <ul className="space-y-4 text-gray-700">
               <li className="flex items-start">
-                <span className="text-yellow-400 mr-2 mt-1">•</span>
-                <span>Mengembangkan sistem pembinaan olahraga yang terintegrasi</span>
+                <span className="text-red-600 mr-3 mt-1 text-lg">•</span>
+                <span className="text-base leading-relaxed">Mengembangkan sistem pembinaan olahraga yang terintegrasi</span>
               </li>
               <li className="flex items-start">
-                <span className="text-yellow-400 mr-2 mt-1">•</span>
-                <span>Meningkatkan kapasitas dan karakter generasi muda</span>
+                <span className="text-red-600 mr-3 mt-1 text-lg">•</span>
+                <span className="text-base leading-relaxed">Meningkatkan kapasitas dan karakter generasi muda</span>
               </li>
               <li className="flex items-start">
-                <span className="text-yellow-400 mr-2 mt-1">•</span>
-                <span>Menciptakan prestasi olahraga yang membanggakan daerah</span>
+                <span className="text-red-600 mr-3 mt-1 text-lg">•</span>
+                <span className="text-base leading-relaxed">Menciptakan prestasi olahraga yang membanggakan daerah</span>
               </li>
             </ul>
           </div>

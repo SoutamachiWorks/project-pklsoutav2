@@ -213,4 +213,9 @@
     background-position: center;
     background-repeat: no-repeat;
   }
+
+  /* Custom modal background */
+  .modal-bg-transparent {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+  }
 }

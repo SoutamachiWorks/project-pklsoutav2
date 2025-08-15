@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { EyeIcon, ArrowRightIcon, AlertIcon } from './Icons';
 
 const NewsSection = () => {
@@ -11,7 +12,7 @@ const NewsSection = () => {
     time: "14:59:09 WIB",
     views: 112,
     category: "TERKINI",
-    image: "/news/featured-news.jpg",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     slug: "seleksi-penerimaan-siswa-baru-binaan-uptd"
   };
 
@@ -24,7 +25,7 @@ const NewsSection = () => {
       time: "09:43:52 WIB",
       views: 102,
       category: "TERKINI",
-      image: "/news/news2.jpg",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
       slug: "laporan-layanan-informasi-publik-2024"
     },
     {
@@ -35,7 +36,7 @@ const NewsSection = () => {
       time: "11:13:07 WIB",
       views: 280,
       category: "TERKINI",
-      image: "/news/news3.jpg",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
       slug: "lhkpn-pimpinan-dispora-sumbar-2024"
     },
     {
@@ -46,7 +47,7 @@ const NewsSection = () => {
       time: "08:15:09 WIB",
       views: 456,
       category: "OLAHRAGA",
-      image: "/news/news4.jpg",
+      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
       slug: "turnamen-sepakbola-piala-gubernur"
     },
     {
@@ -57,7 +58,7 @@ const NewsSection = () => {
       time: "17:08:08 WIB",
       views: 934,
       category: "PRESTASI",
-      image: "/news/news5.jpg",
+      image: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
       slug: "kadispora-motivasi-atlet"
     }
   ];
@@ -91,7 +92,14 @@ const NewsSection = () => {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
               <div className="relative">
-                <div className="h-64 bg-gradient-to-r from-red-500 to-orange-500"></div>
+                <div className="h-64 relative overflow-hidden">
+                  <Image
+                    src={featuredNews.image}
+                    alt={featuredNews.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <div className="absolute top-4 left-4">
                   <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                     {featuredNews.category}
@@ -121,7 +129,14 @@ const NewsSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {latestNews.map((news) => (
                 <div key={news.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                  <div className="h-48 relative overflow-hidden">
+                    <Image
+                      src={news.image}
+                      alt={news.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="p-4">
                     <div className="flex items-center mb-2">
                       <span className={`text-xs px-2 py-1 rounded-full text-white ${
