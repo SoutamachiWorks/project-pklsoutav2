@@ -87,63 +87,14 @@ const Header = () => {
               <Link href="/profil" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
                 PROFIL
               </Link>
-              <div className="relative group">
-                <button className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
-                  KATEGORI
-                  <ArrowDownIcon className="ml-1 w-4 h-4" />
-                </button>
-                <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                  <Link href="/berita?kategori=olahraga" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    Berita Olahraga
-                  </Link>
-                  <Link href="/berita?kategori=ppid" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    PPID
-                  </Link>
-                  <Link href="/berita?kategori=daerah" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    Daerah
-                  </Link>
-                  <Link href="/berita?kategori=agenda" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    Agenda Kegiatan
-                  </Link>
-                  <Link href="/berita?kategori=bidang-olahraga" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    Bidang Olahraga
-                  </Link>
-                  <Link href="/berita?kategori=uptd-pplp" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    UPTD PPLP
-                  </Link>
-                </div>
-              </div>
               <Link href="/berita" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
                 BERITA
               </Link>
-              <div className="relative group">
-                <button className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
-                  DOWNLOAD AREA
-                  <ArrowDownIcon className="ml-1 w-4 h-4" />
-                </button>
-                <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                  <Link href="/layanan" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    Informasi Layanan
-                  </Link>
-                  <Link href="/lapor" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    Lapor
-                  </Link>
-                  <Link href="/resipora" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    Resipora
-                  </Link>
-                  <Link href="/sippko" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    SIPPKO
-                  </Link>
-                  <Link href="/sidaka" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
-                    SIDAKA
-                  </Link>
-                </div>
-              </div>
               <Link href="/galeri" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
-                DATA
+                GALERI
               </Link>
-              <Link href="/pengumuman" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
-                PENGUMUMAN
+              <Link href="/program" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+                PROGRAM
               </Link>
               <Link href="/kontak" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
                 HUBUNGI KAMI
@@ -151,6 +102,20 @@ const Header = () => {
               <Link href="/ppid" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
                 PPID
               </Link>
+              <div className="relative group">
+                <button className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
+                  UNDUH & LAPOR
+                  <ArrowDownIcon className="ml-1 w-4 h-4" />
+                </button>
+                <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <Link href="/download/laporan" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                    Laporan
+                  </Link>
+                  <Link href="/download/dokumen" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                    Unduh
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -165,19 +130,13 @@ const Header = () => {
                   PROFIL
                 </Link>
                 <Link href="/berita" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
-                  KATEGORI
-                </Link>
-                <Link href="/berita" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
                   BERITA
                 </Link>
-                <Link href="/layanan" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
-                  DOWNLOAD AREA
-                </Link>
                 <Link href="/galeri" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
-                  DATA
+                  GALERI
                 </Link>
-                <Link href="/pengumuman" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
-                  PENGUMUMAN
+                <Link href="/program" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
+                  PROGRAM
                 </Link>
                 <Link href="/kontak" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
                   HUBUNGI KAMI
@@ -185,6 +144,20 @@ const Header = () => {
                 <Link href="/ppid" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
                   PPID
                 </Link>
+                <div className="relative group">
+                  <button className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
+                    UNDUH & LAPOR
+                    <ArrowDownIcon className="ml-1 w-4 h-4" />
+                  </button>
+                  <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <Link href="/download/laporan" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                      Laporan
+                    </Link>
+                    <Link href="/download/dokumen" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                      Unduh
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           )}

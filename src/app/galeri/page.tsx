@@ -1,9 +1,14 @@
+'use client';
+
+import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { CalendarIcon, LocationIcon } from '@/components/Icons';
 
 export default function GaleriPage() {
+  const [activeTab, setActiveTab] = useState<'photo' | 'video'>('photo');
+  const [activeCategory, setActiveCategory] = useState('Semua');
   const photoGallery = [
     {
       id: 1,
@@ -154,16 +159,36 @@ export default function GaleriPage() {
     }
   ];
 
-  const categories = [
-    { name: "Semua", count: 150, active: true },
-    { name: "Seleksi", count: 25, active: false },
-    { name: "Upacara", count: 18, active: false },
-    { name: "Event", count: 32, active: false },
-    { name: "Kejuaraan", count: 28, active: false },
-    { name: "Pelatihan", count: 22, active: false },
-    { name: "Kunjungan", count: 15, active: false },
-    { name: "Rutin", count: 10, active: false }
+  const photoCategories = [
+    { name: "Semua", count: 150 },
+    { name: "Seleksi", count: 25 },
+    { name: "Upacara", count: 18 },
+    { name: "Event", count: 32 },
+    { name: "Kejuaraan", count: 28 },
+    { name: "Pelatihan", count: 22 },
+    { name: "Kunjungan", count: 15 },
+    { name: "Rutin", count: 10 }
   ];
+
+  const videoCategories = [
+    { name: "Semua", count: 89 },
+    { name: "Prestasi", count: 15 },
+    { name: "Profil", count: 12 },
+    { name: "Kegiatan", count: 25 },
+    { name: "Kejuaraan", count: 18 },
+    { name: "Pelatihan", count: 10 },
+    { name: "Infrastruktur", count: 9 }
+  ];
+
+  const currentCategories = activeTab === 'photo' ? photoCategories : videoCategories;
+  
+  const filteredPhotos = activeCategory === 'Semua' 
+    ? photoGallery 
+    : photoGallery.filter(item => item.category === activeCategory);
+  
+  const filteredVideos = activeCategory === 'Semua' 
+    ? videoGallery 
+    : videoGallery.filter(item => item.category === activeCategory);
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -194,10 +219,30 @@ export default function GaleriPage() {
         {/* Tab Navigation */}
         <div className="flex justify-center mb-8">
           <div className="bg-white rounded-lg shadow-md p-1 flex">
-            <button className="px-6 py-3 rounded-md font-semibold bg-red-600 text-white">
+            <button 
+              onClick={() => {
+                setActiveTab('photo');
+                setActiveCategory('Semua');
+              }}
+              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 ${
+                activeTab === 'photo' 
+                  ? 'bg-red-600 text-white' 
+                  : 'text-gray-600 hover:text-red-600'
+              }`}
+            >
               📷 Galeri Foto
             </button>
-            <button className="px-6 py-3 rounded-md font-semibold text-gray-600 hover:text-red-600">
+            <button 
+              onClick={() => {
+                setActiveTab('video');
+                setActiveCategory('Semua');
+              }}
+              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 ${
+                activeTab === 'video' 
+                  ? 'bg-red-600 text-white' 
+                  : 'text-gray-600 hover:text-red-600'
+              }`}
+            >
               🎥 Galeri Video
             </button>
           </div>
@@ -210,11 +255,12 @@ export default function GaleriPage() {
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
               <h3 className="font-bold text-lg text-gray-800 mb-4">Filter Kategori</h3>
               <div className="space-y-2">
-                {categories.map((category, index) => (
+                {currentCategories.map((category, index) => (
                   <button
                     key={index}
+                    onClick={() => setActiveCategory(category.name)}
                     className={`w-full flex items-center justify-between py-2 px-3 rounded text-left transition-colors ${
-                      category.active 
+                      activeCategory === category.name 
                         ? 'bg-red-50 text-red-600 border-l-4 border-red-600' 
                         : 'hover:bg-gray-50 text-gray-700'
                     }`}
@@ -254,17 +300,24 @@ export default function GaleriPage() {
               <h3 className="font-bold text-lg text-gray-800 mb-4">Album Populer</h3>
               <div className="space-y-4">
                 {photoGallery.slice(0, 3).map((album, index) => (
-                  <div key={album.id} className="flex space-x-3">
-                    <div className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  <button
+                    key={album.id}
+                    onClick={() => {
+                      setActiveTab('photo');
+                      setActiveCategory(album.category);
+                    }}
+                    className="flex space-x-3 w-full text-left hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 group"
+                  >
+                    <div className="flex-shrink-0 w-8 h-8 bg-red-600 group-hover:bg-red-700 text-white rounded-full flex items-center justify-center text-sm font-bold transition-colors duration-200">
                       {index + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-medium text-gray-800 leading-tight line-clamp-2 mb-1">
+                      <h4 className="text-sm font-medium text-gray-800 group-hover:text-red-600 leading-tight line-clamp-2 mb-1 transition-colors duration-200">
                         {album.title}
                       </h4>
                       <p className="text-xs text-gray-500">{album.views.toLocaleString()} views</p>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -273,8 +326,9 @@ export default function GaleriPage() {
           {/* Main Content */}
           <div className="lg:col-span-3">
             {/* Photo Gallery Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {photoGallery.map((album) => (
+            {activeTab === 'photo' && (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredPhotos.map((album) => (
                 <div key={album.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
                   {/* Image Placeholder */}
                   <div className="relative h-48 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
@@ -329,13 +383,13 @@ export default function GaleriPage() {
                   </div>
                 </div>
               ))}
-            </div>
+              </div>
+            )}
 
             {/* Video Gallery */}
-            <div className="mt-16">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Video Dokumentasi</h2>
+            {activeTab === 'video' && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {videoGallery.map((video) => (
+                {filteredVideos.map((video) => (
                   <div key={video.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
                     {/* Video Thumbnail */}
                     <div className="relative h-40 bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 overflow-hidden">
@@ -381,41 +435,35 @@ export default function GaleriPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            )}
+
+            {/* Empty State */}
+            {((activeTab === 'photo' && filteredPhotos.length === 0) || 
+              (activeTab === 'video' && filteredVideos.length === 0)) && (
+              <div className="text-center py-16">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Tidak ada {activeTab === 'photo' ? 'foto' : 'video'} ditemukan</h3>
+                <p className="text-gray-600">Coba pilih kategori lain atau kembali ke &quot;Semua&quot;</p>
+              </div>
+            )}
 
             {/* Pagination */}
-            <div className="flex justify-center mt-12">
-              <div className="flex space-x-2">
-                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
-                  ← Sebelumnya
-                </button>
-                <button className="px-4 py-2 bg-red-600 text-white rounded-lg">1</button>
-                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">2</button>
-                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">3</button>
-                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
-                  Selanjutnya →
-                </button>
+            {((activeTab === 'photo' && filteredPhotos.length > 0) || 
+              (activeTab === 'video' && filteredVideos.length > 0)) && (
+              <div className="flex justify-center mt-12">
+                <div className="flex space-x-2">
+                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                    ← Sebelumnya
+                  </button>
+                  <button className="px-4 py-2 bg-red-600 text-white rounded-lg">1</button>
+                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">2</button>
+                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">3</button>
+                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
+                    Selanjutnya →
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Upload Section */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Punya Dokumentasi Kegiatan?</h2>
-          <p className="text-lg mb-6 opacity-90">
-            Bagikan dokumentasi kegiatan Anda dengan kami untuk dipublikasikan di galeri resmi
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-300">
-              📤 Upload Foto/Video
-            </button>
-            <Link 
-              href="/kontak"
-              className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-colors duration-300"
-            >
-              💬 Hubungi Admin
-            </Link>
+            )}
           </div>
         </div>
       </div>

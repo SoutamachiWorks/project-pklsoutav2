@@ -90,7 +90,7 @@ const ServicesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {services.map((service) => (
             <div key={service.id} className="group">
-              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
+              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full w-full">
                 {/* Header with gradient */}
                 <div className={`bg-gradient-to-r ${service.color} p-6 text-white`}>
                   <div className="text-white mb-3">{service.icon}</div>
@@ -99,27 +99,29 @@ const ServicesSection = () => {
                 </div>
                 
                 {/* Content */}
-                <div className="p-6">
-                  <p className="text-gray-600 mb-4 leading-relaxed">
+                <div className="p-6 flex-grow flex flex-col">
+                  <p className="text-gray-600 mb-4 leading-relaxed flex-grow min-h-[5rem]">
                     {service.description}
                   </p>
                   
                   {/* Features */}
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-2 mb-6 min-h-[7rem]">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-sm text-gray-600">
-                        <CheckIcon className="text-green-500 mr-2 w-4 h-4" />
+                        <CheckIcon className="text-green-500 mr-2 w-4 h-4 flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
                   </ul>
                   
-                  <Link 
-                    href={service.link}
-                    className="block w-full text-center py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors duration-300 group-hover:bg-red-600 group-hover:text-white"
-                  >
-                    Pelajari Lebih Lanjut
-                  </Link>
+                  <div className="mt-auto">
+                    <Link 
+                      href={service.link}
+                      className="block w-full text-center py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors duration-300 group-hover:bg-red-600 group-hover:text-white"
+                    >
+                      Pelajari Lebih Lanjut
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

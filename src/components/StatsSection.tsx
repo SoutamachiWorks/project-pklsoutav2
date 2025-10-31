@@ -105,17 +105,17 @@ const StatsSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, index) => (
             <div key={index} className="relative group">
-              <div className="bg-white bg-opacity-95 backdrop-blur-lg rounded-xl p-6 border border-gray-200 hover:bg-opacity-100 transition-all duration-300 shadow-lg">
+              <div className="bg-white bg-opacity-95 backdrop-blur-lg rounded-xl p-6 border border-gray-200 hover:bg-opacity-100 transition-all duration-300 shadow-lg flex flex-col h-full w-full">
                 <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${stat.color} rounded-full mb-4 text-white`}>
                   {stat.icon}
                 </div>
                 <div className="text-3xl md:text-4xl font-bold mb-2 text-gray-800">
                   {stat.number.toLocaleString()}+
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-gray-800">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800 min-h-[3.5rem] flex items-center">
                   {stat.label}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed flex-grow">
                   {stat.description}
                 </p>
               </div>

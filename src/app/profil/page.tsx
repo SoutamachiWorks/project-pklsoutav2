@@ -8,6 +8,11 @@ import { MedalIcon, PhoneIcon } from '@/components/Icons';
 
 export default function ProfilPage() {
   const [activeTab, setActiveTab] = useState('visi-misi');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
 
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
@@ -125,8 +130,52 @@ export default function ProfilPage() {
       kapasitas: "150 peserta",
       fasilitas: ["Aula", "Ruang Meeting", "Penginapan", "Lapangan"],
       kondisi: "Baik"
-    }
+    },
   ];
+
+  // Filter sarana berdasarkan search term
+  const filteredSarana = saranaPrasarana.filter(sarana =>
+    sarana.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    sarana.jenis.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    sarana.fasilitas.some(f => f.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredSarana.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentSarana = filteredSarana.slice(startIndex, endIndex);
+
+  // Reset to page 1 when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  // Auto-play slider for prestasi
+  useEffect(() => {
+    if (!isAutoPlay) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % prestasi.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoPlay]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % prestasi.length);
+    setIsAutoPlay(false);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + prestasi.length) % prestasi.length);
+    setIsAutoPlay(false);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setIsAutoPlay(false);
+  };
 
   const prestasi = [
     {
@@ -182,7 +231,7 @@ export default function ProfilPage() {
 
       <div className="container mx-auto px-4 py-12">
         {/* Navigation Tabs - Sticky */}
-        <div className="sticky top-20 z-40 mb-12">
+        <div className="sticky top-5 z-40 mb-12">
           <div className="flex flex-wrap justify-center bg-white rounded-lg shadow-md p-1">
             <button 
               onClick={() => scrollToSection('visi-misi')}
@@ -274,21 +323,21 @@ export default function ProfilPage() {
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-12">Tugas & Fungsi</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Tugas */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
+            <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full">
               <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                 Tugas Pokok
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed flex-grow">
                 {tugasFungsi.tugas}
               </p>
             </div>
 
             {/* Fungsi */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
+            <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full">
               <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                 Fungsi
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3 flex-grow">
                 {tugasFungsi.fungsi.map((item, index) => (
                   <li key={index} className="flex items-start">
                     <span className="text-orange-600 mr-2 mt-1">•</span>
@@ -340,70 +389,242 @@ export default function ProfilPage() {
 
         {/* Sarana & Prasarana */}
         <section id="sarana-prasarana" className="mb-16 scroll-mt-24">
-          <h2 className="text-3xl font-bold text-gray-800 text-center mb-12">Sarana & Prasarana</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {saranaPrasarana.map((sarana, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="h-48 bg-gradient-to-br from-green-400 to-blue-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-gray-800">{sarana.nama}</h3>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      sarana.kondisi === 'Sangat Baik' ? 'bg-green-100 text-green-800' :
-                      sarana.kondisi === 'Baik' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {sarana.kondisi}
-                    </span>
-                  </div>
-                  <p className="text-gray-600 text-sm mb-2">{sarana.jenis}</p>
-                  <p className="text-gray-600 text-sm mb-4">Kapasitas: {sarana.kapasitas}</p>
-                  
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Fasilitas:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {sarana.fasilitas.map((fasilitas, idx) => (
-                        <span key={idx} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
-                          {fasilitas}
+          <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Sarana & Prasarana</h2>
+          
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Cari sarana berdasarkan nama, jenis, atau fasilitas..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+              />
+              <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <p className="text-sm text-gray-500 mt-2 text-center">
+              Ditemukan {filteredSarana.length} sarana prasarana
+            </p>
+          </div>
+
+          {/* Results */}
+          {currentSarana.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {currentSarana.map((sarana, index) => (
+                  <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div className="h-48 bg-gradient-to-br from-green-400 to-blue-500"></div>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-bold text-gray-800">{sarana.nama}</h3>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          sarana.kondisi === 'Sangat Baik' ? 'bg-green-100 text-green-800' :
+                          sarana.kondisi === 'Baik' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {sarana.kondisi}
                         </span>
-                      ))}
+                      </div>
+                      <p className="text-gray-600 text-sm mb-2">{sarana.jenis}</p>
+                      <p className="text-gray-600 text-sm mb-4">Kapasitas: {sarana.kapasitas}</p>
+                      
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Fasilitas:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {sarana.fasilitas.map((fasilitas, idx) => (
+                            <span key={idx} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                              {fasilitas}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Halaman sebelumnya"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  
+                  <div className="flex gap-2">
+                    {[...Array(totalPages)].map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentPage(index + 1)}
+                        className={`px-4 py-2 rounded-lg transition-colors ${
+                          currentPage === index + 1
+                            ? 'bg-red-600 text-white'
+                            : 'bg-white border border-gray-300 hover:bg-gray-50'
+                        }`}
+                        aria-label={`Halaman ${index + 1}`}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Halaman berikutnya"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-gray-600 text-lg">Tidak ada sarana ditemukan</p>
+              <p className="text-gray-500 text-sm mt-2">Coba gunakan kata kunci lain</p>
+            </div>
+          )}
         </section>
 
         {/* Prestasi */}
         <section id="prestasi" className="mb-16 scroll-mt-24">
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-12">Prestasi Terkini</h2>
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gradient-to-r from-red-600 to-orange-600 text-white">
-                  <tr>
-                    <th className="px-6 py-4 text-left">Tahun</th>
-                    <th className="px-6 py-4 text-left">Event</th>
-                    <th className="px-6 py-4 text-left">Prestasi</th>
-                    <th className="px-6 py-4 text-left">Perolehan Medali</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {prestasi.map((item, index) => (
-                    <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
-                      <td className="px-6 py-4 font-semibold text-gray-800">{item.tahun}</td>
-                      <td className="px-6 py-4 text-gray-600">{item.event}</td>
-                      <td className="px-6 py-4">
-                        <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                          {item.prestasi}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-gray-600">{item.medali}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          
+          <div className="relative bg-white rounded-xl shadow-lg overflow-hidden">
+            {/* Slider Container */}
+            <div className="relative h-[400px] md:h-[450px]">
+              {prestasi.map((item, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                    index === currentSlide
+                      ? 'opacity-100 translate-x-0'
+                      : index < currentSlide
+                      ? 'opacity-0 -translate-x-full'
+                      : 'opacity-0 translate-x-full'
+                  }`}
+                >
+                  <div className="h-full flex flex-col justify-center items-center p-8 md:p-12">
+                    {/* Year Badge */}
+                    <div className="inline-block bg-gradient-to-r from-red-600 to-orange-600 text-white px-6 py-2 rounded-full text-2xl font-bold mb-6">
+                      {item.tahun}
+                    </div>
+                    
+                    {/* Event Name */}
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 text-center">
+                      {item.event}
+                    </h3>
+                    
+                    {/* Achievement Badge */}
+                    <div className="bg-green-100 text-green-800 px-6 py-3 rounded-full text-lg font-semibold mb-8">
+                      🏆 {item.prestasi}
+                    </div>
+                    
+                    {/* Medals */}
+                    <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+                      <div className="text-center">
+                        <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-2 shadow-lg">
+                          <span className="text-3xl md:text-4xl">🥇</span>
+                        </div>
+                        <p className="text-2xl md:text-3xl font-bold text-gray-800">
+                          {item.medali.split(',')[0].trim().split(' ')[0]}
+                        </p>
+                        <p className="text-sm text-gray-600">Emas</p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center mb-2 shadow-lg">
+                          <span className="text-3xl md:text-4xl">🥈</span>
+                        </div>
+                        <p className="text-2xl md:text-3xl font-bold text-gray-800">
+                          {item.medali.split(',')[1].trim().split(' ')[0]}
+                        </p>
+                        <p className="text-sm text-gray-600">Perak</p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mb-2 shadow-lg">
+                          <span className="text-3xl md:text-4xl">🥉</span>
+                        </div>
+                        <p className="text-2xl md:text-3xl font-bold text-gray-800">
+                          {item.medali.split(',')[2].trim().split(' ')[0]}
+                        </p>
+                        <p className="text-sm text-gray-600">Perunggu</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 z-10 group"
+              aria-label="Slide sebelumnya"
+            >
+              <svg className="w-6 h-6 text-gray-800 group-hover:text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 z-10 group"
+              aria-label="Slide berikutnya"
+            >
+              <svg className="w-6 h-6 text-gray-800 group-hover:text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Dots Navigation */}
+            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+              {prestasi.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`transition-all duration-300 rounded-full ${
+                    index === currentSlide
+                      ? 'w-8 h-3 bg-red-600'
+                      : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Pergi ke slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Auto-play Toggle */}
+            <button
+              onClick={() => setIsAutoPlay(!isAutoPlay)}
+              className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10"
+              aria-label={isAutoPlay ? 'Pause auto-play' : 'Resume auto-play'}
+            >
+              {isAutoPlay ? (
+                <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+            </button>
           </div>
         </section>
 

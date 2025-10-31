@@ -1,3 +1,5 @@
+'use client';
+
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -132,7 +134,7 @@ export default function ProgramPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50" suppressHydrationWarning>
       <Header />
       
       {/* Breadcrumb */}
@@ -200,9 +202,9 @@ export default function ProgramPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programPemuda.map((program) => (
-              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
                 <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500"></div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-3">
                     <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">
                       {program.category}
@@ -240,7 +242,7 @@ export default function ProgramPage() {
                     )}
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-4 flex-grow">
                     <h4 className="font-semibold text-gray-800 mb-2">Fasilitas:</h4>
                     <div className="flex flex-wrap gap-1">
                       {program.fasilitas.map((fasilitas, idx) => (
@@ -251,7 +253,7 @@ export default function ProgramPage() {
                     </div>
                   </div>
 
-                  <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors duration-300">
+                  <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors duration-300 mt-auto">
                     Daftar Sekarang
                   </button>
                 </div>
@@ -271,9 +273,9 @@ export default function ProgramPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programOlahraga.map((program) => (
-              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
                 <div className="h-48 bg-gradient-to-br from-orange-400 to-red-500"></div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-3">
                     <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-medium">
                       {program.category}
@@ -311,7 +313,7 @@ export default function ProgramPage() {
                     )}
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-4 flex-grow">
                     <h4 className="font-semibold text-gray-800 mb-2">Fasilitas:</h4>
                     <div className="flex flex-wrap gap-1">
                       {program.fasilitas.map((fasilitas, idx) => (
@@ -322,7 +324,7 @@ export default function ProgramPage() {
                     </div>
                   </div>
 
-                  <button className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-colors duration-300">
+                  <button className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-colors duration-300 mt-auto">
                     Daftar Sekarang
                   </button>
                 </div>
@@ -342,7 +344,7 @@ export default function ProgramPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {programUnggulan.map((program, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg p-8">
+              <div key={index} className="bg-white rounded-xl shadow-lg p-8 flex flex-col">
                 <h3 className="text-2xl font-bold text-gray-800 mb-4">{program.title}</h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">{program.description}</p>
                 
@@ -361,7 +363,7 @@ export default function ProgramPage() {
                   <h4 className="font-semibold text-gray-800 mb-2">Peserta: {program.participants}</h4>
                 </div>
 
-                <div className="mb-6">
+                <div className="mb-6 flex-grow">
                   <h4 className="font-semibold text-gray-800 mb-3">Highlight Acara:</h4>
                   <div className="grid grid-cols-2 gap-2">
                     {program.highlights.map((highlight, idx) => (
@@ -373,7 +375,7 @@ export default function ProgramPage() {
                   </div>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors duration-300">
+                <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors duration-300 mt-auto">
                   Daftar Partisipasi
                 </button>
               </div>
@@ -392,7 +394,7 @@ export default function ProgramPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {beasiswa.map((item, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-yellow-500">
+              <div key={index} className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-yellow-500 flex flex-col">
                 <div className="text-center mb-4">
                   <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <span className="text-yellow-600 text-2xl">🎓</span>
@@ -402,7 +404,7 @@ export default function ProgramPage() {
                 
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">{item.deskripsi}</p>
                 
-                <div className="mb-4">
+                <div className="mb-4 flex-grow">
                   <h4 className="font-semibold text-gray-800 mb-2">Syarat:</h4>
                   <ul className="space-y-1">
                     {item.syarat.map((syarat, idx) => (
@@ -425,7 +427,7 @@ export default function ProgramPage() {
                   </p>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-3 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-colors duration-300">
+                <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-3 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-colors duration-300 mt-auto">
                   Ajukan Beasiswa
                 </button>
               </div>
