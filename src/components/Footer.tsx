@@ -211,11 +211,11 @@ const Footer = () => {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 z-50 group"
+          className="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-orange-600 hover:bg-orange-700 text-white p-3 md:p-4 rounded-full shadow-lg transition-all duration-300 z-50 group"
           aria-label="Kembali ke atas"
         >
           <svg 
-            className="w-6 h-6 transform group-hover:-translate-y-1 transition-transform duration-300" 
+            className="w-5 h-5 md:w-6 md:h-6 transform group-hover:-translate-y-1 transition-transform duration-300" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
