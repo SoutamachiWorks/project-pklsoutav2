@@ -3,6 +3,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 import { UsersIcon, TargetIcon, MedalIcon } from '@/components/Icons';
 
 export default function ProgramPage() {
@@ -17,7 +18,7 @@ export default function ProgramPage() {
       peserta: "500 peserta",
       fasilitas: ["Pelatihan gratis", "Sertifikat", "Networking", "Magang"],
       status: "Pendaftaran Dibuka",
-      image: "/api/placeholder/400/300",
+      image: "/programs/sumpah-pemuda-digital.jpg",
       deadline: "31 Desember 2024"
     },
     {
@@ -30,7 +31,7 @@ export default function ProgramPage() {
       peserta: "200 peserta",
       fasilitas: ["Modal usaha", "Mentoring", "Pelatihan bisnis", "Jaringan pasar"],
       status: "Akan Dibuka",
-      image: "/api/placeholder/400/300",
+      image: "/programs/wirausaha-muda.jpg",
       deadline: "15 Januari 2025"
     },
     {
@@ -43,7 +44,7 @@ export default function ProgramPage() {
       peserta: "1000 peserta",
       fasilitas: ["Pelatihan SAR", "Peralatan", "Sertifikat", "Tim response"],
       status: "Sedang Berjalan",
-      image: "/api/placeholder/400/300",
+      image: "/programs/pemuda-tanggap-bencana.jpg",
       deadline: "Ongoing"
     }
   ];
@@ -59,7 +60,7 @@ export default function ProgramPage() {
       peserta: "200 atlet",
       fasilitas: ["Asrama", "Pelatih profesional", "Fasilitas latihan", "Pendidikan formal"],
       status: "Pendaftaran Dibuka",
-      image: "/api/placeholder/400/300",
+      image: "/programs/pplp-sumbar.jpg",
       deadline: "28 Februari 2025"
     },
     {
@@ -72,7 +73,7 @@ export default function ProgramPage() {
       peserta: "150 atlet",
       fasilitas: ["Beasiswa", "Pelatihan intensif", "Kompetisi", "Gizi olahraga"],
       status: "Pendaftaran Dibuka",
-      image: "/api/placeholder/400/300",
+      image: "/programs/ppop-sumbar.jpg",
       deadline: "15 Maret 2025"
     },
     {
@@ -85,7 +86,7 @@ export default function ProgramPage() {
       peserta: "Unlimited",
       fasilitas: ["Instruktur gratis", "Peralatan olahraga", "Event kompetisi", "Pemeriksaan kesehatan"],
       status: "Sedang Berjalan",
-      image: "/api/placeholder/400/300",
+      image: "/programs/olahraga-masyarakat.jpg",
       deadline: "Ongoing"
     }
   ];
@@ -135,6 +136,7 @@ export default function ProgramPage() {
 
   return (
     <main className="min-h-screen bg-gray-50" suppressHydrationWarning>
+      <div suppressHydrationWarning>
       <Header />
       
       {/* Breadcrumb */}
@@ -203,7 +205,16 @@ export default function ProgramPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programPemuda.map((program) => (
               <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
-                <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500"></div>
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden bg-gray-200">
+                  <Image
+                    src={program.image}
+                    alt={program.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-3">
                     <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">
@@ -274,7 +285,16 @@ export default function ProgramPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programOlahraga.map((program) => (
               <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
-                <div className="h-48 bg-gradient-to-br from-orange-400 to-red-500"></div>
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden bg-gray-200">
+                  <Image
+                    src={program.image}
+                    alt={program.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-3">
                     <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-medium">
@@ -458,6 +478,7 @@ export default function ProgramPage() {
       </div>
 
       <Footer />
+      </div>
     </main>
   );
 }

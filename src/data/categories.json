@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Pengumuman",
+    "count": 3,
+    "color": "bg-blue-500",
+    "slug": "pengumuman"
+  },
+  {
+    "name": "Program",
+    "count": 4,
+    "color": "bg-green-500",
+    "slug": "program"
+  },
+  {
+    "name": "Kegiatan",
+    "count": 4,
+    "color": "bg-yellow-500",
+    "slug": "kegiatan"
+  },
+  {
+    "name": "Prestasi",
+    "count": 1,
+    "color": "bg-purple-500",
+    "slug": "prestasi"
+  },
+  {
+    "name": "Berita Utama",
+    "count": 3,
+    "color": "bg-red-500",
+    "slug": "berita-utama"
+  }
+]

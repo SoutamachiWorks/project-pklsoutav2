@@ -38,6 +38,24 @@ const Hero = () => {
     }
   ];
 
+  const breakingNews = [
+    {
+      id: 1,
+      icon: <MedalIcon className="w-4 h-4 mr-2 flex-shrink-0" />,
+      text: "Atlet PPLP Sumbar Raih Medali Emas di Kejuaraan Nasional"
+    },
+    {
+      id: 2,
+      icon: <SettingsIcon className="w-4 h-4 mr-2 flex-shrink-0" />,
+      text: "Pendaftaran PPOP 2025 Dibuka Hingga 31 Agustus"
+    },
+    {
+      id: 3,
+      icon: <TargetIcon className="w-4 h-4 mr-2 flex-shrink-0" />,
+      text: "Program Pembinaan Atlet Berbakat Tahun 2025 Segera Dimulai"
+    }
+  ];
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -125,14 +143,14 @@ const Hero = () => {
       {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all duration-300"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 text-black p-3 rounded-full shadow-lg transition-all duration-300"
         aria-label="Previous slide"
       >
         <ArrowLeftIcon className="w-6 h-6" />
       </button>
       <button 
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all duration-300"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 text-black p-3 rounded-full shadow-lg transition-all duration-300"
         aria-label="Next slide"
       >
         <ArrowRightIcon className="w-6 h-6" />
@@ -161,18 +179,12 @@ const Hero = () => {
             </span>
             <div className="overflow-hidden flex-1">
               <div className="animate-marquee whitespace-nowrap flex items-center">
-                <span className="mx-8 inline-flex items-center">
-                  <MedalIcon className="w-4 h-4 mr-2 flex-shrink-0" /> 
-                  Atlet PPLP Sumbar Raih Medali Emas di Kejuaraan Nasional
-                </span>
-                <span className="mx-8 inline-flex items-center">
-                  <SettingsIcon className="w-4 h-4 mr-2 flex-shrink-0" /> 
-                  Pendaftaran PPOP 2025 Dibuka Hingga 31 Agustus
-                </span>
-                <span className="mx-8 inline-flex items-center">
-                  <TargetIcon className="w-4 h-4 mr-2 flex-shrink-0" /> 
-                  Program Pembinaan Atlet Berbakat Tahun 2025 Segera Dimulai
-                </span>
+                {breakingNews.map((news) => (
+                  <span key={news.id} className="mx-8 inline-flex items-center">
+                    {news.icon}
+                    {news.text}
+                  </span>
+                ))}
               </div>
             </div>
           </div>

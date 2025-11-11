@@ -2,12 +2,115 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { EyeIcon, ArrowRightIcon, AlertIcon } from './Icons';
-import newsData from '@/data/news.json';
-import categoriesData from '@/data/categories.json';
 
 const NewsSection = () => {
-  // Data berita dari JSON - hanya tampilkan 8 berita pertama untuk homepage
-  const allNews = newsData.slice(0, 8);
+  // Data berita - sinkron dengan halaman berita
+  const allNews = [
+    {
+      id: 1,
+      title: "Seleksi Penerimaan Siswa Baru Binaan UPTD Kebakatan Olahraga Dinas Pemuda dan Olahraga",
+      excerpt: "Dinas Pemuda Dan Olahraga Provinsi Sumatera Barat Melalui Uptd Kebakatan Olahraga Akan Melaksanakan Seleksi Penerimaan penerimaan Atlet/siswa Binaan Pada Kegiatan Sentra.",
+      date: "22 April 2025",
+      time: "14:59:09 WIB",
+      views: 112,
+      category: "PROGRAM",
+      tags: ["berita utama", "program"],
+      author: "Admin Dispora",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      slug: "seleksi-penerimaan-siswa-baru-binaan-uptd"
+    },
+    {
+      id: 2,
+      title: "Laporan Layanan Informasi Publik Tahun 2024",
+      excerpt: "Pada Tahun 2024, Ppid Dinas Pemuda Dan Olahraga Provinsi Sumatera Barat telah Menyelesaikan Permohonan Informasi Publik Yang Disampaikan Melalui Formulir Permohonan Datang Lan.",
+      date: "18 Maret 2025",
+      time: "09:43:52 WIB",
+      views: 102,
+      category: "PENGUMUMAN",
+      tags: ["berita utama", "pengumuman"],
+      author: "Admin Dispora",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      slug: "laporan-layanan-informasi-publik-2024"
+    },
+    {
+      id: 3,
+      title: "PPLP Sumbar Gelar Seleksi Penerimaan Atlet Tahun 2025",
+      excerpt: "Padang, lebih kurang 177 orang atlet (siswa) ikuti seleksi calon penerimaan Pusat Pembinaan Dan Latihan Pelajar (PPLP) Sumbar Tahun 2025.",
+      date: "14 Maret 2025",
+      time: "10:30:00 WIB",
+      views: 324,
+      category: "KEGIATAN",
+      tags: ["berita utama", "kegiatan"],
+      author: "Admin Dispora",
+      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      slug: "pplp-seleksi-atlet-2025"
+    },
+    {
+      id: 4,
+      title: "LHKPN Pimpinan Dinas Pemuda dan Olahraga Provinsi Sumatera Barat Tahun 2024",
+      excerpt: "Laporan Harta Kekayaan Pejabat Negara Pimpinan Dinas Pemuda Dan Olahraga Provinsi Sumatera Barat Tahun 2024 Yang Telah Diperiksa, Diverifikasi Dan Telah Dikirimkan Oleh Komisi Pemb.",
+      date: "18 September 2024",
+      time: "11:13:07 WIB",
+      views: 280,
+      category: "PENGUMUMAN",
+      tags: ["pengumuman"],
+      author: "Admin Dispora",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      slug: "lhkpn-pimpinan-dispora-2024"
+    },
+    {
+      id: 5,
+      title: "Turnamen Sepakbola Antar Lembaga, 17 Tim Siap Perebutkan Piala Gubernur Sumatera Barat",
+      excerpt: "Turnamen sepakbola antar lembaga dengan partisipasi 17 tim terbaik dari berbagai instansi di Sumatera Barat dalam rangka memperebutkan Piala Gubernur.",
+      date: "7 Agustus 2023",
+      time: "08:15:09 WIB",
+      views: 456,
+      category: "KEGIATAN",
+      tags: ["kegiatan", "olahraga"],
+      author: "Admin Dispora",
+      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      slug: "turnamen-sepakbola-piala-gubernur"
+    },
+    {
+      id: 6,
+      title: "Kadispora Sumbar: Jangan Setengah Setengah Menjadi Atlet",
+      excerpt: "Jadilah Atlet Hebat, Buat Bangga Orang Tua, Pelatih, Dan Daerah Dengan Torehan Prestasi. Motifasi Ini Disampaikan Kepala Dinas Pemuda Dan Olahraga (Kadispo).",
+      date: "18 Mei 2023",
+      time: "17:08:08 WIB",
+      views: 934,
+      category: "PRESTASI",
+      tags: ["prestasi", "motivasi"],
+      author: "Michael Angelo",
+      image: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      slug: "kadispora-motivasi-atlet"
+    },
+    {
+      id: 7,
+      title: "Pelatihan Kewirausahaan Dispora Sumbar Tahun 2025",
+      excerpt: "Dinas Pemuda dan Olahraga Provinsi Sumatera Barat menggelar pelatihan kewirausahaan untuk mengembangkan jiwa entrepreneur generasi muda.",
+      date: "10 Maret 2025",
+      time: "14:20:00 WIB",
+      views: 189,
+      category: "PROGRAM",
+      tags: ["program", "pemuda"],
+      author: "Admin Dispora",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      slug: "pelatihan-kewirausahaan-2025"
+    },
+    {
+      id: 8,
+      title: "Revitalisasi Fasilitas Olahraga di Sumatera Barat",
+      excerpt: "Program revitalisasi fasilitas olahraga dilakukan untuk mendukung pembinaan atlet dan pengembangan olahraga masyarakat di Sumatera Barat.",
+      date: "5 Maret 2025",
+      time: "09:15:00 WIB",
+      views: 267,
+      category: "PROGRAM",
+      tags: ["program", "infrastruktur"],
+      author: "Admin Dispora",
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      slug: "revitalisasi-fasilitas-olahraga"
+    }
+  ];
 
   // Featured news = berita pertama (berita utama terbaru)
   const featuredNews = allNews.find(news => news.tags?.includes("berita utama")) || allNews[0];
@@ -15,8 +118,13 @@ const NewsSection = () => {
   // Latest news = 4 berita terbaru setelah featured
   const latestNews = allNews.filter(news => news.id !== featuredNews.id).slice(0, 4);
 
-  // Categories dari JSON
-  const categories = categoriesData;
+  const categories = [
+    { name: "Pengumuman", count: 2, color: "bg-blue-500" },
+    { name: "Program", count: 4, color: "bg-green-500" },
+    { name: "Kegiatan", count: 4, color: "bg-yellow-500" },
+    { name: "Prestasi", count: 1, color: "bg-purple-500" },
+    { name: "Berita Utama", count: 3, color: "bg-red-500" }
+  ];
 
   return (
     <section className="py-16 bg-gray-50">
@@ -42,8 +150,6 @@ const NewsSection = () => {
                     alt={featuredNews.title}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 66vw"
-                    priority
                   />
                 </div>
                 <div className="absolute top-4 left-4">
@@ -74,14 +180,13 @@ const NewsSection = () => {
             {/* Latest News Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {latestNews.map((news) => (
-                <div key={news.id} className="bg-white rounded-lg shadow-md overflow-hidden group">
+                <div key={news.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                   <div className="h-48 relative overflow-hidden">
                     <Image
                       src={news.image}
                       alt={news.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-4">
@@ -135,7 +240,7 @@ const NewsSection = () => {
                 {categories.map((category, index) => (
                   <Link 
                     key={index}
-                    href={`/berita/kategori/${category.slug}`}
+                    href={`/berita/kategori/${category.name.toLowerCase().replace(/\s+/g, '-')}`}
                     className="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 transition-colors group"
                   >
                     <div className="flex items-center">

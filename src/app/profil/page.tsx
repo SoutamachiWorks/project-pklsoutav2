@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MedalIcon, PhoneIcon } from '@/components/Icons';
 
 export default function ProfilPage() {
@@ -108,28 +109,32 @@ export default function ProfilPage() {
       jenis: "Gedung Olahraga",
       kapasitas: "3,000 penonton",
       fasilitas: ["Lapangan Badminton", "Lapangan Bola Voli", "Lapangan Basket"],
-      kondisi: "Baik"
+      kondisi: "Baik",
+      image: "/sarana/gor-agus-salim.jpg"
     },
     {
       nama: "Stadion Haji Agus Salim",
       jenis: "Stadion Sepakbola",
       kapasitas: "40,000 penonton",
       fasilitas: ["Lapangan Sepakbola", "Lintasan Atletik", "Tribun VIP"],
-      kondisi: "Baik"
+      kondisi: "Baik",
+      image: "/sarana/stadion-agus-salim.jpg"
     },
     {
       nama: "Kompleks PPLP Sumbar",
       jenis: "Pusat Latihan",
       kapasitas: "200 atlet",
       fasilitas: ["Asrama", "Lapangan Latihan", "Gimnasium", "Kolam Renang"],
-      kondisi: "Sangat Baik"
+      kondisi: "Sangat Baik",
+      image: "/sarana/pplp-sumbar.jpg"
     },
     {
       nama: "Pondok Pemuda Lubuk Selasih",
       jenis: "Pusat Kepemudaan",
       kapasitas: "150 peserta",
       fasilitas: ["Aula", "Ruang Meeting", "Penginapan", "Lapangan"],
-      kondisi: "Baik"
+      kondisi: "Baik",
+      image: "/sarana/pondok-pemuda.jpg"
     },
   ];
 
@@ -415,8 +420,16 @@ export default function ProfilPage() {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {currentSarana.map((sarana, index) => (
-                  <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div className="h-48 bg-gradient-to-br from-green-400 to-blue-500"></div>
+                  <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden group">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={sarana.image}
+                        alt={sarana.nama}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="font-bold text-gray-800">{sarana.nama}</h3>
@@ -530,15 +543,21 @@ export default function ProfilPage() {
                     </h3>
                     
                     {/* Achievement Badge */}
-                    <div className="bg-green-100 text-green-800 px-6 py-3 rounded-full text-lg font-semibold mb-8">
-                      🏆 {item.prestasi}
+                    <div className="bg-green-100 text-green-800 px-6 py-3 rounded-full text-lg font-semibold mb-8 flex items-center gap-2">
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      {item.prestasi}
                     </div>
                     
                     {/* Medals */}
                     <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+                      {/* Gold Medal */}
                       <div className="text-center">
                         <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-2 shadow-lg">
-                          <span className="text-3xl md:text-4xl">🥇</span>
+                          <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
                         </div>
                         <p className="text-2xl md:text-3xl font-bold text-gray-800">
                           {item.medali.split(',')[0].trim().split(' ')[0]}
@@ -546,9 +565,12 @@ export default function ProfilPage() {
                         <p className="text-sm text-gray-600">Emas</p>
                       </div>
                       
+                      {/* Silver Medal */}
                       <div className="text-center">
                         <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center mb-2 shadow-lg">
-                          <span className="text-3xl md:text-4xl">🥈</span>
+                          <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
                         </div>
                         <p className="text-2xl md:text-3xl font-bold text-gray-800">
                           {item.medali.split(',')[1].trim().split(' ')[0]}
@@ -556,9 +578,12 @@ export default function ProfilPage() {
                         <p className="text-sm text-gray-600">Perak</p>
                       </div>
                       
+                      {/* Bronze Medal */}
                       <div className="text-center">
                         <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mb-2 shadow-lg">
-                          <span className="text-3xl md:text-4xl">🥉</span>
+                          <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
                         </div>
                         <p className="text-2xl md:text-3xl font-bold text-gray-800">
                           {item.medali.split(',')[2].trim().split(' ')[0]}

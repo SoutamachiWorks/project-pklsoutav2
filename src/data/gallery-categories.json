@@ -1,0 +1,31 @@
+{
+  "photo": [
+    { "name": "Semua", "count": 20 },
+    { "name": "Seleksi", "count": 1 },
+    { "name": "Upacara", "count": 2 },
+    { "name": "Event", "count": 1 },
+    { "name": "Kejuaraan", "count": 2 },
+    { "name": "Pelatihan", "count": 2 },
+    { "name": "Kunjungan", "count": 1 },
+    { "name": "Pelantikan", "count": 1 },
+    { "name": "Turnamen", "count": 1 },
+    { "name": "Rutin", "count": 1 },
+    { "name": "Rapat", "count": 1 },
+    { "name": "Sosialisasi", "count": 1 },
+    { "name": "Monitoring", "count": 1 },
+    { "name": "Festival", "count": 1 },
+    { "name": "Pameran", "count": 1 },
+    { "name": "Workshop", "count": 1 },
+    { "name": "Launching", "count": 1 },
+    { "name": "Pembinaan", "count": 1 }
+  ],
+  "video": [
+    { "name": "Semua", "count": 6 },
+    { "name": "Prestasi", "count": 1 },
+    { "name": "Profil", "count": 1 },
+    { "name": "Kegiatan", "count": 2 },
+    { "name": "Kejuaraan", "count": 1 },
+    { "name": "Pelatihan", "count": 1 },
+    { "name": "Infrastruktur", "count": 0 }
+  ]
+}

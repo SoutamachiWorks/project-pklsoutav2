@@ -5,9 +5,6 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import Image from 'next/image';
-import newsData from '@/data/news.json';
-import categoriesData from '@/data/categories.json';
 
 export default function BeritaPage() {
   const [activeFilter, setActiveFilter] = useState('semua');
@@ -17,22 +14,165 @@ export default function BeritaPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  // Semua Berita dari JSON - Single Source of Truth
-  const allNews = newsData;
+  // Semua Berita - Single Source of Truth
+  const allNews = [
+    {
+      id: 1,
+      title: "Seleksi Penerimaan Siswa Baru Binaan UPTD Kebakatan Olahraga Dinas Pemuda dan Olahraga",
+      excerpt: "Dinas Pemuda Dan Olahraga Provinsi Sumatera Barat Melalui Uptd Kebakatan Olahraga Akan Melaksanakan Seleksi Penerimaan penerimaan Atlet/siswa Binaan Pada Kegiatan Sentra.",
+      date: "22 April 2025",
+      time: "14:59:09 WIB",
+      views: 112,
+      category: "PROGRAM",
+      tags: ["berita utama", "program"],
+      author: "Admin Dispora",
+      image: "/news/featured-news.jpg",
+      slug: "seleksi-penerimaan-siswa-baru-binaan-uptd"
+    },
+    {
+      id: 2,
+      title: "Laporan Layanan Informasi Publik Tahun 2024",
+      excerpt: "Pada Tahun 2024, Ppid Dinas Pemuda Dan Olahraga Provinsi Sumatera Barat telah Menyelesaikan Permohonan Informasi Publik Yang Disampaikan Melalui Formulir Permohonan Datang Lan.",
+      date: "18 Maret 2025",
+      time: "09:43:52 WIB",
+      views: 102,
+      category: "PENGUMUMAN",
+      tags: ["berita utama", "pengumuman"],
+      author: "Admin Dispora",
+      image: "/news/news2.jpg",
+      slug: "laporan-layanan-informasi-publik-2024"
+    },
+    {
+      id: 3,
+      title: "PPLP Sumbar Gelar Seleksi Penerimaan Atlet Tahun 2025",
+      excerpt: "Padang, lebih kurang 177 orang atlet (siswa) ikuti seleksi calon penerimaan Pusat Pembinaan Dan Latihan Pelajar (PPLP) Sumbar Tahun 2025.",
+      date: "14 Maret 2025",
+      time: "10:30:00 WIB",
+      views: 324,
+      category: "KEGIATAN",
+      tags: ["berita utama", "kegiatan"],
+      author: "Admin Dispora",
+      image: "/news/news3.jpg",
+      slug: "pplp-seleksi-atlet-2025"
+    },
+    {
+      id: 4,
+      title: "LHKPN Pimpinan Dinas Pemuda dan Olahraga Provinsi Sumatera Barat Tahun 2024",
+      excerpt: "Laporan Harta Kekayaan Pejabat Negara Pimpinan Dinas Pemuda Dan Olahraga Provinsi Sumatera Barat Tahun 2024 Yang Telah Diperiksa, Diverifikasi Dan Telah Dikirimkan Oleh Komisi Pemb.",
+      date: "18 September 2024",
+      time: "11:13:07 WIB",
+      views: 280,
+      category: "PENGUMUMAN",
+      tags: ["pengumuman"],
+      author: "Admin Dispora",
+      image: "/news/news4.jpg",
+      slug: "lhkpn-pimpinan-dispora-2024"
+    },
+    {
+      id: 5,
+      title: "Turnamen Sepakbola Antar Lembaga, 17 Tim Siap Perebutkan Piala Gubernur Sumatera Barat",
+      excerpt: "Turnamen sepakbola antar lembaga dengan partisipasi 17 tim terbaik dari berbagai instansi di Sumatera Barat dalam rangka memperebutkan Piala Gubernur.",
+      date: "7 Agustus 2023",
+      time: "08:15:09 WIB",
+      views: 456,
+      category: "KEGIATAN",
+      tags: ["kegiatan", "olahraga"],
+      author: "Admin Dispora",
+      image: "/news/news5.jpg",
+      slug: "turnamen-sepakbola-piala-gubernur"
+    },
+    {
+      id: 6,
+      title: "Kadispora Sumbar: Jangan Setengah Setengah Menjadi Atlet",
+      excerpt: "Jadilah Atlet Hebat, Buat Bangga Orang Tua, Pelatih, Dan Daerah Dengan Torehan Prestasi. Motifasi Ini Disampaikan Kepala Dinas Pemuda Dan Olahraga (Kadispo).",
+      date: "18 Mei 2023",
+      time: "17:08:08 WIB",
+      views: 934,
+      category: "PRESTASI",
+      tags: ["prestasi", "motivasi"],
+      author: "Michael Angelo",
+      image: "/news/news6.jpg",
+      slug: "kadispora-motivasi-atlet"
+    },
+    {
+      id: 7,
+      title: "Pelatihan Kewirausahaan Dispora Sumbar Tahun 2025",
+      excerpt: "Dinas Pemuda dan Olahraga Provinsi Sumatera Barat menggelar pelatihan kewirausahaan untuk mengembangkan jiwa entrepreneur generasi muda.",
+      date: "10 Maret 2025",
+      time: "14:20:00 WIB",
+      views: 189,
+      category: "PROGRAM",
+      tags: ["program", "pemuda"],
+      author: "Admin Dispora",
+      image: "/news/news7.jpg",
+      slug: "pelatihan-kewirausahaan-2025"
+    },
+    {
+      id: 8,
+      title: "Revitalisasi Fasilitas Olahraga di Sumatera Barat",
+      excerpt: "Program revitalisasi fasilitas olahraga dilakukan untuk mendukung pembinaan atlet dan pengembangan olahraga masyarakat di Sumatera Barat.",
+      date: "5 Maret 2025",
+      time: "09:15:00 WIB",
+      views: 267,
+      category: "PROGRAM",
+      tags: ["program", "infrastruktur"],
+      author: "Admin Dispora",
+      image: "/news/news8.jpg",
+      slug: "revitalisasi-fasilitas-olahraga"
+    },
+    {
+      id: 9,
+      title: "Workshop Pembinaan Organisasi Pemuda Tingkat Provinsi",
+      excerpt: "Kegiatan workshop bertujuan meningkatkan kapasitas organisasi kepemudaan dalam mengelola program dan kegiatan yang bermanfaat.",
+      date: "1 Maret 2025",
+      time: "13:00:00 WIB",
+      views: 156,
+      category: "KEGIATAN",
+      tags: ["kegiatan", "pemuda"],
+      author: "Admin Dispora",
+      image: "/news/news9.jpg",
+      slug: "workshop-pembinaan-pemuda"
+    },
+    {
+      id: 10,
+      title: "Pengumuman Hasil Seleksi Beasiswa Atlet Berprestasi 2025",
+      excerpt: "Dinas Pemuda dan Olahraga Provinsi Sumatera Barat mengumumkan hasil seleksi penerima beasiswa untuk atlet berprestasi tahun 2025.",
+      date: "25 Februari 2025",
+      time: "10:00:00 WIB",
+      views: 421,
+      category: "PENGUMUMAN",
+      tags: ["pengumuman", "beasiswa"],
+      author: "Admin Dispora",
+      image: "/news/news10.jpg",
+      slug: "pengumuman-beasiswa-atlet-2025"
+    },
+    {
+      id: 11,
+      title: "Festival Olahraga Tradisional Sumatera Barat 2025",
+      excerpt: "Rangkaian kegiatan festival olahraga tradisional akan digelar sebagai upaya melestarikan budaya olahraga lokal Minangkabau.",
+      date: "15 Februari 2025",
+      time: "14:45:00 WIB",
+      views: 512,
+      category: "KEGIATAN",
+      tags: ["kegiatan", "budaya"],
+      author: "Admin Dispora",
+      image: "/news/news11.jpg",
+      slug: "festival-olahraga-tradisional-2025"
+    }
+  ];
 
   // Filter berita untuk slider utama (yang punya tag "berita utama")
   const featuredNews = allNews.filter(news => news.tags?.includes("berita utama"));
 
-  // Categories dari JSON
+  // Categories
   const categories = [
-    { name: "Semua", count: allNews.length, id: 'semua' },
-    ...categoriesData.map(cat => ({
-      name: cat.name,
-      count: cat.count,
-      id: cat.slug
-    }))
+    { name: "Semua", count: 50, id: 'semua' },
+    { name: "Berita", count: 15, id: 'berita' },
+    { name: "Pengumuman", count: 12, id: 'pengumuman' },
+    { name: "Program", count: 8, id: 'program' },
+    { name: "Kegiatan", count: 10, id: 'kegiatan' },
+    { name: "Berita Utama", count: 5, id: 'berita-utama' }
   ];
-
 
   // Berita Terkait
   const beritaTerkait = [
@@ -139,7 +279,7 @@ export default function BeritaPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50" suppressHydrationWarning>
       <Header />
       
       {/* Breadcrumb */}
@@ -232,15 +372,7 @@ export default function BeritaPage() {
                       index === currentSlide ? 'opacity-100' : 'opacity-0'
                     }`}
                   >
-                    <Image
-                      src={news.image}
-                      alt={news.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      priority={index === 0}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400"></div>
                     <span className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-md text-sm font-medium z-10">
                       {news.category}
                     </span>
@@ -359,15 +491,8 @@ export default function BeritaPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               {currentNews.map((news) => (
                 <article key={news.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow group">
-                  {/* Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={news.image}
-                      alt={news.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
+                  {/* Image Placeholder */}
+                  <div className="relative h-48 bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 overflow-hidden">
                     {/* Category Badge */}
                     <div className="absolute top-4 left-4 z-10">
                       <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">

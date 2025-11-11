@@ -1,18 +1,50 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FacebookIcon, InstagramIcon, TwitterIcon, YouTubeIcon, PhoneIcon, EmailIcon, LocationIcon } from './Icons';
 
 const Footer = () => {
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowBackToTop(true);
+      } else {
+        setShowBackToTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <footer className="bg-gray-900 text-white">
-      {/* Main Footer */}
-      <div className="container mx-auto px-4 py-12">
+    <>
+      <footer className="bg-blue-900 text-white">
+        {/* Main Footer */}
+        <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">DS</span>
+              <div className="w-12 h-12 relative flex-shrink-0">
+                <Image
+                  src="/logo-sumbar.png"
+                  alt="Logo Sumatera Barat"
+                  fill
+                  className="object-contain"
+                  sizes="48px"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-lg">DISPORA SUMBAR</h3>
@@ -133,7 +165,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Footer */}
-      <div className="border-t border-gray-800">
+      <div className="border-t border-blue-800">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left mb-4 md:mb-0">
@@ -157,7 +189,7 @@ const Footer = () => {
       </div>
 
       {/* External Links */}
-      <div className="bg-gray-800 py-4">
+      <div className="bg-blue-800 py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center items-center space-x-6 text-sm">
             <span className="text-gray-400">Link Terkait:</span>
@@ -173,7 +205,26 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+      </footer>
+
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 z-50 group"
+          aria-label="Kembali ke atas"
+        >
+          <svg 
+            className="w-6 h-6 transform group-hover:-translate-y-1 transition-transform duration-300" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      )}
+    </>
   );
 };
 

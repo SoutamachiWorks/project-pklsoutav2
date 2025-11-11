@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "title": "Seleksi Atlet/Siswa KBOR (PPLP) Sumbar",
+    "description": "Proses seleksi calon atlet berbakat untuk program PPLP Sumatera Barat tahun 2025",
+    "date": "4 Juli 2025",
+    "views": 1259,
+    "category": "Seleksi",
+    "images": 15,
+    "location": "GOR Haji Agus Salim",
+    "image": "/gallery/seleksi-pplp.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Pelantikan Eselon II, III dan IV di Lingkungan Dispora Sumbar",
+    "description": "Upacara pelantikan pejabat struktural di lingkungan Dinas Pemuda dan Olahraga",
+    "date": "2 Juli 2025",
+    "views": 864,
+    "category": "Upacara",
+    "images": 22,
+    "location": "Kantor Dispora Sumbar",
+    "image": "/gallery/pelantikan.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Kadispora Sumbar Hadiri Sekaligus Menyerahkan Bantuan pada Penutupan Event",
+    "description": "Kepala Dinas menyerahkan bantuan dan menutup event olahraga daerah",
+    "date": "8 Agustus 2025",
+    "views": 1825,
+    "category": "Event",
+    "images": 18,
+    "location": "Stadion Utama Sumbar",
+    "image": "/gallery/penutupan-event.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Kadispora Sumbar Mewakili Gubernur Membuka Kejuaraan Terbuka",
+    "description": "Pembukaan kejuaraan olahraga terbuka tingkat provinsi dengan berbagai cabang olahraga",
+    "date": "30 Juli 2025",
+    "views": 2049,
+    "category": "Kejuaraan",
+    "images": 31,
+    "location": "Kompleks Olahraga Sumbar",
+    "image": "/gallery/kejuaraan-terbuka.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Gubernur Lantik Kadispora Sumbar Drs. Bustavidia, MM",
+    "description": "Upacara pelantikan Kepala Dinas Pemuda dan Olahraga Provinsi Sumatera Barat yang baru",
+    "date": "14 Juli 2025",
+    "views": 3109,
+    "category": "Pelantikan",
+    "images": 25,
+    "location": "Kantor Gubernur Sumbar",
+    "image": "/gallery/pelantikan-kadis.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Kunjungan Kerja Komisi V DPRD Sumbar ke Pondok Pemuda Lubuk Selasih",
+    "description": "Kunjungan kerja untuk monitoring fasilitas kepemudaan dan program pembinaan",
+    "date": "11 Juli 2025",
+    "views": 2043,
+    "category": "Kunjungan",
+    "images": 12,
+    "location": "Pondok Pemuda Lubuk Selasih",
+    "image": "/gallery/kunjungan-dprd.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Pelatihan Kewirausahaan Pemuda Sumbar 2025",
+    "description": "Program pelatihan kewirausahaan untuk mengembangkan jiwa entrepreneur generasi muda",
+    "date": "20 Juni 2025",
+    "views": 1456,
+    "category": "Pelatihan",
+    "images": 20,
+    "location": "Hotel Grand Zuri Padang",
+    "image": "/gallery/pelatihan-wirausaha.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Turnamen Sepakbola Antar Lembaga Piala Gubernur",
+    "description": "Kompetisi sepakbola dengan partisipasi 17 tim dari berbagai instansi di Sumbar",
+    "date": "15 Juni 2025",
+    "views": 2234,
+    "category": "Turnamen",
+    "images": 42,
+    "location": "Stadion H. Agus Salim",
+    "image": "/gallery/turnamen-sepakbola.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Senam Rutin Tiap Hari Jumat Bersama Kadispora",
+    "description": "Kegiatan senam bersama rutin setiap hari Jumat di lingkungan Dinas",
+    "date": "10 Juni 2025",
+    "views": 892,
+    "category": "Rutin",
+    "images": 8,
+    "location": "Halaman Kantor Dispora",
+    "image": "/gallery/senam-jumat.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Rapat Koordinasi Pengurus Cabang Olahraga se-Sumbar",
+    "description": "Koordinasi program kerja dengan seluruh pengurus cabang olahraga di Sumatera Barat",
+    "date": "5 Juni 2025",
+    "views": 745,
+    "category": "Rapat",
+    "images": 10,
+    "location": "Aula Dispora Sumbar",
+    "image": "/gallery/rapat-pengcab.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Sosialisasi Program Satu Siswa Satu Ekstrakurikuler Olahraga",
+    "description": "Sosialisasi program untuk meningkatkan partisipasi siswa dalam kegiatan olahraga",
+    "date": "1 Juni 2025",
+    "views": 1123,
+    "category": "Sosialisasi",
+    "images": 14,
+    "location": "SMAN 1 Padang",
+    "image": "/gallery/sosialisasi-ekskul.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Upacara Hari Olahraga Nasional 2025",
+    "description": "Peringatan Hari Olahraga Nasional dengan berbagai kegiatan dan pemberian penghargaan",
+    "date": "9 September 2025",
+    "views": 2567,
+    "category": "Upacara",
+    "images": 28,
+    "location": "Lapangan Kantor Gubernur",
+    "image": "/gallery/haornas.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Pelatihan Wasit dan Juri Cabang Olahraga",
+    "description": "Peningkatan kapasitas wasit dan juri untuk berbagai cabang olahraga prioritas",
+    "date": "25 Mei 2025",
+    "views": 623,
+    "category": "Pelatihan",
+    "images": 16,
+    "location": "GOR Haji Agus Salim",
+    "image": "/gallery/pelatihan-wasit.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Festival Olahraga Tradisional Sumbar",
+    "description": "Festival yang menampilkan berbagai permainan olahraga tradisional Minangkabau",
+    "date": "18 Mei 2025",
+    "views": 1876,
+    "category": "Festival",
+    "images": 35,
+    "location": "Taman Budaya Padang",
+    "image": "/gallery/festival-tradisional.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Monitoring dan Evaluasi Program PPLP",
+    "description": "Kegiatan monitoring dan evaluasi terhadap program pembinaan atlet PPLP",
+    "date": "12 Mei 2025",
+    "views": 534,
+    "category": "Monitoring",
+    "images": 11,
+    "location": "Asrama PPLP Sumbar",
+    "image": "/gallery/monev-pplp.jpg"
+  },
+  {
+    "id": 16,
+    "title": "Pameran Prestasi Olahraga Sumbar 2025",
+    "description": "Pameran dokumentasi prestasi atlet dan cabang olahraga Sumatera Barat",
+    "date": "5 Mei 2025",
+    "views": 1345,
+    "category": "Pameran",
+    "images": 24,
+    "location": "Mall Nipah Padang",
+    "image": "/gallery/pameran-prestasi.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Olimpiade Olahraga Siswa Nasional (O2SN) Tingkat Provinsi",
+    "description": "Kompetisi multi cabang olahraga tingkat pelajar se-Sumatera Barat",
+    "date": "28 April 2025",
+    "views": 3234,
+    "category": "Kejuaraan",
+    "images": 48,
+    "location": "Berbagai Venue di Padang",
+    "image": "/gallery/o2sn.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Workshop Manajemen Event Olahraga",
+    "description": "Pelatihan manajemen pengelolaan event olahraga untuk panitia dan pengurus",
+    "date": "20 April 2025",
+    "views": 687,
+    "category": "Workshop",
+    "images": 13,
+    "location": "Hotel Pangeran Beach",
+    "image": "/gallery/workshop-event.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Launching Program Sumbar Berolahraga",
+    "description": "Peluncuran program massal untuk meningkatkan budaya olahraga masyarakat",
+    "date": "15 April 2025",
+    "views": 1987,
+    "category": "Launching",
+    "images": 21,
+    "location": "Pantai Padang",
+    "image": "/gallery/launching-sumbar-berolahraga.jpg"
+  },
+  {
+    "id": 20,
+    "title": "Pembekalan Atlet Pra-PON 2025",
+    "description": "Pembekalan mental dan teknis bagi atlet kontingen Sumbar yang akan berlaga di PON",
+    "date": "8 April 2025",
+    "views": 1654,
+    "category": "Pembinaan",
+    "images": 19,
+    "location": "Wisma Atlet Sumbar",
+    "image": "/gallery/pembekalan-pon.jpg"
+  }
+]

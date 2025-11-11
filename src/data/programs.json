@@ -1,0 +1,125 @@
+{
+  "programPemuda": [
+    {
+      "id": 1,
+      "title": "Sumpah Pemuda Digital",
+      "category": "Kepemudaan",
+      "description": "Program pengembangan literasi digital dan teknologi untuk generasi muda Sumatera Barat",
+      "target": "Pemuda usia 17-30 tahun",
+      "durasi": "6 bulan",
+      "peserta": "500 peserta",
+      "fasilitas": ["Pelatihan gratis", "Sertifikat", "Networking", "Magang"],
+      "status": "Pendaftaran Dibuka",
+      "image": "/programs/sumpah-pemuda-digital.jpg",
+      "deadline": "31 Desember 2024"
+    },
+    {
+      "id": 2,
+      "title": "Wirausaha Muda Sumbar",
+      "category": "Kewirausahaan",
+      "description": "Program pemberdayaan ekonomi kreatif dan kewirausahaan untuk pemuda Sumatera Barat",
+      "target": "Calon entrepreneur muda",
+      "durasi": "12 bulan",
+      "peserta": "200 peserta",
+      "fasilitas": ["Modal usaha", "Mentoring", "Pelatihan bisnis", "Jaringan pasar"],
+      "status": "Akan Dibuka",
+      "image": "/programs/wirausaha-muda.jpg",
+      "deadline": "15 Januari 2025"
+    },
+    {
+      "id": 3,
+      "title": "Pemuda Tanggap Bencana",
+      "category": "Kerelawanan",
+      "description": "Pelatihan kesiapsiagaan bencana dan pembentukan tim relawan pemuda di setiap daerah",
+      "target": "Pemuda relawan",
+      "durasi": "3 bulan",
+      "peserta": "1000 peserta",
+      "fasilitas": ["Pelatihan SAR", "Peralatan", "Sertifikat", "Tim response"],
+      "status": "Sedang Berjalan",
+      "image": "/programs/pemuda-tanggap-bencana.jpg",
+      "deadline": "Ongoing"
+    }
+  ],
+  "programOlahraga": [
+    {
+      "id": 4,
+      "title": "PPLP Sumbar",
+      "category": "Prestasi",
+      "description": "Pusat Pendidikan dan Latihan Pelajar untuk mengembangkan atlet berbakat di berbagai cabang olahraga",
+      "target": "Pelajar berbakat olahraga",
+      "durasi": "3-6 tahun",
+      "peserta": "200 atlet",
+      "fasilitas": ["Asrama", "Pelatih profesional", "Fasilitas latihan", "Pendidikan formal"],
+      "status": "Pendaftaran Dibuka",
+      "image": "/programs/pplp-sumbar.jpg",
+      "deadline": "28 Februari 2025"
+    },
+    {
+      "id": 5,
+      "title": "PPOP Sumbar",
+      "category": "Prestasi",
+      "description": "Pusat Pembinaan dan Pendidikan Olahraga Pelajar untuk meningkatkan prestasi olahraga pelajar",
+      "target": "Atlet pelajar terpilih",
+      "durasi": "1-2 tahun",
+      "peserta": "150 atlet",
+      "fasilitas": ["Beasiswa", "Pelatihan intensif", "Kompetisi", "Gizi olahraga"],
+      "status": "Pendaftaran Dibuka",
+      "image": "/programs/ppop-sumbar.jpg",
+      "deadline": "15 Maret 2025"
+    },
+    {
+      "id": 6,
+      "title": "Olahraga Masyarakat",
+      "category": "Massal",
+      "description": "Program pengembangan olahraga rekreasi dan kesehatan untuk masyarakat umum",
+      "target": "Masyarakat umum",
+      "durasi": "Berkelanjutan",
+      "peserta": "Unlimited",
+      "fasilitas": ["Instruktur gratis", "Peralatan olahraga", "Event kompetisi", "Pemeriksaan kesehatan"],
+      "status": "Sedang Berjalan",
+      "image": "/programs/olahraga-masyarakat.jpg",
+      "deadline": "Ongoing"
+    }
+  ],
+  "programUnggulan": [
+    {
+      "title": "Festival Pemuda Nusantara",
+      "description": "Event tahunan yang mempertemukan pemuda dari seluruh Indonesia untuk berbagi budaya dan inovasi",
+      "tanggal": "17-20 Agustus 2024",
+      "lokasi": "Padang, Sumatera Barat",
+      "participants": "2000+ peserta",
+      "highlights": ["Parade budaya", "Kompetisi inovasi", "Talkshow inspiratif", "Bazar produk lokal"]
+    },
+    {
+      "title": "Sumbar Sports Week",
+      "description": "Pekan olahraga terbesar di Sumatera Barat yang menggabungkan kompetisi dan festival olahraga",
+      "tanggal": "1-7 November 2024",
+      "lokasi": "Berbagai venue di Sumbar",
+      "participants": "5000+ atlet",
+      "highlights": ["20+ cabang olahraga", "Kompetisi internasional", "Expo olahraga", "Seminar kepelatihan"]
+    }
+  ],
+  "beasiswa": [
+    {
+      "nama": "Beasiswa Atlet Berprestasi",
+      "deskripsi": "Bantuan pendidikan untuk atlet yang berprestasi di tingkat nasional dan internasional",
+      "syarat": ["Prestasi juara 1-3 tingkat nasional", "Rekomendasi pelatih", "Surat keterangan sekolah"],
+      "benefit": "Rp 2.000.000/bulan + fasilitas latihan",
+      "kuota": "50 penerima"
+    },
+    {
+      "nama": "Beasiswa Pemuda Berprestasi",
+      "deskripsi": "Dukungan pendidikan untuk pemuda yang aktif dalam kegiatan sosial dan kepemudaan",
+      "syarat": ["Aktif di organisasi pemuda", "IPK minimal 3.0", "Surat rekomendasi"],
+      "benefit": "Rp 1.500.000/bulan",
+      "kuota": "100 penerima"
+    },
+    {
+      "nama": "Beasiswa Penelitian Olahraga",
+      "deskripsi": "Bantuan untuk penelitian di bidang ilmu keolahragaan dan kesehatan",
+      "syarat": ["Mahasiswa S2/S3", "Proposal penelitian", "Rekomendasi dosen"],
+      "benefit": "Rp 5.000.000/penelitian",
+      "kuota": "20 peneliti"
+    }
+  ]
+}

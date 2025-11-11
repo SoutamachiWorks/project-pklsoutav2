@@ -4,99 +4,20 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CameraIcon, MonitorIcon, EyeIcon, ClockIcon } from '@/components/Icons';
+import galleryData from '@/data/gallery.json';
+import videosData from '@/data/videos.json';
+import categoriesData from '@/data/gallery-categories.json';
 
 const GallerySection = () => {
   const [activeTab, setActiveTab] = useState('foto');
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
-  const photoGallery = [
-    {
-      id: 1,
-      title: "Seleksi Atlet/Siswa KBOR (PPLP) Sumbar",
-      description: "Proses seleksi calon atlet berbakat untuk program PPLP Sumatera Barat",
-      date: "4 Juli 2019",
-      views: 1259,
-      category: "Seleksi",
-      image: "/gallery/seleksi-pplp.svg"
-    },
-    {
-      id: 2,
-      title: "Pelantikan Eselon II, III dan IV di Lingkungan Dispora Sumbar",
-      description: "Upacara pelantikan pejabat struktural di lingkungan Dinas Pemuda dan Olahraga",
-      date: "2 Juli 2019",
-      views: 864,
-      category: "Upacara",
-      image: "/gallery/pelantikan.svg"
-    },
-    {
-      id: 3,
-      title: "Kadispora Sumbar Hadiri Sekaligus Menyerahkan Bantuan pada Penutupan Event",
-      description: "Kepala Dinas menyerahkan bantuan dan menutup event olahraga daerah",
-      date: "8 Agustus 2019",
-      views: 1825,
-      category: "Event",
-      image: "/gallery/penutupan-event.svg"
-    },
-    {
-      id: 4,
-      title: "Kadispora Sumbar Mewakili Gubernur Membuka Kejuaraan Terbuka",
-      description: "Pembukaan kejuaraan olahraga terbuka tingkat provinsi",
-      date: "30 Juli 2019",
-      views: 2049,
-      category: "Kejuaraan",
-      image: "/gallery/kejuaraan-terbuka.svg"
-    },
-    {
-      id: 5,
-      title: "Gubernur Lantik Kadispora Sumbar Drs. Bustavidia, MM",
-      description: "Upacara pelantikan Kepala Dinas Pemuda dan Olahraga Provinsi Sumatera Barat",
-      date: "14 Juli 2019",
-      views: 3109,
-      category: "Pelantikan",
-      image: "/gallery/pelantikan-kadis.svg"
-    },
-    {
-      id: 6,
-      title: "Kunjungan Kerja Komisi V DPRD Sumbar ke Pondok Pemuda Lubuk Selasih",
-      description: "Kunjungan kerja untuk monitoring fasilitas kepemudaan",
-      date: "11 Juli 2019",
-      views: 2043,
-      category: "Kunjungan",
-      image: "/gallery/kunjungan-dprd.svg"
-    }
-  ];
+  // Data dari JSON
+  const photoGallery = galleryData.slice(0, 6); // Tampilkan 6 foto terbaru untuk homepage
+  const videoGallery = videosData.slice(0, 3); // Tampilkan 3 video terbaru untuk homepage
 
-  const videoGallery = [
-    {
-      id: 1,
-      title: "Highlight PON XX Papua 2021",
-      description: "Cuplikan performa atlet Sumbar di PON XX Papua",
-      duration: "5:32",
-      views: 15420,
-      youtubeId: "dQw4w9WgXcQ", // Ganti dengan ID YouTube video yang sesuai
-      thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
-    },
-    {
-      id: 2,
-      title: "Profil PPLP Sumatera Barat",
-      description: "Video profil fasilitas dan program PPLP Sumbar",
-      duration: "8:15",
-      views: 8934,
-      youtubeId: "ScMzIvxBSi4", // Ganti dengan ID YouTube video yang sesuai
-      thumbnail: "https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg"
-    },
-    {
-      id: 3,
-      title: "Senam Rutin Tiap Hari Jumat Bersama Kadispora",
-      description: "Kegiatan senam bersama di lingkungan Dinas",
-      duration: "3:45",
-      views: 5672,
-      youtubeId: "9bZkp7q19f0", // Ganti dengan ID YouTube video yang sesuai
-      thumbnail: "https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg"
-    }
-  ];
-
-  const categories = ['Semua', 'Seleksi', 'Upacara', 'Event', 'Kejuaraan', 'Pelantikan', 'Kunjungan'];
+  // Categories dari JSON - hanya yang ditampilkan di homepage
+  const displayCategories = ['Semua', 'Seleksi', 'Upacara', 'Event', 'Kejuaraan', 'Pelantikan'];
   const [selectedCategory, setSelectedCategory] = useState('Semua');
 
   const filteredPhotos = selectedCategory === 'Semua' 
@@ -157,7 +78,7 @@ const GallerySection = () => {
           <div>
             {/* Category Filter */}
             <div className="flex flex-wrap justify-center gap-2 mb-8">
-              {categories.map((category) => (
+              {displayCategories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}

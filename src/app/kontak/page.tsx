@@ -1,7 +1,8 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ContactIcon, SettingsIcon, UsersIcon, SportIcon, MedalIcon, BookIcon, CameraIcon, TwitterIcon, MonitorIcon, LocationIcon, ClockIcon } from '@/components/Icons';
+import { ContactIcon, SettingsIcon, UsersIcon, SportIcon, MedalIcon, LocationIcon, ClockIcon, PhoneIcon, EmailIcon } from '@/components/Icons';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function KontakPage() {
   const contactInfo = {
@@ -55,29 +56,37 @@ export default function KontakPage() {
       name: "Facebook",
       handle: "@dispora.sumbar",
       url: "https://facebook.com/dispora.sumbar",
-      icon: <BookIcon className="w-6 h-6" />,
-      followers: "12.5K"
+      icon: "https://img.icons8.com/color/96/facebook-new.png",
+      color: "from-blue-600 to-blue-700",
+      followers: "12.5K",
+      label: "followers"
     },
     {
       name: "Instagram",
       handle: "@dispora_sumbar",
       url: "https://instagram.com/dispora_sumbar",
-      icon: <CameraIcon className="w-6 h-6" />,
-      followers: "8.2K"
+      icon: "https://img.icons8.com/color/96/instagram-new--v1.png",
+      color: "from-pink-600 to-purple-600",
+      followers: "8.2K",
+      label: "followers"
     },
     {
       name: "Twitter",
       handle: "@disporasumbar",
       url: "https://twitter.com/disporasumbar",
-      icon: <TwitterIcon className="w-6 h-6" />,
-      followers: "5.8K"
+      icon: "https://img.icons8.com/color/96/twitterx--v1.png",
+      color: "from-sky-500 to-blue-500",
+      followers: "5.8K",
+      label: "followers"
     },
     {
       name: "YouTube",
       handle: "Dispora Sumbar Official",
       url: "https://youtube.com/disporasumbar",
-      icon: <MonitorIcon className="w-6 h-6" />,
-      followers: "3.1K"
+      icon: "https://img.icons8.com/color/96/youtube-play.png",
+      color: "from-red-600 to-red-700",
+      followers: "3.1K",
+      label: "subscribers"
     }
   ];
 
@@ -234,7 +243,7 @@ export default function KontakPage() {
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <span className="text-blue-600 text-xl">📞</span>
+                    <PhoneIcon className="text-blue-600 w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">Telepon</h3>
@@ -244,7 +253,7 @@ export default function KontakPage() {
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <span className="text-green-600 text-xl">✉️</span>
+                    <EmailIcon className="text-green-600 w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
@@ -254,7 +263,7 @@ export default function KontakPage() {
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <span className="text-purple-600 text-xl">🕒</span>
+                    <ClockIcon className="text-purple-600 w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">Jam Kerja</h3>
@@ -264,23 +273,38 @@ export default function KontakPage() {
               </div>
             </div>
 
-            {/* Map Placeholder */}
+            {/* Map */}
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Lokasi Kami</h3>
-              <div className="h-64 bg-gradient-to-br from-blue-400 to-green-400 rounded-lg flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="text-4xl mb-2">🗺️</div>
-                  <p className="font-semibold">Peta Lokasi</p>
-                  <p className="text-sm opacity-90">Jl. Rasuna Said No. 74, Padang</p>
-                </div>
+              <div className="h-64 rounded-lg overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3089876543216!2d100.3547!3d-0.9471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b7f8f8f8f8f8%3A0x1234567890abcdef!2sJl.%20Rasuna%20Said%20No.74%2C%20Padang%2C%20Sumatera%20Barat!5e0!3m2!1sid!2sid!4v1234567890123!5m2!1sid!2sid"
+                  width="100%"
+                  height="100%"
+                  className="border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Lokasi Dinas Pemuda dan Olahraga Provinsi Sumatera Barat"
+                ></iframe>
               </div>
-              <div className="mt-4 flex space-x-3">
-                <button className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+              <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                <a
+                  href="https://maps.google.com/?q=Jl.+Rasuna+Said+No.74,+Padang,+Sumatera+Barat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center flex items-center justify-center"
+                >
                   <LocationIcon className="w-4 h-4 mr-2" /> Buka di Google Maps
-                </button>
-                <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                </a>
+                <a
+                  href="https://waze.com/ul?q=Jl.+Rasuna+Said+No.74,+Padang"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-center flex items-center justify-center"
+                >
                   <LocationIcon className="w-4 h-4 mr-2" /> Buka di Waze
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -299,11 +323,11 @@ export default function KontakPage() {
                   
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center justify-center space-x-2">
-                      <span className="text-blue-600">📞</span>
+                      <PhoneIcon className="text-blue-600 w-4 h-4" />
                       <span className="text-gray-600">{dept.phone}</span>
                     </div>
                     <div className="flex items-center justify-center space-x-2">
-                      <span className="text-green-600">✉️</span>
+                      <EmailIcon className="text-green-600 w-4 h-4" />
                       <span className="text-gray-600 text-xs">{dept.email}</span>
                     </div>
                   </div>
@@ -331,27 +355,35 @@ export default function KontakPage() {
         </div>
 
         {/* Social Media */}
-        <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-8 text-white text-center">
-          <h2 className="text-3xl font-bold mb-4">Ikuti Media Sosial Kami</h2>
-          <p className="text-lg mb-8 opacity-90">
+        <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-8 md:p-12 text-white text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ikuti Media Sosial Kami</h2>
+          <p className="text-lg md:text-xl mb-12 opacity-90 max-w-3xl mx-auto">
             Dapatkan informasi terbaru dan berinteraksi dengan kami di media sosial
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
             {socialMedia.map((social, index) => (
               <a
                 key={index}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-6 hover:bg-opacity-30 transition-all duration-300 group"
+                className="bg-white text-gray-800 rounded-xl p-6 hover:scale-105 hover:shadow-2xl transition-all duration-300 group"
               >
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {social.icon}
+                <div className="mb-4 flex justify-center">
+                  <Image
+                    src={social.icon}
+                    alt={`${social.name} icon`}
+                    width={64}
+                    height={64}
+                    className="group-hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
-                <h3 className="font-semibold mb-1">{social.name}</h3>
-                <p className="text-sm opacity-90 mb-2">{social.handle}</p>
-                <p className="text-xs opacity-75">{social.followers} followers</p>
+                <h3 className="font-bold text-lg md:text-xl mb-2 text-gray-800">{social.name}</h3>
+                <p className="text-sm md:text-base text-gray-600 mb-3 font-medium">{social.handle}</p>
+                <div className={`bg-gradient-to-r ${social.color} text-white text-xs md:text-sm font-semibold py-2 px-4 rounded-full`}>
+                  {social.followers} {social.label || 'followers'}
+                </div>
               </a>
             ))}
           </div>

@@ -2,26 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { SearchIcon, MenuIcon, ArrowDownIcon } from './Icons';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  if (!isMounted) {
-    return null; // Avoid hydration mismatch
-  }
-
   return (
-    <header className="bg-white shadow-lg">
+    <header className="bg-white shadow-lg" suppressHydrationWarning>
       {/* Top Header with Orange Background */}
       <div className="bg-orange-500 text-white py-2">
         <div className="container mx-auto px-4 text-center">
@@ -34,8 +26,15 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo and Title */}
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">DS</span>
+            <div className="w-16 h-16 relative flex-shrink-0">
+              <Image
+                src="/logo-sumbar.png"
+                alt="Logo Sumatera Barat"
+                fill
+                className="object-contain"
+                priority
+                sizes="64px"
+              />
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-800">
@@ -76,34 +75,54 @@ const Header = () => {
       </div>
 
       {/* Navigation Menu */}
-      <nav className="bg-gray-800 text-white">
+      <nav className="bg-blue-900 text-white shadow-md">
         <div className="container mx-auto px-4">
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between">
             <div className="flex items-center space-x-1">
-              <Link href="/" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+              <Link href="/" className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide">
                 BERANDA
               </Link>
-              <Link href="/profil" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+              <Link href="/profil" className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide">
                 PROFIL
               </Link>
-              <Link href="/berita" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+              <Link href="/berita" className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide">
                 BERITA
               </Link>
-              <Link href="/galeri" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+              <Link href="/galeri" className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide">
                 GALERI
               </Link>
-              <Link href="/program" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+              <Link href="/program" className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide">
                 PROGRAM
               </Link>
-              <Link href="/kontak" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+              <div className="relative group">
+                <button className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
+                  LAYANAN
+                  <ArrowDownIcon className="ml-1 w-4 h-4" />
+                </button>
+                <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <Link href="/layanan/ppop" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                    PPOP
+                  </Link>
+                  <Link href="/layanan/pplp" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                    PPLP
+                  </Link>
+                  <Link href="/layanan/pplp" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                    Layanan Kepemudaan
+                  </Link>
+                  <Link href="/layanan/olahraga" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                    Layanan Keolahragaan
+                  </Link>
+                </div>
+              </div>
+              <Link href="/kontak" className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide">
                 HUBUNGI KAMI
               </Link>
-              <Link href="/ppid" className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide">
+              <Link href="/ppid" className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide">
                 PPID
               </Link>
               <div className="relative group">
-                <button className="px-6 py-4 hover:bg-gray-700 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
+                <button className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
                   UNDUH & LAPOR
                   <ArrowDownIcon className="ml-1 w-4 h-4" />
                 </button>
@@ -123,21 +142,41 @@ const Header = () => {
           {isMenuOpen && (
             <div className="lg:hidden">
               <div className="py-4 space-y-2">
-                <Link href="/" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
+                <Link href="/" className="block px-4 py-2 hover:bg-blue-800 transition-colors text-sm uppercase">
                   HOME PAGE
                 </Link>
-                <Link href="/profil" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
+                <Link href="/profil" className="block px-4 py-2 hover:bg-blue-800 transition-colors text-sm uppercase">
                   PROFIL
                 </Link>
-                <Link href="/berita" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
+                <Link href="/berita" className="block px-4 py-2 hover:bg-blue-800 transition-colors text-sm uppercase">
                   BERITA
                 </Link>
-                <Link href="/galeri" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
+                <Link href="/galeri" className="block px-4 py-2 hover:bg-blue-800 transition-colors text-sm uppercase">
                   GALERI
                 </Link>
-                <Link href="/program" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
+                <Link href="/program" className="block px-4 py-2 hover:bg-blue-800 transition-colors text-sm uppercase">
                   PROGRAM
                 </Link>
+                <div className="relative group">
+                  <button className="px-6 py-4 hover:bg-blue-800 transition-colors font-medium text-sm uppercase tracking-wide flex items-center">
+                    LAYANAN
+                    <ArrowDownIcon className="ml-1 w-4 h-4" />
+                  </button>
+                  <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <Link href="/layanan/ppop" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                      PPOP
+                    </Link>
+                    <Link href="/layanan/pplp" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                      PPLP
+                    </Link>
+                    <Link href="/layanan/pplp" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                      Layanan Kepemudaan
+                    </Link>
+                    <Link href="/layanan/olahraga" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600">
+                      Layanan Keolahragaan
+                    </Link>
+                  </div>
+                </div>
                 <Link href="/kontak" className="block px-4 py-2 hover:bg-gray-700 transition-colors text-sm uppercase">
                   HUBUNGI KAMI
                 </Link>

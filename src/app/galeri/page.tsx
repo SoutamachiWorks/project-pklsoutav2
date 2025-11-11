@@ -4,181 +4,24 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { CalendarIcon, LocationIcon } from '@/components/Icons';
+import Image from 'next/image';
+import { CalendarIcon, LocationIcon, EyeIcon, ClockIcon } from '@/components/Icons';
+import galleryData from '@/data/gallery.json';
+import videosData from '@/data/videos.json';
+import categoriesData from '@/data/gallery-categories.json';
 
 export default function GaleriPage() {
   const [activeTab, setActiveTab] = useState<'photo' | 'video'>('photo');
   const [activeCategory, setActiveCategory] = useState('Semua');
-  const photoGallery = [
-    {
-      id: 1,
-      title: "Seleksi Atlet/Siswa KBOR (PPLP) Sumbar",
-      description: "Proses seleksi calon atlet berbakat untuk program PPLP Sumatera Barat tahun 2025",
-      date: "4 Juli 2025",
-      views: 1259,
-      category: "Seleksi",
-      images: 15,
-      location: "GOR Haji Agus Salim"
-    },
-    {
-      id: 2,
-      title: "Pelantikan Eselon II, III dan IV di Lingkungan Dispora Sumbar",
-      description: "Upacara pelantikan pejabat struktural di lingkungan Dinas Pemuda dan Olahraga",
-      date: "2 Juli 2025",
-      views: 864,
-      category: "Upacara",
-      images: 22,
-      location: "Kantor Dispora Sumbar"
-    },
-    {
-      id: 3,
-      title: "Kadispora Sumbar Hadiri Sekaligus Menyerahkan Bantuan pada Penutupan Event",
-      description: "Kepala Dinas menyerahkan bantuan dan menutup event olahraga daerah",
-      date: "8 Agustus 2025",
-      views: 1825,
-      category: "Event",
-      images: 18,
-      location: "Stadion Utama Sumbar"
-    },
-    {
-      id: 4,
-      title: "Kadispora Sumbar Mewakili Gubernur Membuka Kejuaraan Terbuka",
-      description: "Pembukaan kejuaraan olahraga terbuka tingkat provinsi dengan berbagai cabang olahraga",
-      date: "30 Juli 2025",
-      views: 2049,
-      category: "Kejuaraan",
-      images: 31,
-      location: "Kompleks Olahraga Sumbar"
-    },
-    {
-      id: 5,
-      title: "Gubernur Lantik Kadispora Sumbar",
-      description: "Upacara pelantikan Kepala Dinas Pemuda dan Olahraga Provinsi Sumatera Barat yang baru",
-      date: "14 Juli 2025",
-      views: 3109,
-      category: "Pelantikan",
-      images: 25,
-      location: "Kantor Gubernur Sumbar"
-    },
-    {
-      id: 6,
-      title: "Kunjungan Kerja Komisi V DPRD Sumbar ke Pondok Pemuda Lubuk Selasih",
-      description: "Kunjungan kerja untuk monitoring fasilitas kepemudaan dan program pembinaan",
-      date: "11 Juli 2025",
-      views: 2043,
-      category: "Kunjungan",
-      images: 12,
-      location: "Pondok Pemuda Lubuk Selasih"
-    },
-    {
-      id: 7,
-      title: "Pelatihan Kewirausahaan Pemuda Sumbar 2025",
-      description: "Program pelatihan kewirausahaan untuk mengembangkan jiwa entrepreneur generasi muda",
-      date: "20 Juni 2025",
-      views: 1456,
-      category: "Pelatihan",
-      images: 20,
-      location: "Hotel Grand Zuri Padang"
-    },
-    {
-      id: 8,
-      title: "Turnamen Sepakbola Antar Lembaga Piala Gubernur",
-      description: "Kompetisi sepakbola dengan partisipasi 17 tim dari berbagai instansi di Sumbar",
-      date: "15 Juni 2025",
-      views: 2234,
-      category: "Turnamen",
-      images: 42,
-      location: "Stadion H. Agus Salim"
-    },
-    {
-      id: 9,
-      title: "Senam Rutin Tiap Hari Jumat Bersama Kadispora",
-      description: "Kegiatan senam bersama rutin setiap hari Jumat di lingkungan Dinas",
-      date: "10 Juni 2025",
-      views: 892,
-      category: "Rutin",
-      images: 8,
-      location: "Halaman Kantor Dispora"
-    }
-  ];
-
-  const videoGallery = [
-    {
-      id: 1,
-      title: "Highlight PON XX Papua 2021",
-      description: "Cuplikan performa terbaik atlet Sumbar di PON XX Papua dengan berbagai prestasi membanggakan",
-      duration: "5:32",
-      views: 15420,
-      date: "25 Oktober 2021",
-      category: "Prestasi"
-    },
-    {
-      id: 2,
-      title: "Profil PPLP Sumatera Barat 2025",
-      description: "Video profil lengkap fasilitas dan program PPLP Sumbar untuk pembinaan atlet masa depan",
-      duration: "8:15",
-      views: 8934,
-      date: "15 Maret 2025",
-      category: "Profil"
-    },
-    {
-      id: 3,
-      title: "Senam Rutin Tiap Hari Jumat Bersama Kadispora",
-      description: "Dokumentasi kegiatan senam bersama rutin setiap hari Jumat di lingkungan Dinas",
-      duration: "3:45",
-      views: 5672,
-      date: "7 Juni 2025",
-      category: "Kegiatan"
-    },
-    {
-      id: 4,
-      title: "Pembukaan Kejuaraan Bola Voli U-13 Piala Kadispora",
-      description: "Dokumentasi pembukaan kejuaraan bola voli junior dengan antusiasme tinggi dari peserta",
-      duration: "4:28",
-      views: 7234,
-      date: "28 Mei 2025",
-      category: "Kejuaraan"
-    },
-    {
-      id: 5,
-      title: "Pelatihan Kewirausahaan Dispora Sumbar",
-      description: "Dokumentasi lengkap pelatihan kewirausahaan untuk pemuda Sumatera Barat",
-      duration: "6:42",
-      views: 4123,
-      date: "20 Mei 2025",
-      category: "Pelatihan"
-    },
-    {
-      id: 6,
-      title: "Revitalisasi Fasilitas Olahraga Sumbar",
-      description: "Progress revitalisasi berbagai fasilitas olahraga di Sumatera Barat",
-      duration: "7:18",
-      views: 6789,
-      date: "10 Mei 2025",
-      category: "Infrastruktur"
-    }
-  ];
-
-  const photoCategories = [
-    { name: "Semua", count: 150 },
-    { name: "Seleksi", count: 25 },
-    { name: "Upacara", count: 18 },
-    { name: "Event", count: 32 },
-    { name: "Kejuaraan", count: 28 },
-    { name: "Pelatihan", count: 22 },
-    { name: "Kunjungan", count: 15 },
-    { name: "Rutin", count: 10 }
-  ];
-
-  const videoCategories = [
-    { name: "Semua", count: 89 },
-    { name: "Prestasi", count: 15 },
-    { name: "Profil", count: 12 },
-    { name: "Kegiatan", count: 25 },
-    { name: "Kejuaraan", count: 18 },
-    { name: "Pelatihan", count: 10 },
-    { name: "Infrastruktur", count: 9 }
-  ];
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9; // 9 items per halaman (3x3 grid)
+  
+  // Data dari JSON
+  const photoGallery = galleryData;
+  const videoGallery = videosData;
+  const photoCategories = categoriesData.photo;
+  const videoCategories = categoriesData.video;
 
   const currentCategories = activeTab === 'photo' ? photoCategories : videoCategories;
   
@@ -189,6 +32,42 @@ export default function GaleriPage() {
   const filteredVideos = activeCategory === 'Semua' 
     ? videoGallery 
     : videoGallery.filter(item => item.category === activeCategory);
+
+  // Pagination logic
+  const currentItems = activeTab === 'photo' ? filteredPhotos : filteredVideos;
+  const totalPages = Math.ceil(currentItems.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentDisplayItems = currentItems.slice(startIndex, endIndex);
+
+  // Filtered items untuk display
+  const displayPhotos = activeTab === 'photo' ? currentDisplayItems : [];
+  const displayVideos = activeTab === 'video' ? currentDisplayItems : [];
+
+  // Reset page saat ganti tab atau kategori
+  const handleTabChange = (tab: 'photo' | 'video') => {
+    setActiveTab(tab);
+    setActiveCategory('Semua');
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openVideoModal = (youtubeId: string) => {
+    setSelectedVideo(youtubeId);
+  };
+
+  const closeVideoModal = () => {
+    setSelectedVideo(null);
+  };
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -220,10 +99,7 @@ export default function GaleriPage() {
         <div className="flex justify-center mb-8">
           <div className="bg-white rounded-lg shadow-md p-1 flex">
             <button 
-              onClick={() => {
-                setActiveTab('photo');
-                setActiveCategory('Semua');
-              }}
+              onClick={() => handleTabChange('photo')}
               className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 ${
                 activeTab === 'photo' 
                   ? 'bg-red-600 text-white' 
@@ -233,10 +109,7 @@ export default function GaleriPage() {
               📷 Galeri Foto
             </button>
             <button 
-              onClick={() => {
-                setActiveTab('video');
-                setActiveCategory('Semua');
-              }}
+              onClick={() => handleTabChange('video')}
               className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 ${
                 activeTab === 'video' 
                   ? 'bg-red-600 text-white' 
@@ -258,7 +131,7 @@ export default function GaleriPage() {
                 {currentCategories.map((category, index) => (
                   <button
                     key={index}
-                    onClick={() => setActiveCategory(category.name)}
+                    onClick={() => handleCategoryChange(category.name)}
                     className={`w-full flex items-center justify-between py-2 px-3 rounded text-left transition-colors ${
                       activeCategory === category.name 
                         ? 'bg-red-50 text-red-600 border-l-4 border-red-600' 
@@ -328,11 +201,17 @@ export default function GaleriPage() {
             {/* Photo Gallery Grid */}
             {activeTab === 'photo' && (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredPhotos.map((album) => (
+                {(displayPhotos as typeof photoGallery).map((album) => (
                 <div key={album.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
-                  {/* Image Placeholder */}
-                  <div className="relative h-48 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
-                    <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={album.image}
+                      alt={album.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    />
                     
                     {/* Category Badge */}
                     <div className="absolute top-3 left-3">
@@ -343,13 +222,16 @@ export default function GaleriPage() {
                     
                     {/* Image Count */}
                     <div className="absolute top-3 right-3">
-                      <span className="bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
-                        📷 {album.images} foto
+                      <span className="bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                        </svg>
+                        {album.images} foto
                       </span>
                     </div>
                     
                     {/* View Button */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30">
                       <button className="bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white px-4 py-2 rounded-lg hover:bg-opacity-30 transition-all duration-300">
                         Lihat Album
                       </button>
@@ -389,22 +271,35 @@ export default function GaleriPage() {
             {/* Video Gallery */}
             {activeTab === 'video' && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredVideos.map((video) => (
-                  <div key={video.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                {(displayVideos as typeof videoGallery).map((video) => (
+                  <div 
+                    key={video.id} 
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer"
+                    onClick={() => openVideoModal(video.youtubeId)}
+                  >
                     {/* Video Thumbnail */}
-                    <div className="relative h-40 bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 overflow-hidden">
-                      <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                    <div className="relative h-40 overflow-hidden">
+                      <Image
+                        src={video.thumbnail}
+                        alt={video.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
                       
                       {/* Play Button */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white border-opacity-30">
-                          <span className="text-white text-2xl ml-1">▶️</span>
+                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-20 transition-all duration-300">
+                        <div className="w-16 h-16 bg-red-600 bg-opacity-80 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
                         </div>
                       </div>
                       
                       {/* Duration */}
                       <div className="absolute bottom-3 right-3">
-                        <span className="bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                        <span className="bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
+                          <ClockIcon className="w-3 h-3" />
                           {video.duration}
                         </span>
                       </div>
@@ -448,24 +343,137 @@ export default function GaleriPage() {
             )}
 
             {/* Pagination */}
-            {((activeTab === 'photo' && filteredPhotos.length > 0) || 
-              (activeTab === 'video' && filteredVideos.length > 0)) && (
-              <div className="flex justify-center mt-12">
-                <div className="flex space-x-2">
-                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                    ← Sebelumnya
-                  </button>
-                  <button className="px-4 py-2 bg-red-600 text-white rounded-lg">1</button>
-                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">2</button>
-                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">3</button>
-                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
-                    Selanjutnya →
-                  </button>
+            {totalPages > 1 && (
+              <div className="mt-12">
+                <div className="flex justify-center">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {/* Previous Button */}
+                    <button 
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      ← Sebelumnya
+                    </button>
+
+                    {/* Page Numbers */}
+                    {(() => {
+                      const pages = [];
+                      const maxVisible = 5; // Maksimal tombol halaman yang ditampilkan
+                      
+                      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+                      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+                      
+                      // Adjust jika di akhir
+                      if (endPage - startPage < maxVisible - 1) {
+                        startPage = Math.max(1, endPage - maxVisible + 1);
+                      }
+
+                      // First page
+                      if (startPage > 1) {
+                        pages.push(
+                          <button
+                            key={1}
+                            onClick={() => handlePageChange(1)}
+                            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
+                          >
+                            1
+                          </button>
+                        );
+                        if (startPage > 2) {
+                          pages.push(
+                            <span key="dots1" className="px-2 text-gray-400">...</span>
+                          );
+                        }
+                      }
+
+                      // Middle pages
+                      for (let i = startPage; i <= endPage; i++) {
+                        pages.push(
+                          <button
+                            key={i}
+                            onClick={() => handlePageChange(i)}
+                            className={`px-4 py-2 rounded-lg transition-colors ${
+                              currentPage === i
+                                ? 'bg-red-600 text-white'
+                                : 'border border-gray-300 text-gray-600 hover:bg-gray-50'
+                            }`}
+                          >
+                            {i}
+                          </button>
+                        );
+                      }
+
+                      // Last page
+                      if (endPage < totalPages) {
+                        if (endPage < totalPages - 1) {
+                          pages.push(
+                            <span key="dots2" className="px-2 text-gray-400">...</span>
+                          );
+                        }
+                        pages.push(
+                          <button
+                            key={totalPages}
+                            onClick={() => handlePageChange(totalPages)}
+                            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
+                          >
+                            {totalPages}
+                          </button>
+                        );
+                      }
+
+                      return pages;
+                    })()}
+
+                    {/* Next Button */}
+                    <button 
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Selanjutnya →
+                    </button>
+                  </div>
+                </div>
+
+                {/* Page Info */}
+                <div className="mt-4 text-center text-sm text-gray-600">
+                  Halaman {currentPage} dari {totalPages} • Menampilkan {startIndex + 1}-{Math.min(endIndex, currentItems.length)} dari {currentItems.length} {activeTab === 'photo' ? 'foto' : 'video'}
                 </div>
               </div>
             )}
           </div>
         </div>
+
+        {/* Video Modal */}
+        {selectedVideo && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+            onClick={closeVideoModal}
+          >
+            <div 
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={closeVideoModal}
+                aria-label="Close video"
+                className="absolute top-4 right-4 text-white hover:text-gray-300 z-10 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 transition-all duration-200"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <iframe
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
 
       <Footer />
