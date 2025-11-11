@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { CameraIcon, MonitorIcon, EyeIcon, ClockIcon } from '@/components/Icons';
 import galleryData from '@/data/gallery.json';
 import videosData from '@/data/videos.json';
-import categoriesData from '@/data/gallery-categories.json';
 
 const GallerySection = () => {
   const [activeTab, setActiveTab] = useState('foto');

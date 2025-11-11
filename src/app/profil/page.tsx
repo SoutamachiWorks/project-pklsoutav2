@@ -49,6 +49,35 @@ export default function ProfilPage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Prestasi data
+  const prestasi = [
+    {
+      tahun: "2024",
+      event: "PON XXI Aceh-Sumut 2024",
+      prestasi: "Peringkat 12 Nasional",
+      medali: "8 Emas, 12 Perak, 15 Perunggu"
+    },
+    {
+      tahun: "2023",
+      event: "Kejuaraan Nasional Multi Event",
+      prestasi: "Juara Umum Wilayah Sumatra",
+      medali: "15 Emas, 20 Perak, 18 Perunggu"
+    },
+    {
+      tahun: "2022",
+      event: "POPNAS XVI Jawa Barat",
+      prestasi: "Peringkat 8 Nasional",
+      medali: "12 Emas, 18 Perak, 22 Perunggu"
+    },
+    {
+      tahun: "2021",
+      event: "PON XX Papua",
+      prestasi: "Peringkat 10 Nasional",
+      medali: "10 Emas, 15 Perak, 20 Perunggu"
+    }
+  ];
+  
   const visiMisi = {
     visi: "Terwujudnya Sumatera Barat yang unggul dalam bidang kepemudaan dan keolahragaan melalui pembinaan yang berkelanjutan dan prestasi yang membanggakan.",
     misi: [
@@ -165,7 +194,7 @@ export default function ProfilPage() {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
-  }, [isAutoPlay]);
+  }, [isAutoPlay, prestasi.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % prestasi.length);
@@ -181,33 +210,6 @@ export default function ProfilPage() {
     setCurrentSlide(index);
     setIsAutoPlay(false);
   };
-
-  const prestasi = [
-    {
-      tahun: "2024",
-      event: "PON XXI Aceh-Sumut 2024",
-      prestasi: "Peringkat 12 Nasional",
-      medali: "8 Emas, 12 Perak, 15 Perunggu"
-    },
-    {
-      tahun: "2023",
-      event: "Kejuaraan Nasional Multi Event",
-      prestasi: "Juara Umum Wilayah Sumatra",
-      medali: "15 Emas, 20 Perak, 18 Perunggu"
-    },
-    {
-      tahun: "2022",
-      event: "POPNAS XVI Jawa Barat",
-      prestasi: "Peringkat 8 Nasional",
-      medali: "12 Emas, 18 Perak, 22 Perunggu"
-    },
-    {
-      tahun: "2021",
-      event: "PON XX Papua",
-      prestasi: "Peringkat 10 Nasional",
-      medali: "10 Emas, 15 Perak, 20 Perunggu"
-    }
-  ];
 
   return (
     <main className="min-h-screen bg-gray-50">

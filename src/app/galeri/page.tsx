@@ -5,10 +5,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CalendarIcon, LocationIcon, EyeIcon, ClockIcon } from '@/components/Icons';
+import { CalendarIcon, LocationIcon, ClockIcon } from '@/components/Icons';
 import galleryData from '@/data/gallery.json';
 import videosData from '@/data/videos.json';
-import categoriesData from '@/data/gallery-categories.json';
 
 export default function GaleriPage() {
   const [activeTab, setActiveTab] = useState<'photo' | 'video'>('photo');
@@ -20,8 +19,8 @@ export default function GaleriPage() {
   // Data dari JSON
   const photoGallery = galleryData;
   const videoGallery = videosData;
-  const photoCategories = categoriesData.photo;
-  const videoCategories = categoriesData.video;
+  const photoCategories = ['Semua', 'Olahraga', 'Kepemudaan', 'Pelatihan', 'Event', 'Fasilitas'];
+  const videoCategories = ['Semua', 'Dokumentasi', 'Sosialisasi', 'Kegiatan'];
 
   const currentCategories = activeTab === 'photo' ? photoCategories : videoCategories;
   
@@ -128,18 +127,17 @@ export default function GaleriPage() {
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
               <h3 className="font-bold text-lg text-gray-800 mb-4">Filter Kategori</h3>
               <div className="space-y-2">
-                {currentCategories.map((category, index) => (
+                {currentCategories.map((category: string, index: number) => (
                   <button
                     key={index}
-                    onClick={() => handleCategoryChange(category.name)}
+                    onClick={() => handleCategoryChange(category)}
                     className={`w-full flex items-center justify-between py-2 px-3 rounded text-left transition-colors ${
-                      activeCategory === category.name 
+                      activeCategory === category 
                         ? 'bg-red-50 text-red-600 border-l-4 border-red-600' 
                         : 'hover:bg-gray-50 text-gray-700'
                     }`}
                   >
-                    <span>{category.name}</span>
-                    <span className="text-sm text-gray-500">({category.count})</span>
+                    <span>{category}</span>
                   </button>
                 ))}
               </div>
@@ -361,16 +359,16 @@ export default function GaleriPage() {
                       const pages = [];
                       const maxVisible = 5; // Maksimal tombol halaman yang ditampilkan
                       
-                      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-                      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+                      const startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+                      const endPage = Math.min(totalPages, startPage + maxVisible - 1);
                       
                       // Adjust jika di akhir
-                      if (endPage - startPage < maxVisible - 1) {
-                        startPage = Math.max(1, endPage - maxVisible + 1);
-                      }
+                      const adjustedStartPage = endPage - startPage < maxVisible - 1 
+                        ? Math.max(1, endPage - maxVisible + 1)
+                        : startPage;
 
                       // First page
-                      if (startPage > 1) {
+                      if (adjustedStartPage > 1) {
                         pages.push(
                           <button
                             key={1}
@@ -380,7 +378,7 @@ export default function GaleriPage() {
                             1
                           </button>
                         );
-                        if (startPage > 2) {
+                        if (adjustedStartPage > 2) {
                           pages.push(
                             <span key="dots1" className="px-2 text-gray-400">...</span>
                           );
@@ -388,7 +386,7 @@ export default function GaleriPage() {
                       }
 
                       // Middle pages
-                      for (let i = startPage; i <= endPage; i++) {
+                      for (let i = adjustedStartPage; i <= endPage; i++) {
                         pages.push(
                           <button
                             key={i}
