@@ -143,15 +143,32 @@ export default function BeritaPage() {
       <Header />
       
       {/* Breadcrumb */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 py-4">
-          <nav className="text-sm">
-            <Link href="/" className="text-gray-500 hover:text-red-600">Beranda</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-800 font-medium">Berita</span>
+          <nav className="text-sm flex items-center">
+            <Link href="/" className="text-gray-500 hover:text-red-600 transition-colors">Beranda</Link>
+            <span className="mx-2 text-gray-400">→</span>
+            <span className="text-gray-800 font-semibold">Berita</span>
           </nav>
         </div>
       </div>
+
+      {/* Page Header Banner */}
+      <section className="bg-gradient-to-br from-red-600 via-red-700 to-orange-600 text-white py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+            Portal Berita & Informasi
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Berita Terkini</h1>
+          <p className="text-lg opacity-90 max-w-2xl mx-auto leading-relaxed">
+            Informasi terbaru, update kegiatan, dan prestasi gemilang 
+            Dinas Pemuda dan Olahraga Provinsi Sumatera Barat
+          </p>
+        </div>
+      </section>
 
       <div className="container mx-auto px-4 py-12">
         {/* Featured News Hero Slider */}

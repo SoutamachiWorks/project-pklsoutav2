@@ -122,22 +122,29 @@ export default function KontakPage() {
       <Header />
       
       {/* Breadcrumb */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 py-4">
-          <nav className="text-sm">
-            <Link href="/" className="text-gray-500 hover:text-red-600">Beranda</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-800 font-medium">Kontak</span>
+          <nav className="text-sm flex items-center">
+            <Link href="/" className="text-gray-500 hover:text-red-600 transition-colors">Beranda</Link>
+            <span className="mx-2 text-gray-400">→</span>
+            <span className="text-gray-800 font-semibold">Kontak</span>
           </nav>
         </div>
       </div>
 
       {/* Page Header */}
-      <section className="bg-gradient-to-r from-red-600 to-orange-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Hubungi Kami</h1>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Siap melayani dan membantu Anda dengan informasi yang dibutuhkan
+      <section className="bg-gradient-to-br from-green-600 via-emerald-600 to-teal-700 text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/5 rounded-full -ml-40 -mb-40"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+            Layanan Komunikasi
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Hubungi Kami</h1>
+          <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+            Siap melayani Anda 24/7. Hubungi kami untuk informasi, konsultasi, 
+            atau kerjasama di bidang kepemudaan dan keolahragaan
           </p>
         </div>
       </section>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -9,10 +9,25 @@ import { CalendarIcon, LocationIcon, ClockIcon } from '@/components/Icons';
 import galleryData from '@/data/gallery.json';
 import videosData from '@/data/videos.json';
 
+interface GalleryItemData {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  date: string;
+  location: string;
+  category: string;
+  views: number;
+  images: number;
+}
+
 export default function GaleriPage() {
   const [activeTab, setActiveTab] = useState<'photo' | 'video'>('photo');
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageTitle, setSelectedImageTitle] = useState<string>('');
+  const [selectedImageData, setSelectedImageData] = useState<GalleryItemData | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9; // 9 items per halaman (3x3 grid)
   
@@ -68,27 +83,67 @@ export default function GaleriPage() {
     setSelectedVideo(null);
   };
 
+  const openImageModal = (imageUrl: string, title: string, data?: GalleryItemData) => {
+    setSelectedImage(imageUrl);
+    setSelectedImageTitle(title);
+    setSelectedImageData(data || null);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+    setSelectedImageTitle('');
+    setSelectedImageData(null);
+  };
+
+  // Keyboard event listener for ESC key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (selectedImage) closeImageModal();
+        if (selectedVideo) closeVideoModal();
+      }
+    };
+
+    if (selectedImage || selectedVideo) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedImage, selectedVideo]);
+
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />
       
       {/* Breadcrumb */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 py-4">
-          <nav className="text-sm">
-            <Link href="/" className="text-gray-500 hover:text-red-600">Beranda</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-800 font-medium">Galeri</span>
+          <nav className="text-sm flex items-center">
+            <Link href="/" className="text-gray-500 hover:text-red-600 transition-colors">Beranda</Link>
+            <span className="mx-2 text-gray-400">→</span>
+            <span className="text-gray-800 font-semibold">Galeri</span>
           </nav>
         </div>
       </div>
 
       {/* Page Header */}
-      <section className="bg-gradient-to-r from-red-600 to-orange-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Galeri Dokumentasi</h1>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Dokumentasi kegiatan dan momen penting Dinas Pemuda dan Olahraga Provinsi Sumatera Barat
+      <section className="bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/5 rounded-full -ml-40 -mb-40"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+            Dokumentasi Visual
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Galeri Foto & Video</h1>
+          <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+            Lihat dokumentasi kegiatan, momen berharga, dan pencapaian prestasi 
+            Dinas Pemuda dan Olahraga Provinsi Sumatera Barat dalam foto dan video berkualitas tinggi
           </p>
         </div>
       </section>
@@ -99,23 +154,30 @@ export default function GaleriPage() {
           <div className="bg-white rounded-lg shadow-md p-1 flex">
             <button 
               onClick={() => handleTabChange('photo')}
-              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 flex items-center gap-2 ${
                 activeTab === 'photo' 
                   ? 'bg-red-600 text-white' 
                   : 'text-gray-600 hover:text-red-600'
               }`}
             >
-              📷 Galeri Foto
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Galeri Foto
             </button>
             <button 
               onClick={() => handleTabChange('video')}
-              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 flex items-center gap-2 ${
                 activeTab === 'video' 
                   ? 'bg-red-600 text-white' 
                   : 'text-gray-600 hover:text-red-600'
               }`}
             >
-              🎥 Galeri Video
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              Galeri Video
             </button>
           </div>
         </div>
@@ -202,7 +264,10 @@ export default function GaleriPage() {
                 {(displayPhotos as typeof photoGallery).map((album) => (
                 <div key={album.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
                   {/* Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div 
+                    className="relative h-48 overflow-hidden cursor-pointer"
+                    onClick={() => openImageModal(album.image, album.title, album)}
+                  >
                     <Image
                       src={album.image}
                       alt={album.title}
@@ -229,9 +294,13 @@ export default function GaleriPage() {
                     </div>
                     
                     {/* View Button */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30">
-                      <button className="bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white px-4 py-2 rounded-lg hover:bg-opacity-30 transition-all duration-300">
-                        Lihat Album
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-40">
+                      <button className="bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white px-6 py-3 rounded-lg hover:bg-opacity-30 transition-all duration-300 flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Lihat Gambar
                       </button>
                     </div>
                   </div>
@@ -256,8 +325,19 @@ export default function GaleriPage() {
                         <span className="truncate">{album.location}</span>
                       </div>
                       <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span>👁️ {album.views.toLocaleString()} views</span>
-                        <span>📷 {album.images} foto</span>
+                        <span className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                          {album.views.toLocaleString()} views
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          {album.images} foto
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -322,7 +402,13 @@ export default function GaleriPage() {
                       {/* Meta Info */}
                       <div className="flex items-center justify-between text-xs text-gray-500">
                         <span>{video.date}</span>
-                        <span>👁️ {video.views.toLocaleString()}</span>
+                        <span className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                          {video.views.toLocaleString()}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -334,7 +420,9 @@ export default function GaleriPage() {
             {((activeTab === 'photo' && filteredPhotos.length === 0) || 
               (activeTab === 'video' && filteredVideos.length === 0)) && (
               <div className="text-center py-16">
-                <div className="text-6xl mb-4">🔍</div>
+                <svg className="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Tidak ada {activeTab === 'photo' ? 'foto' : 'video'} ditemukan</h3>
                 <p className="text-gray-600">Coba pilih kategori lain atau kembali ke &quot;Semua&quot;</p>
               </div>
@@ -469,6 +557,91 @@ export default function GaleriPage() {
                 allowFullScreen
                 className="w-full h-full"
               ></iframe>
+            </div>
+          </div>
+        )}
+
+        {/* Image Modal / Lightbox */}
+        {selectedImage && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+            onClick={closeImageModal}
+          >
+            <div 
+              className="relative max-w-7xl max-h-[90vh] w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeImageModal}
+                aria-label="Close image"
+                className="absolute -top-12 right-0 text-white hover:text-gray-300 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full p-3 transition-all duration-200 flex items-center gap-2"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span className="text-sm font-semibold">ESC</span>
+              </button>
+
+              {/* Image Container */}
+              <div className="relative w-full h-full flex flex-col items-center">
+                <div className="relative w-full max-h-[70vh] rounded-lg overflow-hidden shadow-2xl">
+                  <Image
+                    src={selectedImage}
+                    alt={selectedImageTitle}
+                    width={1200}
+                    height={800}
+                    className="w-full h-full object-contain bg-black"
+                    priority
+                  />
+                </div>
+                
+                {/* Image Info */}
+                {selectedImageTitle && (
+                  <div className="mt-4 bg-black bg-opacity-70 backdrop-blur-md px-8 py-5 rounded-xl max-w-4xl w-full">
+                    <h3 className="text-white text-xl font-bold mb-3">
+                      {selectedImageTitle}
+                    </h3>
+                    
+                    {/* Additional Info */}
+                    {selectedImageData && (
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        {/* Date */}
+                        {selectedImageData.date && (
+                          <div className="flex items-center gap-2 text-gray-300">
+                            <CalendarIcon className="w-4 h-4 text-blue-400" />
+                            <span>{selectedImageData.date}</span>
+                          </div>
+                        )}
+                        
+                        {/* Location */}
+                        {selectedImageData.location && (
+                          <div className="flex items-center gap-2 text-gray-300">
+                            <LocationIcon className="w-4 h-4 text-red-400" />
+                            <span>{selectedImageData.location}</span>
+                          </div>
+                        )}
+                        
+                        {/* Category */}
+                        {selectedImageData.category && (
+                          <div className="flex items-center gap-2">
+                            <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                              {selectedImageData.category}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    
+                    {/* Description */}
+                    {selectedImageData?.description && (
+                      <p className="text-gray-300 mt-3 leading-relaxed">
+                        {selectedImageData.description}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

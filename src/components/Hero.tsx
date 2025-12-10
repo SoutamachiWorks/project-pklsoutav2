@@ -11,29 +11,29 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      title: "Selamat Datang di Website Resmi Dispora Sumbar",
+      title: "Selamat Datang di Website Resmi",
       subtitle: "Dinas Pemuda dan Olahraga Provinsi Sumatera Barat",
-      description: "Berkomitmen mengembangkan potensi pemuda dan prestasi olahraga demi kemajuan Sumatera Barat",
-      image: "/slider/dispora-meeting.jpg", // Gambar meeting/rapat yang baru diupload
-      cta: "Jelajahi Layanan",
+      description: "Berkomitmen mengembangkan potensi pemuda dan prestasi olahraga untuk membangun Sumatra Barat yang lebih maju dan berprestasi",
+      image: "/slider/dispora-meeting.jpg",
+      cta: "Jelajahi Layanan Kami",
       ctaLink: "/layanan"
     },
     {
       id: 2,
-      title: "Pembinaan Atlet Berprestasi",
+      title: "Cetak Atlet Juara Nasional",
       subtitle: "PPLP & PPOP Sumatera Barat",
-      description: "Menghasilkan atlet-atlet berbakat melalui sistem pembinaan yang terintegrasi dan berkelanjutan",
-      image: "/slider/dispora-prestasi.jpg", // Menggunakan gambar pembinaan untuk konsistensi
-      cta: "Lihat Program",
+      description: "Sistem pembinaan atlet terintegrasi yang telah menghasilkan ratusan atlet berprestasi di tingkat nasional dan internasional",
+      image: "/slider/dispora-prestasi.jpg",
+      cta: "Lihat Program Pembinaan",
       ctaLink: "/layanan/pplp"
     },
     {
       id: 3,
-      title: "Pengembangan Kepemudaan",
-      subtitle: "Generasi Muda Berkarakter", 
-      description: "Memberdayakan pemuda Sumatera Barat melalui program-program kepemudaan yang inovatif",
-      image: "/slider/dispora-pengembangan.jpg", // Menggunakan gambar meeting untuk konsistensi
-      cta: "Info Pemuda",
+      title: "Generasi Muda Berkarakter & Berdaya",
+      subtitle: "Program Pemberdayaan Pemuda", 
+      description: "Mengembangkan jiwa kepemimpinan, kewirausahaan, dan kreativitas pemuda melalui program-program kepemudaan yang inovatif dan berkelanjutan",
+      image: "/slider/dispora-pengembangan.jpg",
+      cta: "Gabung Program Pemuda",
       ctaLink: "/layanan/pemuda"
     }
   ];
@@ -42,17 +42,17 @@ const Hero = () => {
     {
       id: 1,
       icon: <MedalIcon className="w-4 h-4 mr-2 flex-shrink-0" />,
-      text: "Atlet PPLP Sumbar Raih Medali Emas di Kejuaraan Nasional"
+      text: "Atlet PPLP Sumbar Raih 5 Medali Emas di Kejuaraan Nasional 2025!"
     },
     {
       id: 2,
       icon: <SettingsIcon className="w-4 h-4 mr-2 flex-shrink-0" />,
-      text: "Pendaftaran PPOP 2025 Dibuka Hingga 31 Agustus"
+      text: "Pendaftaran PPOP 2025 Dibuka! Deadline 31 Agustus - Jangan Lewatkan!"
     },
     {
       id: 3,
       icon: <TargetIcon className="w-4 h-4 mr-2 flex-shrink-0" />,
-      text: "Program Pembinaan Atlet Berbakat Tahun 2025 Segera Dimulai"
+      text: "Program Beasiswa Atlet Berprestasi Tahun 2025 Sudah Dibuka"
     }
   ];
 

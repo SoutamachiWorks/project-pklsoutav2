@@ -12,10 +12,10 @@ const StatsSection = () => {
   });
 
   const finalNumbers = {
-    athletes: 1250,
-    medals: 324,
-    events: 156,
-    facilities: 45
+    athletes: 1850,
+    medals: 527,
+    events: 243,
+    facilities: 68
   };
 
   useEffect(() => {
@@ -69,22 +69,22 @@ const StatsSection = () => {
 
   const achievements = [
     {
-      title: "Juara Umum PON XX Papua 2021",
-      description: "Sumatera Barat meraih posisi 10 besar dengan total 15 medali emas",
+      title: "Top 10 PON XX Papua 2021",
+      description: "Sumatera Barat meraih prestasi gemilang dengan 15 medali emas dan posisi 10 besar nasional",
       year: "2021",
       category: "Prestasi Nasional"
     },
     {
       title: "Atlet Terbaik SEA Games 2023",
-      description: "2 atlet Sumbar masuk nominasi atlet terbaik SEA Games Kamboja",
+      description: "2 atlet binaan Sumbar masuk nominasi atlet terbaik SEA Games Kamboja dan membawa pulang 4 medali",
       year: "2023",
       category: "Prestasi Internasional"
     },
     {
-      title: "Pengembangan PPLP Terbaik",
-      description: "PPLP Sumbar dinobatkan sebagai PPLP dengan program pembinaan terbaik",
+      title: "PPLP Pembinaan Terbaik Se-Indonesia",
+      description: "PPLP Sumbar dinobatkan sebagai pusat pembinaan dengan sistem dan program terbaik tingkat nasional",
       year: "2024",
-      category: "Pembinaan"
+      category: "Pembinaan Atlet"
     }
   ];
 
@@ -93,11 +93,14 @@ const StatsSection = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-12">
+          <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-semibold mb-4">
+            Statistik & Pencapaian
+          </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">
-            Capaian & Prestasi
+            Capaian & Prestasi Gemilang
           </h2>
-          <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto px-4">
-            Data dan pencapaian kami dalam mengembangkan olahraga dan kepemudaan di Sumatera Barat
+          <p className="text-sm md:text-base text-blue-100 max-w-2xl mx-auto px-4 leading-relaxed">
+            Dedikasi dan kerja keras menghasilkan prestasi nyata dalam pengembangan olahraga dan kepemudaan Sumatera Barat
           </p>
         </div>
 

@@ -36,37 +36,41 @@ const GallerySection = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
+          <span className="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold mb-4">
+            Dokumentasi Visual
+          </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Galeri Dokumentasi
+            Galeri Foto & Video
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Dokumentasi kegiatan dan momen penting Dinas Pemuda dan Olahraga Provinsi Sumatera Barat
+          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Lihat dokumentasi kegiatan, momen berharga, dan pencapaian prestasi 
+            Dinas Pemuda dan Olahraga Provinsi Sumatera Barat
           </p>
         </div>
 
         {/* Tab Navigation */}
         <div className="flex justify-center mb-8">
-          <div className="bg-white rounded-lg shadow-md p-1 flex">
+          <div className="bg-white rounded-xl shadow-lg p-2 flex border border-gray-200">
             <button
               onClick={() => setActiveTab('foto')}
-              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 flex items-center gap-2 ${
+              className={`px-6 py-3 rounded-lg font-bold transition-all duration-300 flex items-center gap-2 ${
                 activeTab === 'foto'
-                  ? 'bg-red-600 text-white'
-                  : 'text-gray-600 hover:text-red-600'
+                  ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-md'
+                  : 'text-gray-600 hover:text-red-600 hover:bg-red-50'
               }`}
             >
-              <CameraIcon className="w-4 h-4" />
+              <CameraIcon className="w-5 h-5" />
               Galeri Foto
             </button>
             <button
               onClick={() => setActiveTab('video')}
-              className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 flex items-center gap-2 ${
+              className={`px-6 py-3 rounded-lg font-bold transition-all duration-300 flex items-center gap-2 ${
                 activeTab === 'video'
-                  ? 'bg-red-600 text-white'
-                  : 'text-gray-600 hover:text-red-600'
+                  ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-md'
+                  : 'text-gray-600 hover:text-red-600 hover:bg-red-50'
               }`}
             >
-              <MonitorIcon className="w-4 h-4" />
+              <MonitorIcon className="w-5 h-5" />
               Galeri Video
             </button>
           </div>
