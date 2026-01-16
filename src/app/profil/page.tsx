@@ -26,6 +26,32 @@ export default function ProfilPage() {
     }
   };
 
+  // Scroll Animation
+  useEffect(() => {
+    // Optimized for mobile and desktop
+    const isMobile = window.innerWidth < 768;
+    const observerOptions = {
+      threshold: isMobile ? 0.05 : 0.15,
+      rootMargin: isMobile ? '0px 0px -30px 0px' : '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, [activeTab]);
+
   // Scroll spy effect
   useEffect(() => {
     const handleScroll = () => {
@@ -304,7 +330,7 @@ export default function ProfilPage() {
         <section id="visi-misi" className="mb-16 scroll-mt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Visi */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
+            <div className="bg-white rounded-xl shadow-lg p-8 scroll-animate">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Visi</h2>
               </div>
@@ -314,7 +340,7 @@ export default function ProfilPage() {
             </div>
 
             {/* Misi */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
+            <div className="bg-white rounded-xl shadow-lg p-8 scroll-animate">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Misi</h2>
               </div>

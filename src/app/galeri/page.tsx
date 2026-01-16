@@ -38,6 +38,32 @@ export default function GaleriPage() {
   const videoCategories = ['Semua', 'Dokumentasi', 'Sosialisasi', 'Kegiatan'];
 
   const currentCategories = activeTab === 'photo' ? photoCategories : videoCategories;
+
+  // Scroll Animation
+  useEffect(() => {
+    // Optimized for mobile and desktop
+    const isMobile = window.innerWidth < 768;
+    const observerOptions = {
+      threshold: isMobile ? 0.05 : 0.15,
+      rootMargin: isMobile ? '0px 0px -30px 0px' : '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, [activeTab, currentPage]);
   
   const filteredPhotos = activeCategory === 'Semua' 
     ? photoGallery 
@@ -262,7 +288,7 @@ export default function GaleriPage() {
             {activeTab === 'photo' && (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {(displayPhotos as typeof photoGallery).map((album) => (
-                <div key={album.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                <div key={album.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group scroll-animate">
                   {/* Image */}
                   <div 
                     className="relative h-48 overflow-hidden cursor-pointer"

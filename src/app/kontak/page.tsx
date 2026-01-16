@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ContactIcon, SettingsIcon, UsersIcon, SportIcon, MedalIcon, LocationIcon, ClockIcon, PhoneIcon, EmailIcon } from '@/components/Icons';
@@ -5,6 +8,72 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function KontakPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Scroll Animation
+  useEffect(() => {
+    // Optimized for mobile and desktop
+    const isMobile = window.innerWidth < 768;
+    const observerOptions = {
+      threshold: isMobile ? 0.05 : 0.15,
+      rootMargin: isMobile ? '0px 0px -30px 0px' : '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulasi pengiriman form
+    setTimeout(() => {
+      setSubmitted(true);
+      setIsSubmitting(false);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+    }, 1000);
+  };
+
   const contactInfo = {
     address: "Jl. Rasuna Said No. 74, Padang, Sumatera Barat 25129",
     phone: "(0751) 443973",
@@ -155,7 +224,15 @@ export default function KontakPage() {
           {/* Contact Form */}
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Kirim Pesan</h2>
-            <form className="space-y-6">
+            
+            {submitted && (
+              <div className="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
+                <p className="font-semibold">✓ Pesan berhasil dikirim!</p>
+                <p className="text-sm mt-1">Terima kasih, kami akan segera merespons pesan Anda.</p>
+              </div>
+            )}
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -163,7 +240,10 @@ export default function KontakPage() {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Masukkan nama lengkap"
                   />
@@ -174,7 +254,10 @@ export default function KontakPage() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     required
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="nama@email.com"
                   />
@@ -188,6 +271,9 @@ export default function KontakPage() {
                   </label>
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="08xx xxxx xxxx"
                   />
@@ -197,7 +283,10 @@ export default function KontakPage() {
                     Subjek *
                   </label>
                   <select 
+                    name="subject"
                     required
+                    value={formData.subject}
+                    onChange={handleChange}
                     title="Pilih subjek pesan"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   >
@@ -216,8 +305,11 @@ export default function KontakPage() {
                   Pesan *
                 </label>
                 <textarea
+                  name="message"
                   required
                   rows={6}
+                  value={formData.message}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="Tulis pesan Anda di sini..."
                 ></textarea>
@@ -225,9 +317,10 @@ export default function KontakPage() {
               
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold py-3 rounded-lg hover:from-red-700 hover:to-orange-700 transition-all duration-300"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold py-3 rounded-lg hover:from-red-700 hover:to-orange-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Kirim Pesan
+                {isSubmitting ? 'Mengirim...' : 'Kirim Pesan'}
               </button>
             </form>
           </div>

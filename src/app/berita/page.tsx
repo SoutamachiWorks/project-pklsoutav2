@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -138,6 +138,32 @@ export default function BeritaPage() {
     setIsAutoPlay(false);
   };
 
+  // Scroll Animation Hook
+  useEffect(() => {
+    // Optimized for mobile and desktop
+    const isMobile = window.innerWidth < 768;
+    const observerOptions = {
+      threshold: isMobile ? 0.05 : 0.15,
+      rootMargin: isMobile ? '0px 0px -30px 0px' : '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, [currentNews]);
+
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />
@@ -154,7 +180,7 @@ export default function BeritaPage() {
       </div>
 
       {/* Page Header Banner */}
-      <section className="bg-gradient-to-br from-red-600 via-red-700 to-orange-600 text-white py-16 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-red-600 via-red-700 to-orange-600 text-white py-16 relative overflow-hidden scroll-animate">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32"></div>
@@ -172,51 +198,51 @@ export default function BeritaPage() {
 
       <div className="container mx-auto px-4 py-12">
         {/* Featured News Hero Slider */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-12 relative">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-12 relative scroll-animate">
           {/* Slider Container */}
-          <div className="relative min-h-[500px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[500px]">
+          <div className="relative min-h-[280px] md:min-h-[400px] lg:min-h-[500px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[280px] md:min-h-[400px] lg:min-h-[500px]">
               {/* Left Content */}
-              <div className="p-8 lg:p-12 flex flex-col justify-center min-h-[500px] relative">
+              <div className="p-2 sm:p-6 lg:p-12 flex flex-col justify-center min-h-[280px] md:min-h-[400px] lg:min-h-[500px] relative">
                 {featuredNews.map((news, index) => (
                   <div
                     key={news.id}
-                    className={`transition-all duration-700 absolute inset-0 p-8 lg:p-12 flex flex-col justify-center ${
+                    className={`transition-all duration-700 absolute inset-0 p-2 sm:p-6 lg:p-12 flex flex-col justify-center ${
                       index === currentSlide
                         ? 'opacity-100 z-10'
                         : 'opacity-0 z-0 pointer-events-none'
                     }`}
                   >
-                    <span className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-4 w-fit">
+                    <span className="inline-block bg-blue-600 text-white px-2 py-0.5 rounded-full text-[10px] sm:text-sm font-medium mb-1.5 sm:mb-4 w-fit">
                       Berita Utama
                     </span>
                     
-                    <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 leading-tight">
+                    <h2 className="text-base md:text-xl lg:text-3xl font-bold text-gray-800 mb-1.5 md:mb-3 lg:mb-4 leading-tight">
                       {news.title}
                     </h2>
                     
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center text-[10px] sm:text-sm text-gray-500 mb-1.5 sm:mb-4">
+                      <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 mr-0.5 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                       {news.date}
-                      <span className="mx-2">•</span>
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <span className="mx-1 sm:mx-2">•</span>
+                      <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 mr-0.5 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                       </svg>
                       {news.views} views
                     </div>
                     
-                    <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3">
+                    <p className="text-[10px] md:text-sm lg:text-base text-gray-600 mb-2 md:mb-4 lg:mb-6 leading-snug line-clamp-2 overflow-hidden">
                       {news.excerpt}
                     </p>
                     
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-6">
                       {news.tags && news.tags.map((tag, tagIndex) => (
                         <span 
                           key={tagIndex}
-                          className={`px-3 py-1 rounded-md text-sm ${
+                          className={`px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-md text-[9px] sm:text-sm ${
                             tagIndex === 0 
                               ? 'bg-blue-50 text-blue-600' 
                               : 'bg-green-50 text-green-600'
@@ -227,21 +253,23 @@ export default function BeritaPage() {
                       ))}
                     </div>
                     
-                    <Link 
-                      href={`/berita/${news.slug}`}
-                      className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium w-fit"
-                    >
-                      Baca Selengkapnya
-                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </Link>
+                    <div className="flex justify-center lg:justify-start">
+                      <Link 
+                        href={`/berita/${news.slug}`}
+                        className="inline-flex items-center bg-blue-600 text-white px-2.5 py-1 md:px-5 md:py-2.5 lg:px-6 lg:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-[10px] md:text-sm lg:text-base"
+                      >
+                        Baca Selengkapnya
+                        <svg className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 ml-1 md:ml-1.5 lg:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
                 ))}
               </div>
               
               {/* Right Image */}
-              <div className="relative min-h-[500px]">
+              <div className="relative min-h-[200px] md:min-h-[400px] lg:min-h-[500px]">
                 {featuredNews.map((news, index) => (
                   <div
                     key={news.id}
@@ -272,20 +300,20 @@ export default function BeritaPage() {
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 z-10 group"
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10 group"
                 aria-label="Slide sebelumnya"
               >
-                <svg className="w-6 h-6 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
               
               <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 z-10 group"
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10 group"
                 aria-label="Slide berikutnya"
               >
-                <svg className="w-6 h-6 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
@@ -328,7 +356,7 @@ export default function BeritaPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-3xl mx-auto mb-8">
+        <div className="max-w-3xl mx-auto mb-8 scroll-animate">
           <div className="relative">
             <input
               type="text"
@@ -344,7 +372,7 @@ export default function BeritaPage() {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-12 scroll-animate">
           {categories.map((category) => (
             <button
               key={category.id}
@@ -368,14 +396,14 @@ export default function BeritaPage() {
           <div className="lg:col-span-3">
             {/* Section Title */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Semua Berita</h2>
-              <p className="text-gray-500">{searchedNews.length} berita ditemukan</p>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800">Semua Berita</h2>
+              <p className="text-sm md:text-base text-gray-500">{searchedNews.length} berita ditemukan</p>
             </div>
 
             {/* News Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               {currentNews.map((news) => (
-                <article key={news.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow group">
+                <article key={news.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow group scroll-animate">
                   {/* Image */}
                   <div className="relative h-48 overflow-hidden">
                     <Image
@@ -394,42 +422,43 @@ export default function BeritaPage() {
                   </div>
                   
                   {/* Content */}
-                  <div className="p-5">
-                    <div className="flex items-center text-xs text-gray-500 mb-3">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="p-4 md:p-5 flex flex-col">
+                    <div className="flex items-center text-xs text-gray-500 mb-2 flex-wrap">
+                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
-                      {news.date}
-                      <span className="mx-2">•</span>
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <span className="truncate">{news.date}</span>
+                      <span className="mx-1.5 sm:mx-2 flex-shrink-0">•</span>
+                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                       </svg>
-                      {news.views}
+                      <span className="truncate">{news.views}</span>
                     </div>
                     
-                    <h3 className="font-bold text-gray-800 mb-3 leading-tight line-clamp-2 h-12">
-                      <Link href={`/berita/${news.id}`} className="hover:text-blue-600 transition-colors">
+                    <h3 className="font-bold text-gray-800 mb-2 md:mb-3 leading-tight text-sm md:text-base line-clamp-2 h-[2.8rem] md:h-[3rem]">
+                      <Link href={`/berita/${news.slug}`} className="hover:text-blue-600 transition-colors">
                         {news.title}
                       </Link>
                     </h3>
                     
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                    <p className="text-xs md:text-sm text-gray-600 mb-3 line-clamp-2 leading-tight h-[2.4rem] md:h-[2.8rem] overflow-hidden">
                       {news.excerpt}
                     </p>
                     
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                       <Link 
-                        href={`/berita/${news.id}`} 
-                        className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group-hover:gap-2 transition-all"
+                        href={`/berita/${news.slug}`} 
+                        className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-xs md:text-sm group-hover:gap-2 transition-all"
                       >
-                        Baca Selengkapnya
-                        <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <span className="hidden sm:inline">Baca Selengkapnya</span>
+                        <span className="sm:hidden">Baca</span>
+                        <svg className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </Link>
                       {news.author && (
-                        <span className="text-xs text-gray-400">
+                        <span className="text-[10px] md:text-xs text-gray-400 truncate ml-2 max-w-[100px] md:max-w-[120px]">
                           {news.author}
                         </span>
                       )}
@@ -507,12 +536,12 @@ export default function BeritaPage() {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             {/* Berita Terkait */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-              <h3 className="font-bold text-lg text-gray-800 mb-4">Berita Terkait</h3>
+            <div className="bg-white rounded-xl shadow-md p-4 md:p-5 lg:p-6 mb-6 scroll-animate">
+              <h3 className="font-bold text-base md:text-lg text-gray-800 mb-3 md:mb-4">Berita Terkait</h3>
               <div className="space-y-4">
                 {beritaTerkait.map((berita) => (
                   <div key={berita.id} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
-                    <h4 className="text-sm font-medium text-gray-800 leading-tight mb-2 line-clamp-2 hover:text-blue-600 cursor-pointer">
+                    <h4 className="text-sm font-medium text-gray-800 leading-tight mb-2 line-clamp-2 overflow-hidden text-ellipsis hover:text-blue-600 cursor-pointer">
                       {berita.title}
                     </h4>
                     <p className="text-xs text-gray-500">{berita.time}</p>
@@ -522,8 +551,8 @@ export default function BeritaPage() {
             </div>
 
             {/* Agenda Kegiatan */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="font-bold text-lg text-gray-800 mb-4">Agenda Kegiatan</h3>
+            <div className="bg-white rounded-xl shadow-md p-4 md:p-5 lg:p-6 scroll-animate">
+              <h3 className="font-bold text-base md:text-lg text-gray-800 mb-3 md:mb-4">Agenda Kegiatan</h3>
               <div className="space-y-4">
                 {agendaKegiatan.map((agenda) => (
                   <div key={agenda.id} className="flex space-x-3 pb-4 border-b border-gray-100 last:border-0 last:pb-0">
@@ -534,7 +563,7 @@ export default function BeritaPage() {
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-gray-800 text-sm mb-1 leading-tight">
+                      <h4 className="font-semibold text-gray-800 text-sm mb-1 leading-tight line-clamp-2 overflow-hidden text-ellipsis">
                         {agenda.title}
                       </h4>
                       <div className="flex items-center text-xs text-gray-500 mb-1">

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -7,6 +8,32 @@ import Image from 'next/image';
 import { UsersIcon, TargetIcon, MedalIcon } from '@/components/Icons';
 
 export default function ProgramPage() {
+  // Scroll Animation
+  useEffect(() => {
+    // Optimized for mobile and desktop
+    const isMobile = window.innerWidth < 768;
+    const observerOptions = {
+      threshold: isMobile ? 0.05 : 0.15,
+      rootMargin: isMobile ? '0px 0px -30px 0px' : '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+
   const programPemuda = [
     {
       id: 1,
@@ -202,7 +229,7 @@ export default function ProgramPage() {
 
         {/* Program Pemuda */}
         <section className="mb-16">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 scroll-animate">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Program Kepemudaan</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Program-program unggulan untuk pengembangan kapasitas dan karakter generasi muda Sumatera Barat
@@ -211,7 +238,7 @@ export default function ProgramPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programPemuda.map((program) => (
-              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col scroll-animate">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden bg-gray-200">
                   <Image
@@ -282,7 +309,7 @@ export default function ProgramPage() {
 
         {/* Program Olahraga */}
         <section className="mb-16">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 scroll-animate">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Program Keolahragaan</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Program pembinaan dan pengembangan prestasi olahraga untuk berbagai tingkatan
@@ -291,7 +318,7 @@ export default function ProgramPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programOlahraga.map((program) => (
-              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+              <div key={program.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col scroll-animate">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden bg-gray-200">
                   <Image
