@@ -1,22 +1,114 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { EyeIcon, ArrowRightIcon, AlertIcon } from './Icons';
-import newsData from '@/data/news.json';
+import { useBerita } from '@/hooks/useBerita';
 import categoriesData from '@/data/categories.json';
 
 const NewsSection = () => {
-  // Data berita dari JSON - hanya tampilkan 8 berita pertama untuk homepage
-  const allNews = newsData.slice(0, 8);
+  const { berita, loading, error } = useBerita();
 
-  // Featured news = berita pertama (berita utama terbaru)
-  const featuredNews = allNews.find(news => news.tags?.includes("berita utama")) || allNews[0];
-  
+  // Data berita dari API - hanya tampilkan 8 berita pertama untuk homepage
+  const allNews = berita.slice(0, 8);
+
+  // Featured news = berita pertama
+  const featuredNews = allNews[0];
+
   // Latest news = 4 berita terbaru setelah featured
-  const latestNews = allNews.filter(news => news.id !== featuredNews.id).slice(0, 4);
+  const latestNews = allNews.filter(news => news.id !== featuredNews?.id).slice(0, 4);
 
   // Categories dari JSON
   const categories = categoriesData;
+
+  // Loading State
+  if (loading) {
+    return (
+      <section className="py-12 sm:py-16 bg-gray-50">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="text-center mb-10 sm:mb-12">
+            <span className="inline-block px-4 py-2 bg-red-100 text-red-600 rounded-full text-sm font-semibold mb-4">
+              Update Terbaru
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Berita & Informasi Terkini
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="lg:col-span-2">
+              {/* Featured skeleton */}
+              <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-6 sm:mb-8 animate-pulse">
+                <div className="h-64 sm:h-72 md:h-80 bg-gray-200"></div>
+                <div className="p-5 sm:p-6 md:p-8 space-y-4">
+                  <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full"></div>
+                  <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                </div>
+              </div>
+              {/* Grid skeleton */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden animate-pulse">
+                    <div className="h-44 sm:h-48 bg-gray-200"></div>
+                    <div className="p-4 sm:p-5 space-y-3">
+                      <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                      <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+                      <div className="h-3 bg-gray-200 rounded w-full"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-5 sm:space-y-6">
+              <div className="bg-white rounded-xl shadow-lg p-5 sm:p-6 animate-pulse">
+                <div className="h-5 bg-gray-200 rounded w-1/2 mb-4"></div>
+                <div className="space-y-3">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="h-10 bg-gray-200 rounded"></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Error State
+  if (error) {
+    return (
+      <section className="py-12 sm:py-16 bg-gray-50">
+        <div className="container mx-auto px-3 sm:px-4 text-center">
+          <span className="inline-block px-4 py-2 bg-red-100 text-red-600 rounded-full text-sm font-semibold mb-4">
+            Update Terbaru
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Berita & Informasi Terkini
+          </h2>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-8 max-w-lg mx-auto">
+            <p className="text-red-600 font-medium mb-2">Gagal memuat berita</p>
+            <p className="text-gray-500 text-sm">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Empty State
+  if (!featuredNews || allNews.length === 0) {
+    return (
+      <section className="py-12 sm:py-16 bg-gray-50">
+        <div className="container mx-auto px-3 sm:px-4 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Berita & Informasi Terkini
+          </h2>
+          <p className="text-gray-500">Belum ada berita tersedia.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-12 sm:py-16 bg-gray-50">
@@ -30,7 +122,7 @@ const NewsSection = () => {
             Berita & Informasi Terkini
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-4">
-            Ikuti perkembangan terbaru seputar kegiatan, prestasi, dan program-program unggulan 
+            Ikuti perkembangan terbaru seputar kegiatan, prestasi, dan program-program unggulan
             Dinas Pemuda dan Olahraga Provinsi Sumatera Barat
           </p>
         </div>
@@ -78,11 +170,11 @@ const NewsSection = () => {
                       {featuredNews.date}
                     </span>
                     <span className="flex items-center gap-1">
-                      <EyeIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> 
+                      <EyeIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       {featuredNews.views.toLocaleString()}
                     </span>
                   </div>
-                  <Link 
+                  <Link
                     href={`/berita/${featuredNews.slug}`}
                     className="text-red-600 font-semibold hover:text-red-700 flex items-center gap-1 text-xs sm:text-sm transition-all hover:gap-2"
                   >
@@ -108,12 +200,7 @@ const NewsSection = () => {
                   </div>
                   <div className="p-4 sm:p-5">
                     <div className="flex items-center gap-2 mb-3">
-                      <span className={`text-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-white font-semibold ${
-                        news.category === 'PENGUMUMAN' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
-                        news.category === 'PROGRAM' ? 'bg-gradient-to-r from-green-500 to-green-600' :
-                        news.category === 'KEGIATAN' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
-                        news.category === 'PRESTASI' ? 'bg-gradient-to-r from-purple-500 to-purple-600' : 'bg-gradient-to-r from-red-500 to-red-600'
-                      }`}>
+                      <span className="text-xs px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-white font-semibold bg-gradient-to-r from-red-500 to-red-600">
                         {news.category}
                       </span>
                     </div>
@@ -140,7 +227,7 @@ const NewsSection = () => {
             </div>
 
             <div className="text-center mt-8 sm:mt-10">
-              <Link 
+              <Link
                 href="/berita"
                 className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm sm:text-base"
               >
@@ -159,7 +246,7 @@ const NewsSection = () => {
               </div>
               <div className="space-y-2">
                 {categories.map((category, index) => (
-                  <Link 
+                  <Link
                     key={index}
                     href={`/berita/kategori/${category.slug}`}
                     className="flex items-center justify-between py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50 transition-all duration-300 group border border-transparent hover:border-red-100"
@@ -221,18 +308,20 @@ const NewsSection = () => {
                   <span>Pengumuman Penting</span>
                 </h3>
                 <div className="space-y-4">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4">
-                    <p className="text-xs sm:text-sm leading-relaxed font-medium mb-2">
-                      Seleksi Penerimaan Siswa Baru Binaan UPTD Keberbakatan Olahraga 2025
-                    </p>
-                    <p className="text-[10px] sm:text-xs text-red-100 mb-2 sm:mb-3">
-                      Deadline: 31 Agustus 2025
-                    </p>
-                    <Link href="/berita/seleksi-penerimaan-siswa-baru-binaan-uptd" className="inline-flex items-center text-xs sm:text-sm font-semibold text-white hover:text-red-200 transition-all hover:gap-1.5">
-                      Baca Selengkapnya 
-                      <span className="ml-1">→</span>
-                    </Link>
-                  </div>
+                  {allNews.slice(0, 1).map((news) => (
+                    <div key={news.id} className="bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4">
+                      <p className="text-xs sm:text-sm leading-relaxed font-medium mb-2">
+                        {news.title}
+                      </p>
+                      <p className="text-[10px] sm:text-xs text-red-100 mb-2 sm:mb-3">
+                        {news.date}
+                      </p>
+                      <Link href={`/berita/${news.slug}`} className="inline-flex items-center text-xs sm:text-sm font-semibold text-white hover:text-red-200 transition-all hover:gap-1.5">
+                        Baca Selengkapnya
+                        <span className="ml-1">→</span>
+                      </Link>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

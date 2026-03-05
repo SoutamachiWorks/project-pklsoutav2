@@ -6,22 +6,18 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import newsData from '@/data/news.json';
+import { useBerita } from '@/hooks/useBerita';
 import categoriesData from '@/data/categories.json';
 
 export default function BeritaPage() {
+  const { berita: allNews, loading, error } = useBerita();
+
   const [activeFilter, setActiveFilter] = useState('semua');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-
-  // Semua Berita dari JSON - Single Source of Truth
-  const allNews = newsData;
-
-  // Filter berita untuk slider utama (yang punya tag "berita utama")
-  const featuredNews = allNews.filter(news => news.tags?.includes("berita utama"));
 
   // Categories dari JSON
   const categories = [
@@ -33,37 +29,27 @@ export default function BeritaPage() {
     }))
   ];
 
+  // Featured news (ambil 3 berita pertama untuk slider)
+  const featuredNews = allNews.slice(0, 3);
 
   // Berita Terkait
-  const beritaTerkait = [
-    {
-      id: 1,
-      title: "Judul berita terkait yang menarik untuk dibaca",
-      time: "2 hari yang lalu"
-    },
-    {
-      id: 2,
-      title: "Judul berita terkait yang menarik untuk dibaca",
-      time: "2 hari yang lalu"
-    },
-    {
-      id: 3,
-      title: "Judul berita terkait yang menarik untuk dibaca",
-      time: "2 hari yang lalu"
-    }
-  ];
+  const beritaTerkait = allNews.slice(0, 3).map(news => ({
+    id: news.id,
+    title: news.title,
+    time: news.date
+  }));
 
   // Filter berita berdasarkan kategori aktif
   const filteredNews = allNews.filter((news) => {
-    // Exclude berita utama dari grid (karena sudah di slider)
-    const isNotFeatured = !news.tags?.includes("berita utama");
-    
+    // Exclude berita utama dari grid (3 pertama sudah di slider)
+    const isNotFeatured = allNews.indexOf(news) >= 3;
+
     if (activeFilter === 'semua') return isNotFeatured;
     if (activeFilter === 'berita') return isNotFeatured && (news.category === 'TERKINI' || news.category === 'OLAHRAGA' || news.category === 'PEMUDA' || news.category === 'PRESTASI');
     if (activeFilter === 'pengumuman') return isNotFeatured && news.category === 'PENGUMUMAN';
     if (activeFilter === 'program') return isNotFeatured && news.category === 'PROGRAM';
     if (activeFilter === 'kegiatan') return isNotFeatured && news.category === 'KEGIATAN';
-    if (activeFilter === 'berita-utama') return news.tags?.includes("berita utama");
+    if (activeFilter === 'berita-utama') return allNews.indexOf(news) < 3;
     return isNotFeatured;
   });
 
@@ -114,8 +100,8 @@ export default function BeritaPage() {
 
   // Auto-play slider for featured news
   React.useEffect(() => {
-    if (!isAutoPlay) return;
-    
+    if (!isAutoPlay || featuredNews.length === 0) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % featuredNews.length);
     }, 5000); // Change slide every 5 seconds
@@ -164,10 +150,69 @@ export default function BeritaPage() {
     };
   }, [currentNews]);
 
+  // Loading state
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="bg-white border-b shadow-sm">
+          <div className="container mx-auto px-4 py-4">
+            <nav className="text-sm flex items-center">
+              <Link href="/" className="text-gray-500 hover:text-red-600 transition-colors">Beranda</Link>
+              <span className="mx-2 text-gray-400">→</span>
+              <span className="text-gray-800 font-semibold">Berita</span>
+            </nav>
+          </div>
+        </div>
+        <section className="bg-gradient-to-br from-red-600 via-red-700 to-orange-600 text-white py-16 relative overflow-hidden">
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Berita Terkini</h1>
+            <p className="text-lg opacity-90">Memuat berita...</p>
+          </div>
+        </section>
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden animate-pulse">
+                <div className="h-48 bg-gray-200"></div>
+                <div className="p-5 space-y-3">
+                  <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                  <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-3 bg-gray-200 rounded w-full"></div>
+                  <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <main className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="container mx-auto px-4 py-24 text-center">
+          <div className="bg-red-50 border border-red-200 rounded-xl p-12 max-w-lg mx-auto">
+            <svg className="w-16 h-16 text-red-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+            <p className="text-red-600 font-bold text-lg mb-2">Gagal Memuat Berita</p>
+            <p className="text-gray-500 text-sm">{error}</p>
+          </div>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />
-      
+
       {/* Breadcrumb */}
       <div className="bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 py-4">
@@ -190,7 +235,7 @@ export default function BeritaPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Berita Terkini</h1>
           <p className="text-lg opacity-90 max-w-2xl mx-auto leading-relaxed">
-            Informasi terbaru, update kegiatan, dan prestasi gemilang 
+            Informasi terbaru, update kegiatan, dan prestasi gemilang
             Dinas Pemuda dan Olahraga Provinsi Sumatera Barat
           </p>
         </div>
@@ -198,162 +243,146 @@ export default function BeritaPage() {
 
       <div className="container mx-auto px-4 py-12">
         {/* Featured News Hero Slider */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-12 relative scroll-animate">
-          {/* Slider Container */}
-          <div className="relative min-h-[280px] md:min-h-[400px] lg:min-h-[500px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[280px] md:min-h-[400px] lg:min-h-[500px]">
-              {/* Left Content */}
-              <div className="p-2 sm:p-6 lg:p-12 flex flex-col justify-center min-h-[280px] md:min-h-[400px] lg:min-h-[500px] relative">
-                {featuredNews.map((news, index) => (
-                  <div
-                    key={news.id}
-                    className={`transition-all duration-700 absolute inset-0 p-2 sm:p-6 lg:p-12 flex flex-col justify-center ${
-                      index === currentSlide
-                        ? 'opacity-100 z-10'
-                        : 'opacity-0 z-0 pointer-events-none'
-                    }`}
-                  >
-                    <span className="inline-block bg-blue-600 text-white px-2 py-0.5 rounded-full text-[10px] sm:text-sm font-medium mb-1.5 sm:mb-4 w-fit">
-                      Berita Utama
-                    </span>
-                    
-                    <h2 className="text-base md:text-xl lg:text-3xl font-bold text-gray-800 mb-1.5 md:mb-3 lg:mb-4 leading-tight">
-                      {news.title}
-                    </h2>
-                    
-                    <div className="flex items-center text-[10px] sm:text-sm text-gray-500 mb-1.5 sm:mb-4">
-                      <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 mr-0.5 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      {news.date}
-                      <span className="mx-1 sm:mx-2">•</span>
-                      <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 mr-0.5 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                      {news.views} views
-                    </div>
-                    
-                    <p className="text-[10px] md:text-sm lg:text-base text-gray-600 mb-2 md:mb-4 lg:mb-6 leading-snug line-clamp-2 overflow-hidden">
-                      {news.excerpt}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-6">
-                      {news.tags && news.tags.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className={`px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-md text-[9px] sm:text-sm ${
-                            tagIndex === 0 
-                              ? 'bg-blue-50 text-blue-600' 
-                              : 'bg-green-50 text-green-600'
-                          }`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="flex justify-center lg:justify-start">
-                      <Link 
-                        href={`/berita/${news.slug}`}
-                        className="inline-flex items-center bg-blue-600 text-white px-2.5 py-1 md:px-5 md:py-2.5 lg:px-6 lg:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-[10px] md:text-sm lg:text-base"
-                      >
-                        Baca Selengkapnya
-                        <svg className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 ml-1 md:ml-1.5 lg:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        {featuredNews.length > 0 && (
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-12 relative scroll-animate">
+            {/* Slider Container */}
+            <div className="relative min-h-[280px] md:min-h-[400px] lg:min-h-[500px]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[280px] md:min-h-[400px] lg:min-h-[500px]">
+                {/* Left Content */}
+                <div className="p-2 sm:p-6 lg:p-12 flex flex-col justify-center min-h-[280px] md:min-h-[400px] lg:min-h-[500px] relative">
+                  {featuredNews.map((news, index) => (
+                    <div
+                      key={news.id}
+                      className={`transition-all duration-700 absolute inset-0 p-2 sm:p-6 lg:p-12 flex flex-col justify-center ${index === currentSlide
+                          ? 'opacity-100 z-10'
+                          : 'opacity-0 z-0 pointer-events-none'
+                        }`}
+                    >
+                      <span className="inline-block bg-blue-600 text-white px-2 py-0.5 rounded-full text-[10px] sm:text-sm font-medium mb-1.5 sm:mb-4 w-fit">
+                        Berita Utama
+                      </span>
+
+                      <h2 className="text-base md:text-xl lg:text-3xl font-bold text-gray-800 mb-1.5 md:mb-3 lg:mb-4 leading-tight">
+                        {news.title}
+                      </h2>
+
+                      <div className="flex items-center text-[10px] sm:text-sm text-gray-500 mb-1.5 sm:mb-4">
+                        <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 mr-0.5 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                      </Link>
+                        {news.date}
+                        <span className="mx-1 sm:mx-2">•</span>
+                        <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 mr-0.5 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        {news.views} views
+                      </div>
+
+                      <p className="text-[10px] md:text-sm lg:text-base text-gray-600 mb-2 md:mb-4 lg:mb-6 leading-snug line-clamp-2 overflow-hidden">
+                        {news.excerpt}
+                      </p>
+
+                      <div className="flex justify-center lg:justify-start">
+                        <Link
+                          href={`/berita/${news.slug}`}
+                          className="inline-flex items-center bg-blue-600 text-white px-2.5 py-1 md:px-5 md:py-2.5 lg:px-6 lg:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-[10px] md:text-sm lg:text-base"
+                        >
+                          Baca Selengkapnya
+                          <svg className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 ml-1 md:ml-1.5 lg:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-              
-              {/* Right Image */}
-              <div className="relative min-h-[200px] md:min-h-[400px] lg:min-h-[500px]">
-                {featuredNews.map((news, index) => (
-                  <div
-                    key={news.id}
-                    className={`absolute inset-0 transition-opacity duration-700 ${
-                      index === currentSlide ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  >
-                    <Image
-                      src={news.image}
-                      alt={news.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      priority={index === 0}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <span className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-md text-sm font-medium z-10">
-                      {news.category}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
+
+                {/* Right Image */}
+                <div className="relative min-h-[200px] md:min-h-[400px] lg:min-h-[500px]">
+                  {featuredNews.map((news, index) => (
+                    <div
+                      key={news.id}
+                      className={`absolute inset-0 transition-opacity duration-700 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
+                      <Image
+                        src={news.image}
+                        alt={news.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        priority={index === 0}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                      <span className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-md text-sm font-medium z-10">
+                        {news.category}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+
+            {/* Navigation Arrows */}
+            {featuredNews.length > 1 && (
+              <>
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10 group"
+                  aria-label="Slide sebelumnya"
+                >
+                  <svg className="w-5 h-5 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10 group"
+                  aria-label="Slide berikutnya"
+                >
+                  <svg className="w-5 h-5 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Dots Navigation */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  {featuredNews.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      className={`transition-all duration-300 rounded-full ${index === currentSlide
+                          ? 'w-8 h-3 bg-blue-600'
+                          : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                        }`}
+                      aria-label={`Pergi ke slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Auto-play Toggle */}
+                <button
+                  onClick={() => setIsAutoPlay(!isAutoPlay)}
+                  className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10"
+                  aria-label={isAutoPlay ? 'Pause auto-play' : 'Resume auto-play'}
+                >
+                  {isAutoPlay ? (
+                    <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  )}
+                </button>
+              </>
+            )}
           </div>
-
-          {/* Navigation Arrows */}
-          {featuredNews.length > 1 && (
-            <>
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10 group"
-                aria-label="Slide sebelumnya"
-              >
-                <svg className="w-5 h-5 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10 group"
-                aria-label="Slide berikutnya"
-              >
-                <svg className="w-5 h-5 text-gray-800 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-
-              {/* Dots Navigation */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                {featuredNews.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`transition-all duration-300 rounded-full ${
-                      index === currentSlide
-                        ? 'w-8 h-3 bg-blue-600'
-                        : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
-                    }`}
-                    aria-label={`Pergi ke slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              {/* Auto-play Toggle */}
-              <button
-                onClick={() => setIsAutoPlay(!isAutoPlay)}
-                className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 z-10"
-                aria-label={isAutoPlay ? 'Pause auto-play' : 'Resume auto-play'}
-              >
-                {isAutoPlay ? (
-                  <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                )}
-              </button>
-            </>
-          )}
-        </div>
+        )}
 
         {/* Search Bar */}
         <div className="max-w-3xl mx-auto mb-8 scroll-animate">
@@ -377,11 +406,10 @@ export default function BeritaPage() {
             <button
               key={category.id}
               onClick={() => setActiveFilter(category.id)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                activeFilter === category.id
+              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${activeFilter === category.id
                   ? 'bg-blue-600 text-white shadow-lg'
                   : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-              }`}
+                }`}
             >
               {category.name}
               {activeFilter === category.id && (
@@ -420,7 +448,7 @@ export default function BeritaPage() {
                       </span>
                     </div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="p-4 md:p-5 flex flex-col">
                     <div className="flex items-center text-xs text-gray-500 mb-2 flex-wrap">
@@ -435,20 +463,20 @@ export default function BeritaPage() {
                       </svg>
                       <span className="truncate">{news.views}</span>
                     </div>
-                    
+
                     <h3 className="font-bold text-gray-800 mb-2 md:mb-3 leading-tight text-sm md:text-base line-clamp-2 h-[2.8rem] md:h-[3rem]">
                       <Link href={`/berita/${news.slug}`} className="hover:text-blue-600 transition-colors">
                         {news.title}
                       </Link>
                     </h3>
-                    
+
                     <p className="text-xs md:text-sm text-gray-600 mb-3 line-clamp-2 leading-tight h-[2.4rem] md:h-[2.8rem] overflow-hidden">
                       {news.excerpt}
                     </p>
-                    
+
                     <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                      <Link 
-                        href={`/berita/${news.slug}`} 
+                      <Link
+                        href={`/berita/${news.slug}`}
                         className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-xs md:text-sm group-hover:gap-2 transition-all"
                       >
                         <span className="hidden sm:inline">Baca Selengkapnya</span>
@@ -483,14 +511,14 @@ export default function BeritaPage() {
             {totalPages > 1 && (
               <div className="flex justify-center">
                 <div className="flex space-x-2">
-                  <button 
+                  <button
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                     disabled={currentPage === 1}
                     className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     ← Sebelumnya
                   </button>
-                  
+
                   {[...Array(totalPages)].map((_, index) => {
                     const pageNumber = index + 1;
                     // Hanya tampilkan 5 halaman: current, 2 sebelum, 2 sesudah
@@ -503,11 +531,10 @@ export default function BeritaPage() {
                         <button
                           key={pageNumber}
                           onClick={() => setCurrentPage(pageNumber)}
-                          className={`px-4 py-2 rounded-lg font-medium ${
-                            currentPage === pageNumber
+                          className={`px-4 py-2 rounded-lg font-medium ${currentPage === pageNumber
                               ? 'bg-blue-600 text-white'
                               : 'border border-gray-300 text-gray-600 hover:bg-gray-50'
-                          }`}
+                            }`}
                         >
                           {pageNumber}
                         </button>
@@ -520,8 +547,8 @@ export default function BeritaPage() {
                     }
                     return null;
                   })}
-                  
-                  <button 
+
+                  <button
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                     disabled={currentPage === totalPages}
                     className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
