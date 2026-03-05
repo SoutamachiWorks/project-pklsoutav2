@@ -1,0 +1,51 @@
+@startuml
+title Use Case Diagram Website Dispora
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Pengunjung\nWebsite" as user
+
+rectangle "Website Dispora" {
+  usecase "Melihat Beranda" as UC1
+  usecase "Membaca Berita" as UC2
+  usecase "Melihat Detail Berita" as UC3
+  usecase "Melihat Galeri Foto" as UC4
+  usecase "Melihat Program" as UC5
+  usecase "Mengakses Layanan" as UC6
+  usecase "Melihat Profil Dispora" as UC7
+  usecase "Mengakses PPID" as UC8
+  usecase "Mengunduh Dokumen" as UC9
+  usecase "Melihat Informasi Kontak" as UC10
+  usecase "Melakukan Pelaporan" as UC11
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+user --> UC7
+user --> UC8
+user --> UC9
+user --> UC10
+user --> UC11
+
+UC2 ..> UC3 : <<extend>>
+
+note right of UC1
+  Menampilkan hero, berita terbaru,
+  layanan, statistik, dan galeri
+end note
+
+note right of UC8
+  Akses informasi publik
+  sesuai UU KIP
+end note
+
+note right of UC11
+  Fitur pelaporan masyarakat
+end note
+
+@enduml

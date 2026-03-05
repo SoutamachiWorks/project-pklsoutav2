@@ -1,0 +1,181 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Formulir & Template",
+      "description": "Formulir dan template surat untuk keperluan administrasi",
+      "icon": "file-text",
+      "documents": [
+        {
+          "id": 1,
+          "title": "Formulir Permohonan Informasi Publik",
+          "description": "Formulir untuk mengajukan permohonan informasi publik",
+          "file": "/downloads/form-permohonan-informasi.pdf",
+          "size": "350 KB",
+          "format": "PDF",
+          "date": "2025-12-01",
+          "downloads": 267
+        },
+        {
+          "id": 2,
+          "title": "Formulir Pengajuan Keberatan",
+          "description": "Formulir untuk mengajukan keberatan atas penolakan informasi",
+          "file": "/downloads/form-keberatan.pdf",
+          "size": "280 KB",
+          "format": "PDF",
+          "date": "2025-12-01",
+          "downloads": 89
+        },
+        {
+          "id": 3,
+          "title": "Formulir Pengaduan Masyarakat",
+          "description": "Formulir untuk menyampaikan pengaduan terkait pelayanan",
+          "file": "/downloads/form-pengaduan.pdf",
+          "size": "320 KB",
+          "format": "PDF",
+          "date": "2025-11-15",
+          "downloads": 156
+        },
+        {
+          "id": 4,
+          "title": "Template Surat Permohonan",
+          "description": "Template surat permohonan untuk berbagai keperluan",
+          "file": "/downloads/template-surat-permohonan.docx",
+          "size": "45 KB",
+          "format": "DOCX",
+          "date": "2025-10-20",
+          "downloads": 203
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Laporan & Dokumen Publik",
+      "description": "Laporan kinerja, keuangan, dan dokumen publik lainnya",
+      "icon": "book",
+      "documents": [
+        {
+          "id": 5,
+          "title": "Laporan Kinerja Tahunan 2025",
+          "description": "Laporan Kinerja Instansi Pemerintah (LKjIP) Tahun 2025",
+          "file": "/downloads/lkjip-2025.pdf",
+          "size": "2.5 MB",
+          "format": "PDF",
+          "date": "2026-01-10",
+          "downloads": 145
+        },
+        {
+          "id": 6,
+          "title": "Laporan Keuangan 2025",
+          "description": "Ringkasan Laporan Keuangan Tahun Anggaran 2025",
+          "file": "/downloads/laporan-keuangan-2025.pdf",
+          "size": "1.8 MB",
+          "format": "PDF",
+          "date": "2026-01-05",
+          "downloads": 98
+        },
+        {
+          "id": 7,
+          "title": "Rencana Strategis 2024-2026",
+          "description": "Dokumen Perencanaan Strategis Dispora Sumbar 2024-2026",
+          "file": "/downloads/renstra-2024-2026.pdf",
+          "size": "3.2 MB",
+          "format": "PDF",
+          "date": "2024-12-15",
+          "downloads": 234
+        },
+        {
+          "id": 8,
+          "title": "Daftar Informasi Publik 2026",
+          "description": "Daftar Informasi Publik (DIP) Dispora Sumbar Tahun 2026",
+          "file": "/downloads/dip-2026.pdf",
+          "size": "1.2 MB",
+          "format": "PDF",
+          "date": "2026-01-01",
+          "downloads": 176
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Peraturan & Kebijakan",
+      "description": "Peraturan, kebijakan, dan SOP yang berlaku",
+      "icon": "clipboard",
+      "documents": [
+        {
+          "id": 9,
+          "title": "Peraturan Gubernur tentang Pemuda",
+          "description": "Pergub terbaru tentang pemberdayaan pemuda",
+          "file": "/downloads/pergub-pemuda-2025.pdf",
+          "size": "890 KB",
+          "format": "PDF",
+          "date": "2025-11-20",
+          "downloads": 167
+        },
+        {
+          "id": 10,
+          "title": "SOP Pelayanan Informasi Publik",
+          "description": "Standar Operasional Prosedur pelayanan informasi",
+          "file": "/downloads/sop-pelayanan-informasi.pdf",
+          "size": "800 KB",
+          "format": "PDF",
+          "date": "2025-12-20",
+          "downloads": 89
+        },
+        {
+          "id": 11,
+          "title": "Kebijakan Program Kepemudaan",
+          "description": "Dokumen kebijakan program kepemudaan tahun 2026",
+          "file": "/downloads/kebijakan-kepemudaan-2026.pdf",
+          "size": "1.1 MB",
+          "format": "PDF",
+          "date": "2025-12-10",
+          "downloads": 112
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Panduan & Juknis",
+      "description": "Panduan teknis dan petunjuk pelaksanaan program",
+      "icon": "settings",
+      "documents": [
+        {
+          "id": 12,
+          "title": "Juknis Bantuan Organisasi Kepemudaan",
+          "description": "Petunjuk teknis pengajuan bantuan untuk organisasi pemuda",
+          "file": "/downloads/juknis-bantuan-organsisasi.pdf",
+          "size": "1.5 MB",
+          "format": "PDF",
+          "date": "2025-11-01",
+          "downloads": 289
+        },
+        {
+          "id": 13,
+          "title": "Panduan Pengajuan Proposal Kegiatan",
+          "description": "Panduan lengkap pengajuan proposal kegiatan kepemudaan",
+          "file": "/downloads/panduan-proposal.pdf",
+          "size": "950 KB",
+          "format": "PDF",
+          "date": "2025-10-15",
+          "downloads": 321
+        },
+        {
+          "id": 14,
+          "title": "Juknis Pelatihan Kepemimpinan Pemuda",
+          "description": "Petunjuk teknis pelaksanaan pelatihan kepemimpinan",
+          "file": "/downloads/juknis-pelatihan-leadership.pdf",
+          "size": "780 KB",
+          "format": "PDF",
+          "date": "2025-09-20",
+          "downloads": 198
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalDocuments": 14,
+    "totalDownloads": 2744,
+    "lastUpdate": "2026-01-10"
+  }
+}

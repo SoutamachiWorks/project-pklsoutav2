@@ -1,0 +1,233 @@
+{
+  "profile": {
+    "title": "PPID Dinas Pemuda dan Olahraga",
+    "subtitle": "Pejabat Pengelola Informasi dan Dokumentasi",
+    "description": "PPID Dispora Provinsi Sumatera Barat bertugas mengelola dan melayani informasi publik sesuai Undang-Undang No. 14 Tahun 2008 tentang Keterbukaan Informasi Publik.",
+    "image": "/images/ppid-header.jpg"
+  },
+  "contact": {
+    "name": "PPID Dispora Sumbar",
+    "address": "Jl. Contoh No. 123, Padang, Sumatera Barat",
+    "phone": "(0751) 12345",
+    "email": "ppid@disporasumbar.go.id",
+    "hours": "Senin - Jumat, 08:00 - 16:00 WIB"
+  },
+  "informationCategories": [
+    {
+      "id": 1,
+      "title": "Informasi Berkala",
+      "description": "Informasi yang wajib disediakan dan diumumkan secara berkala",
+      "icon": "calendar",
+      "items": [
+        "Profil Badan Publik",
+        "Ringkasan Informasi tentang Program dan Kegiatan",
+        "Ringkasan Informasi Kinerja",
+        "Ringkasan Laporan Keuangan",
+        "Ringkasan Laporan Akses Informasi Publik",
+        "Informasi Kebijakan yang mengikat dan/atau berdampak bagi publik",
+        "Prosedur Memperoleh Informasi",
+        "Prosedur Pengaduan",
+        "Informasi Pengadaan Barang dan Jasa"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Informasi Serta Merta",
+      "description": "Informasi yang dapat mengancam hajat hidup orang banyak dan ketertiban umum",
+      "icon": "alert",
+      "items": [
+        "Informasi tentang bencana alam",
+        "Informasi tentang gangguan keamanan",
+        "Informasi tentang pencemaran lingkungan",
+        "Informasi tentang penanganan pandemi",
+        "Informasi penting lainnya yang perlu diketahui segera"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Informasi Setiap Saat",
+      "description": "Informasi yang tersedia setiap saat dan dapat diakses publik",
+      "icon": "clock",
+      "items": [
+        "Daftar Informasi Publik",
+        "Informasi tentang peraturan, keputusan, dan/atau kebijakan",
+        "Seluruh informasi yang tidak dikecualikan",
+        "Informasi tentang organisasi, administrasi, dan kepegawaian",
+        "Informasi tentang tata cara pengaduan",
+        "Informasi tentang prosedur pelayanan",
+        "Laporan pelayanan informasi publik"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Informasi Dikecualikan",
+      "description": "Informasi yang tidak wajib diumumkan sesuai UU",
+      "icon": "lock",
+      "items": [
+        "Informasi yang dapat membahayakan negara",
+        "Informasi yang berkaitan dengan kepentingan perlindungan usaha",
+        "Informasi yang berkaitan dengan hak-hak pribadi",
+        "Informasi yang berkaitan dengan rahasia jabatan",
+        "Memorandum atau surat-surat antar Badan Publik yang bersifat rahasia"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": 1,
+      "category": "berkala",
+      "title": "Laporan Kinerja Tahunan 2025",
+      "description": "Laporan Kinerja Instansi Pemerintah (LKjIP) Tahun 2025",
+      "date": "2026-01-10",
+      "file": "/downloads/lkjip-2025.pdf",
+      "size": "2.5 MB",
+      "downloads": 145
+    },
+    {
+      "id": 2,
+      "category": "berkala",
+      "title": "Laporan Keuangan 2025",
+      "description": "Ringkasan Laporan Keuangan Tahun Anggaran 2025",
+      "date": "2026-01-05",
+      "file": "/downloads/laporan-keuangan-2025.pdf",
+      "size": "1.8 MB",
+      "downloads": 98
+    },
+    {
+      "id": 3,
+      "category": "berkala",
+      "title": "Rencana Strategis 2024-2026",
+      "description": "Dokumen Perencanaan Strategis Dispora Sumbar 2024-2026",
+      "date": "2024-12-15",
+      "file": "/downloads/renstra-2024-2026.pdf",
+      "size": "3.2 MB",
+      "downloads": 234
+    },
+    {
+      "id": 4,
+      "category": "setiap-saat",
+      "title": "Daftar Informasi Publik",
+      "description": "Daftar Informasi Publik (DIP) Dispora Sumbar",
+      "date": "2026-01-01",
+      "file": "/downloads/dip-2026.pdf",
+      "size": "1.2 MB",
+      "downloads": 176
+    },
+    {
+      "id": 5,
+      "category": "setiap-saat",
+      "title": "Prosedur Pelayanan Informasi",
+      "description": "Standar Operasional Prosedur Pelayanan Informasi Publik",
+      "date": "2025-12-20",
+      "file": "/downloads/sop-pelayanan-informasi.pdf",
+      "size": "800 KB",
+      "downloads": 89
+    },
+    {
+      "id": 6,
+      "category": "setiap-saat",
+      "title": "Formulir Permohonan Informasi",
+      "description": "Formulir untuk mengajukan permohonan informasi publik",
+      "date": "2025-12-01",
+      "file": "/downloads/form-permohonan-informasi.pdf",
+      "size": "350 KB",
+      "downloads": 267
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "title": "Permohonan Informasi",
+      "description": "Ajukan permohonan untuk mendapatkan informasi publik",
+      "icon": "file-text",
+      "steps": [
+        "Isi formulir permohonan informasi",
+        "Serahkan ke petugas PPID atau kirim via email",
+        "Tunggu konfirmasi penerimaan permohonan",
+        "Terima informasi yang diminta (maksimal 10 hari kerja)"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Pengajuan Keberatan",
+      "description": "Ajukan keberatan jika permohonan informasi ditolak",
+      "icon": "alert-circle",
+      "steps": [
+        "Isi formulir pengajuan keberatan",
+        "Lampirkan bukti penolakan informasi",
+        "Serahkan dalam 30 hari sejak penolakan",
+        "Tunggu tanggapan (maksimal 30 hari kerja)"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Konsultasi Informasi",
+      "description": "Konsultasi terkait informasi publik yang tersedia",
+      "icon": "message-circle",
+      "steps": [
+        "Hubungi petugas PPID via telepon/email",
+        "Sampaikan pertanyaan atau konsultasi",
+        "Dapatkan penjelasan dari petugas",
+        "Lanjutkan dengan permohonan formal jika perlu"
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "Apa itu PPID?",
+      "answer": "PPID (Pejabat Pengelola Informasi dan Dokumentasi) adalah unit kerja yang bertanggung jawab dalam penyimpanan, pendokumentasian, penyediaan, dan pelayanan informasi publik di lingkungan instansi pemerintah sesuai UU No. 14 Tahun 2008."
+    },
+    {
+      "id": 2,
+      "question": "Bagaimana cara mengajukan permohonan informasi?",
+      "answer": "Anda dapat mengajukan permohonan dengan mengisi formulir permohonan informasi yang tersedia, lalu menyerahkannya langsung ke loket PPID atau mengirimkan via email ke ppid@disporasumbar.go.id."
+    },
+    {
+      "id": 3,
+      "question": "Berapa lama waktu yang dibutuhkan untuk mendapatkan informasi?",
+      "answer": "Sesuai UU No. 14 Tahun 2008, Badan Publik wajib memberikan tanggapan paling lambat 10 hari kerja sejak permohonan diterima. Jika diperlukan perpanjangan, maksimal 7 hari kerja tambahan dengan pemberitahuan tertulis."
+    },
+    {
+      "id": 4,
+      "question": "Apakah ada biaya untuk mengakses informasi publik?",
+      "answer": "Informasi publik yang tersedia di website dapat diakses gratis. Untuk permohonan informasi dalam bentuk salinan dokumen, mungkin dikenakan biaya sesuai dengan biaya penggandaan dan pengiriman."
+    },
+    {
+      "id": 5,
+      "question": "Bagaimana jika permohonan informasi saya ditolak?",
+      "answer": "Anda dapat mengajukan keberatan kepada atasan PPID dalam waktu 30 hari sejak pemberitahuan tertulis penolakan. Jika keberatan juga ditolak, Anda dapat mengajukan penyelesaian sengketa informasi melalui Komisi Informasi."
+    },
+    {
+      "id": 6,
+      "question": "Informasi apa saja yang dikecualikan?",
+      "answer": "Informasi yang dikecualikan meliputi: informasi yang dapat membahayakan negara, informasi yang berkaitan dengan kepentingan perlindungan usaha, informasi pribadi, rahasia jabatan, dan informasi yang dapat membahayakan pihak yang memberikan informasi atas dasar sukarela."
+    }
+  ],
+  "stats": [
+    {
+      "title": "Permohonan Diterima",
+      "value": "234",
+      "period": "2025",
+      "icon": "inbox"
+    },
+    {
+      "title": "Permohonan Dikabulkan",
+      "value": "218",
+      "period": "2025",
+      "icon": "check-circle"
+    },
+    {
+      "title": "Dokumen Tersedia",
+      "value": "156",
+      "period": "Aktif",
+      "icon": "file"
+    },
+    {
+      "title": "Rata-rata Waktu Layanan",
+      "value": "6 Hari",
+      "period": "2025",
+      "icon": "clock"
+    }
+  ]
+}

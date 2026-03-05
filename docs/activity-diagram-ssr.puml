@@ -1,0 +1,49 @@
+@startuml
+title Activity Diagram Mekanisme SSR
+
+skinparam defaultFontSize 9
+skinparam ActivityFontSize 9
+skinparam PartitionFontSize 9
+
+|Pengunjung|
+start
+:Akses URL;
+
+|Server|
+:Terima Request;
+:Cek Route;
+
+if (Valid?) then (ya)
+  :Load Component;
+  :Baca JSON;
+  
+  if (Data Ada?) then (ya)
+    :Inject Data;
+    :Render HTML;
+    :Kirim ke Browser;
+    
+    |Pengunjung|
+    :Terima HTML;
+    :Render Browser;
+    :Hydration JS;
+    :Interaktif;
+    
+  else (tidak)
+    |Server|
+    :404 Not Found;
+    
+    |Pengunjung|
+    :Halaman Error;
+  endif
+  
+else (tidak)
+  |Server|
+  :404 Page;
+  
+  |Pengunjung|
+  :Halaman 404;
+endif
+
+stop
+
+@enduml

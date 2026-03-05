@@ -1,0 +1,38 @@
+@startuml
+title Diagram Konteks (DFD Level 0) - Sistem Informasi Website Dispora
+
+skinparam shadowing false
+skinparam defaultFontSize 9
+skinparam nodesep 40
+skinparam ranksep 50
+
+rectangle "Pengunjung\nWebsite" as user #E8F4F8
+circle "   0   " as p0 #4A90E2
+database "D1\nData" as ds #F5F5F5
+
+note top of p0
+Sistem Website Dispora
+(Next.js SSR)
+end note
+
+user --> p0 : Request\nHalaman
+p0 --> user : Response\nHTML
+p0 --> ds : Query\nData
+ds --> p0 : Data\nJSON
+
+note left of user
+Aktivitas:
+- Akses halaman
+- Lihat berita/galeri
+- Unduh dokumen
+end note
+
+note right of ds
+Data Store:
+- news.json
+- gallery.json
+- programs.json
+- ppid.json
+end note
+
+@enduml

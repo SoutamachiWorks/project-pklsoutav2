@@ -22,6 +22,17 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'Dispora Sumbar',
   },
+  icons: {
+    icon: '/logo-sumbar.png',
+    apple: '/logo-sumbar.png',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'id_ID',
+    title: 'Dinas Pemuda dan Olahraga Provinsi Sumatera Barat',
+    description: 'Website resmi Dinas Pemuda dan Olahraga Provinsi Sumatera Barat',
+    siteName: 'Dispora Sumbar',
+  },
 };
 
 export const viewport = {

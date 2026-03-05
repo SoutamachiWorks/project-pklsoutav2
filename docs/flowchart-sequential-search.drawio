@@ -1,0 +1,141 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0" version="29.3.2">
+  <diagram name="Flowchart Sequential Search" id="flowchart-sequential-search">
+    <mxGraphModel dx="692" dy="779" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" value="START&lt;br&gt;(Pengguna membuka halaman berita)" vertex="1">
+          <mxGeometry height="60" width="200" x="325" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="import-json" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Sistem memuat data JSON&lt;br&gt;&lt;b&gt;allNews = newsData&lt;/b&gt;&lt;br&gt;(Static Import dari news.json)" vertex="1">
+          <mxGeometry height="70" width="250" x="300" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="user-input" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Input dari User:&lt;br&gt;1. &lt;b&gt;searchTerm&lt;/b&gt; (kata kunci)&lt;br&gt;2. &lt;b&gt;activeFilter&lt;/b&gt; (kategori)" vertex="1">
+          <mxGeometry height="70" width="250" x="300" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="filter-category" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="TAHAP 1: FILTER KATEGORI&lt;br&gt;&lt;b&gt;filteredNews = allNews.filter()&lt;/b&gt;&lt;br&gt;• Jika &quot;semua&quot;: exclude berita utama&lt;br&gt;• Jika kategori: filter by category" vertex="1">
+          <mxGeometry height="80" width="290" x="280" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="search-init" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" value="TAHAP 2: SEQUENTIAL SEARCH&lt;br&gt;Inisialisasi: &lt;b&gt;i = 0&lt;/b&gt;&lt;br&gt;results = []" vertex="1">
+          <mxGeometry height="70" width="250" x="300" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="loop-condition" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" value="i &amp;lt; filteredNews.length?" vertex="1">
+          <mxGeometry height="80" width="210" x="320" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="get-item" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Ambil item[i]&lt;br&gt;&lt;b&gt;news = filteredNews[i]&lt;/b&gt;" vertex="1">
+          <mxGeometry height="50" width="180" x="140" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="normalize" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Normalisasi teks:&lt;br&gt;&lt;b&gt;title.toLowerCase()&lt;/b&gt;&lt;br&gt;&lt;b&gt;excerpt.toLowerCase()&lt;/b&gt;&lt;br&gt;&lt;b&gt;searchTerm.toLowerCase()&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="130" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="match-condition" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="title.includes(searchTerm)&lt;br&gt;||&lt;br&gt;excerpt.includes(searchTerm)?" vertex="1">
+          <mxGeometry height="100" width="240" x="110" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="add-result" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Tambahkan ke hasil&lt;br&gt;&lt;b&gt;results.push(news)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="50" width="180" x="140" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="increment" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;i = i + 1&lt;/b&gt;&lt;br&gt;(Lanjut ke data berikutnya)" vertex="1">
+          <mxGeometry height="50" width="160" x="150" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="return-results" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Return &lt;b&gt;searchedNews&lt;/b&gt;&lt;br&gt;(Array hasil pencarian)" vertex="1">
+          <mxGeometry height="60" width="180" x="570" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="pagination" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="TAHAP 3: PAGINATION&lt;br&gt;&lt;b&gt;currentNews =&lt;/b&gt;&lt;br&gt;&lt;b&gt;searchedNews.slice(start, end)&lt;/b&gt;&lt;br&gt;(6 item per halaman)" vertex="1">
+          <mxGeometry height="90" width="210" x="555" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="render-ui" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Render ke UI&lt;br&gt;(Tampilkan hasil di halaman)" vertex="1">
+          <mxGeometry height="60" width="180" x="570" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" value="END" vertex="1">
+          <mxGeometry height="50" width="150" x="585" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="import-json">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" edge="1" parent="1" source="import-json" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="user-input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" edge="1" parent="1" source="user-input" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="filter-category">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" edge="1" parent="1" source="filter-category" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="search-init">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow5" edge="1" parent="1" source="search-init" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="loop-condition">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow6" edge="1" parent="1" source="loop-condition" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="get-item">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow6-label" connectable="0" parent="arrow6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=11;" value="YA" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow7" edge="1" parent="1" source="loop-condition" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="return-results">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow7-label" connectable="0" parent="arrow7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=11;" value="TIDAK" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow8" edge="1" parent="1" source="get-item" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="normalize">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow9" edge="1" parent="1" source="normalize" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="match-condition">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow10" edge="1" parent="1" source="match-condition" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="add-result">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow10-label" connectable="0" parent="arrow10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=11;" value="YA" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow11" edge="1" parent="1" source="match-condition" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="increment">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="890" />
+              <mxPoint x="390" y="1075" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow11-label" connectable="0" parent="arrow11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=11;" value="TIDAK" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="1" as="geometry">
+            <mxPoint x="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow12" edge="1" parent="1" source="add-result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="increment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow13" edge="1" parent="1" source="increment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;dashPattern=5 5;" target="loop-condition">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="70" y="1075" />
+              <mxPoint x="70" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow13-label" connectable="0" parent="arrow13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=10;backgroundColor=#ffffff;" value="LOOP KEMBALI" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="1" as="geometry">
+            <mxPoint x="10" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow14" edge="1" parent="1" source="return-results" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="pagination">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow15" edge="1" parent="1" source="pagination" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="render-ui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow16" edge="1" parent="1" source="render-ui" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-box" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;fontStyle=0;fontSize=10;" value="&lt;b&gt;KETERANGAN:&lt;/b&gt;&lt;br&gt;Hijau = Start/End&lt;br&gt;Biru = Proses Data&lt;br&gt;Kuning = Input/Output&lt;br&gt;Ungu = Filter/Pagination&lt;br&gt;Merah Muda = Algoritma Utama&lt;br&gt;Orange = Decision/Kondisi" vertex="1">
+          <mxGeometry height="100" width="160" x="100" y="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

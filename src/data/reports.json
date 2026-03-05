@@ -1,0 +1,139 @@
+{
+  "reportTypes": [
+    {
+      "id": 1,
+      "title": "Pengaduan Pelayanan",
+      "description": "Sampaikan keluhan atau masukan terkait pelayanan publik",
+      "icon": "alert-circle",
+      "color": "blue",
+      "fields": [
+        { "name": "nama", "label": "Nama Lengkap", "type": "text", "required": true },
+        { "name": "email", "label": "Email", "type": "email", "required": true },
+        { "name": "phone", "label": "No. Telepon", "type": "tel", "required": true },
+        { "name": "jenis", "label": "Jenis Pengaduan", "type": "select", "required": true, "options": ["Pelayanan Lambat", "Sikap Petugas", "Fasilitas Tidak Memadai", "Prosedur Berbelit", "Lainnya"] },
+        { "name": "lokasi", "label": "Lokasi/Unit Kerja", "type": "text", "required": true },
+        { "name": "tanggal", "label": "Tanggal Kejadian", "type": "date", "required": true },
+        { "name": "uraian", "label": "Uraian Pengaduan", "type": "textarea", "required": true },
+        { "name": "bukti", "label": "Upload Bukti (Opsional)", "type": "file", "required": false }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Laporan Gratifikasi",
+      "description": "Laporkan penerimaan gratifikasi sesuai peraturan perundangan",
+      "icon": "gift",
+      "color": "green",
+      "fields": [
+        { "name": "nama", "label": "Nama Pelapor", "type": "text", "required": true },
+        { "name": "nip", "label": "NIP", "type": "text", "required": true },
+        { "name": "jabatan", "label": "Jabatan", "type": "text", "required": true },
+        { "name": "unit", "label": "Unit Kerja", "type": "text", "required": true },
+        { "name": "jenisGratifikasi", "label": "Jenis Gratifikasi", "type": "select", "required": true, "options": ["Uang", "Barang", "Diskon", "Fasilitas", "Lainnya"] },
+        { "name": "nilaiTaksiran", "label": "Nilai Taksiran", "type": "text", "required": true },
+        { "name": "pemberi", "label": "Nama Pemberi", "type": "text", "required": true },
+        { "name": "tanggalTerima", "label": "Tanggal Penerimaan", "type": "date", "required": true },
+        { "name": "kronologi", "label": "Kronologi", "type": "textarea", "required": true },
+        { "name": "bukti", "label": "Upload Bukti", "type": "file", "required": true }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Whistle Blowing System",
+      "description": "Laporkan dugaan pelanggaran atau tindak pidana korupsi secara aman",
+      "icon": "shield",
+      "color": "red",
+      "fields": [
+        { "name": "isAnonim", "label": "Laporan Anonim", "type": "checkbox", "required": false },
+        { "name": "nama", "label": "Nama (Opsional jika anonim)", "type": "text", "required": false },
+        { "name": "kontak", "label": "Kontak (Opsional jika anonim)", "type": "text", "required": false },
+        { "name": "jenisPelanggaran", "label": "Jenis Pelanggaran", "type": "select", "required": true, "options": ["Korupsi", "Penyalahgunaan Wewenang", "Gratifikasi Ilegal", "Benturan Kepentingan", "Pelanggaran Disiplin", "Lainnya"] },
+        { "name": "terlapor", "label": "Identitas Terlapor", "type": "text", "required": true },
+        { "name": "jabatanTerlapor", "label": "Jabatan Terlapor", "type": "text", "required": true },
+        { "name": "waktu", "label": "Waktu Kejadian", "type": "date", "required": true },
+        { "name": "tempat", "label": "Tempat Kejadian", "type": "text", "required": true },
+        { "name": "uraian", "label": "Uraian Lengkap Pelanggaran", "type": "textarea", "required": true },
+        { "name": "bukti", "label": "Upload Bukti Pendukung", "type": "file", "required": false }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Saran & Masukan",
+      "description": "Berikan saran dan masukan untuk peningkatan layanan",
+      "icon": "message-circle",
+      "color": "purple",
+      "fields": [
+        { "name": "nama", "label": "Nama", "type": "text", "required": true },
+        { "name": "email", "label": "Email", "type": "email", "required": true },
+        { "name": "kategori", "label": "Kategori", "type": "select", "required": true, "options": ["Program Kepemudaan", "Program Olahraga", "Pelayanan Publik", "Fasilitas", "Website", "Lainnya"] },
+        { "name": "saran", "label": "Saran & Masukan", "type": "textarea", "required": true }
+      ]
+    }
+  ],
+  "statistics": [
+    {
+      "title": "Total Laporan",
+      "value": "342",
+      "period": "2025",
+      "icon": "inbox",
+      "color": "blue"
+    },
+    {
+      "title": "Ditindaklanjuti",
+      "value": "298",
+      "period": "87%",
+      "icon": "check-circle",
+      "color": "green"
+    },
+    {
+      "title": "Dalam Proses",
+      "value": "28",
+      "period": "8%",
+      "icon": "clock",
+      "color": "orange"
+    },
+    {
+      "title": "Rata-rata Respon",
+      "value": "3 Hari",
+      "period": "2025",
+      "icon": "zap",
+      "color": "purple"
+    }
+  ],
+  "recentReports": [
+    {
+      "id": "LPR-2026-001",
+      "type": "Pengaduan Pelayanan",
+      "status": "Dalam Proses",
+      "date": "2026-01-12",
+      "response_time": "1 hari"
+    },
+    {
+      "id": "LPR-2026-002",
+      "type": "Saran & Masukan",
+      "status": "Selesai",
+      "date": "2026-01-10",
+      "response_time": "2 hari"
+    },
+    {
+      "id": "LPR-2025-340",
+      "type": "Pengaduan Pelayanan",
+      "status": "Selesai",
+      "date": "2025-12-28",
+      "response_time": "3 hari"
+    }
+  ],
+  "guidelines": [
+    "Sampaikan laporan dengan jelas dan lengkap",
+    "Sertakan bukti pendukung jika tersedia",
+    "Gunakan bahasa yang sopan dan santun",
+    "Laporan akan ditindaklanjuti maksimal 3x24 jam",
+    "Anda akan menerima nomor tiket untuk tracking",
+    "Kerahasiaan pelapor akan dijaga"
+  ],
+  "contact": {
+    "phone": "(0751) 12345",
+    "email": "pengaduan@disporasumbar.go.id",
+    "whatsapp": "0812-3456-7890",
+    "hours": "Senin - Jumat, 08:00 - 16:00 WIB"
+  }
+}

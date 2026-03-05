@@ -1,0 +1,242 @@
+┌─────────────────────────────────────────────────────────────────┐
+│                WIREFRAME DETAIL BERITA MOBILE                   │
+│                       (375px width)                             │
+└─────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ ╔═══════════════════════════════════════════════════════════╗ │
+│ ║ [Logo]  DINAS PEMUDA DAN OLAHRAGA         [☰]            ║ │
+│ ║         Provinsi Sumatera Barat                           ║ │
+│ ╚═══════════════════════════════════════════════════════════╝ │
+├───────────────────────────────────────────────────────────────┤
+│ ┌───────────────────────────────────────────────────────────┐ │
+│ │ Beranda / Berita / Prestasi                               │ │
+│ └───────────────────────────────────────────────────────────┘ │
+├───────────────────────────────────────────────────────────────┤
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ [Badge: Prestasi]                                       │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│  Atlet Sumbar Raih Medali Emas                               │
+│  di Kejuaraan Nasional 2025                                  │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ 📅 20 Januari 2025                                      │ │
+│ │ 👤 Admin Dispora                                        │ │
+│ │ 👁 1,234 views                                          │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │                                                         │ │
+│ │                                                         │ │
+│ │              [GAMBAR UTAMA BERITA]                      │ │
+│ │                                                         │ │
+│ │                                                         │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ [Share: FB] [Share: WA] [Share: TW] [Copy Link]        │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│ ───────────────────────────────────────────────────────────  │
+│                                                               │
+│  Lorem ipsum dolor sit amet, consectetur adipiscing          │
+│  elit. Duis aute irure dolor in reprehenderit in            │
+│  voluptate velit esse cillum dolore eu fugiat nulla          │
+│  pariatur.                                                    │
+│                                                               │
+│  Excepteur sint occaecat cupidatat non proident,             │
+│  sunt in culpa qui officia deserunt mollit anim id           │
+│  est laborum.                                                 │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │                                                         │ │
+│ │           [GAMBAR PENDUKUNG 1]                          │ │
+│ │                                                         │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│  Sed ut perspiciatis unde omnis iste natus error sit         │
+│  voluptatem accusantium doloremque laudantium.               │
+│                                                               │
+│  Totam rem aperiam, eaque ipsa quae ab illo inventore        │
+│  veritatis et quasi architecto beatae vitae dicta            │
+│  sunt explicabo.                                              │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │                                                         │ │
+│ │           [GAMBAR PENDUKUNG 2]                          │ │
+│ │                                                         │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│  Nemo enim ipsam voluptatem quia voluptas sit                │
+│  aspernatur aut odit aut fugit, sed quia consequuntur        │
+│  magni dolores eos qui ratione voluptatem sequi              │
+│  nesciunt.                                                    │
+│                                                               │
+│ ───────────────────────────────────────────────────────────  │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ 🏷️ Tags: #Prestasi #Atlet #MedaliEmas                   │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+├───────────────────────────────────────────────────────────────┤
+│                                                               │
+│  ═══════════ BERITA TERKAIT ═══════════                      │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ [Img] │ Pembukaan PPOP 2025                            │ │
+│ │       │ 📅 18 Jan 2025                                  │ │
+│ │       │ [Baca →]                                        │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ [Img] │ Kejuaraan Olahraga Pelajar                     │ │
+│ │       │ 📅 15 Jan 2025                                  │ │
+│ │       │ [Baca →]                                        │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ [Img] │ Program Beasiswa Atlet                         │ │
+│ │       │ 📅 12 Jan 2025                                  │ │
+│ │       │ [Baca →]                                        │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+│            [Lihat Berita Lainnya]                            │
+│                                                               │
+├───────────────────────────────────────────────────────────────┤
+│ ╔═══════════════════════════════════════════════════════════╗ │
+│ ║                      FOOTER                               ║ │
+│ ║ © 2025 Dinas Pemuda dan Olahraga Sumbar                  ║ │
+│ ╚═══════════════════════════════════════════════════════════╝ │
+└───────────────────────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   WIREFRAME DETAIL BERITA DESKTOP                       │
+│                          (1200px+ width)                                │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ╔═══════════════════════════════════════════════════════════════════╗   │
+│ ║ [Logo] DINAS PEMUDA & OLAHRAGA SUMBAR        [🔍 Search...]      ║   │
+│ ╠═══════════════════════════════════════════════════════════════════╣   │
+│ ║ [Beranda] [Profil▾] [Berita] [Galeri] [Layanan] [PPID] [Kontak] ║   │
+│ ╚═══════════════════════════════════════════════════════════════════╝   │
+├─────────────────────────────────────────────────────────────────────────┤
+│ ┌───────────────────────────────────────────────────────────────────┐   │
+│ │ Beranda / Berita / Prestasi                                       │   │
+│ └───────────────────────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│ ┌────────────────────────────────┬──────────────────────────────────┐  │
+│ │ KONTEN UTAMA (70%)             │  SIDEBAR (30%)                   │  │
+│ │                                │                                  │  │
+│ │ ┌────────────────────────────┐ │ ┌──────────────────────────────┐│  │
+│ │ │ [Badge: Prestasi]          │ │ │ 📌 BERITA POPULER            ││  │
+│ │ └────────────────────────────┘ │ │                              ││  │
+│ │                                │ │ 1. Atlet PPLP Raih...        ││  │
+│ │ Atlet Sumbar Raih Medali Emas  │ │    👁 2,500 views            ││  │
+│ │ di Kejuaraan Nasional 2025     │ │                              ││  │
+│ │                                │ │ 2. Pembukaan PPOP...         ││  │
+│ │ ┌────────────────────────────┐ │ │    👁 1,800 views            ││  │
+│ │ │ 📅 20 Jan 2025             │ │ │                              ││  │
+│ │ │ 👤 Admin Dispora           │ │ │ 3. Beasiswa Atlet...         ││  │
+│ │ │ 👁 1,234 views             │ │ │    👁 1,200 views            ││  │
+│ │ └────────────────────────────┘ │ │                              ││  │
+│ │                                │ └──────────────────────────────┘│  │
+│ │ ┌────────────────────────────┐ │                                  │  │
+│ │ │                            │ │ ┌──────────────────────────────┐│  │
+│ │ │                            │ │ │ 🏷️ KATEGORI                  ││  │
+│ │ │  [GAMBAR UTAMA BERITA]     │ │ │                              ││  │
+│ │ │     (Full Width)           │ │ │ • Prestasi (45)              ││  │
+│ │ │                            │ │ │ • Program (28)               ││  │
+│ │ │                            │ │ │ • Event (32)                 ││  │
+│ │ └────────────────────────────┘ │ │ • Info Publik (18)           ││  │
+│ │                                │ │ • Pengumuman (12)            ││  │
+│ │ ┌────────────────────────────┐ │ └──────────────────────────────┘│  │
+│ │ │ [FB] [WA] [TW] [Copy Link] │ │                                  │  │
+│ │ └────────────────────────────┘ │ ┌──────────────────────────────┐│  │
+│ │                                │ │ 📅 AGENDA                     ││  │
+│ │ ──────────────────────────────│ │                              ││  │
+│ │                                │ │ 25 Jan: Kejuaraan Pelajar    ││  │
+│ │ Lorem ipsum dolor sit amet,    │ │ 01 Feb: Pelatihan Pelatih    ││  │
+│ │ consectetur adipiscing elit.   │ │ 10 Feb: Seleksi PPLP         ││  │
+│ │ Duis aute irure dolor in       │ │                              ││  │
+│ │ reprehenderit in voluptate.    │ └──────────────────────────────┘│  │
+│ │                                │                                  │  │
+│ │ Excepteur sint occaecat        │ ┌──────────────────────────────┐│  │
+│ │ cupidatat non proident, sunt   │ │ 🔗 TAUTAN TERKAIT            ││  │
+│ │ in culpa qui officia deserunt. │ │                              ││  │
+│ │                                │ │ • PPID                       ││  │
+│ │ ┌─────────┬─────────┐          │ │ • Layanan PPLP              ││  │
+│ │ │ [Img 1] │ [Img 2] │          │ │ • Download Formulir         ││  │
+│ │ │         │         │          │ │ • Kontak Kami               ││  │
+│ │ └─────────┴─────────┘          │ └──────────────────────────────┘│  │
+│ │                                │                                  │  │
+│ │ Sed ut perspiciatis unde       │                                  │  │
+│ │ omnis iste natus error sit     │                                  │  │
+│ │ voluptatem accusantium.        │                                  │  │
+│ │                                │                                  │  │
+│ │ Totam rem aperiam, eaque       │                                  │  │
+│ │ ipsa quae ab illo inventore    │                                  │  │
+│ │ veritatis et quasi architecto. │                                  │  │
+│ │                                │                                  │  │
+│ │ ──────────────────────────────│                                  │  │
+│ │                                │                                  │  │
+│ │ ┌────────────────────────────┐ │                                  │  │
+│ │ │ 🏷️ Tags: #Prestasi #Atlet  │ │                                  │  │
+│ │ │ #MedaliEmas #PPLP          │ │                                  │  │
+│ │ └────────────────────────────┘ │                                  │  │
+│ │                                │                                  │  │
+│ └────────────────────────────────┴──────────────────────────────────┘  │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│                    ═══════════ BERITA TERKAIT ═══════════              │
+│                                                                         │
+│ ┌─────────────┬─────────────┬─────────────┬─────────────┐            │
+│ │ [Img]       │ [Img]       │ [Img]       │ [Img]       │            │
+│ │             │             │             │             │            │
+│ │ Pembukaan   │ Kejuaraan   │ Beasiswa    │ Pelatihan   │            │
+│ │ PPOP 2025   │ Pelajar     │ Atlet       │ Pelatih     │            │
+│ │             │             │             │             │            │
+│ │ 📅 18/01    │ 📅 15/01    │ 📅 12/01    │ 📅 10/01    │            │
+│ │             │             │             │             │            │
+│ │ [Baca →]    │ [Baca →]    │ [Baca →]    │ [Baca →]    │            │
+│ └─────────────┴─────────────┴─────────────┴─────────────┘            │
+│                                                                         │
+│                      [Lihat Semua Berita]                              │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│ ╔═══════════════════════════════════════════════════════════════════╗ │
+│ ║                            FOOTER                                 ║ │
+│ ║ © 2025 Dinas Pemuda dan Olahraga Sumatera Barat                  ║ │
+│ ╚═══════════════════════════════════════════════════════════════════╝ │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+KETERANGAN ELEMEN DETAIL BERITA:
+═════════════════════════════════
+1. BREADCRUMB: Navigasi hierarki halaman (Beranda > Berita > Kategori)
+2. BADGE KATEGORI: Indikator kategori berita (Prestasi, Program, dll)
+3. JUDUL BERITA: Headline utama dengan typography yang jelas
+4. META INFO: Tanggal publikasi, author, jumlah views
+5. FEATURED IMAGE: Gambar utama berita dalam ukuran besar
+6. SHARE BUTTONS: Tombol berbagi ke media sosial
+7. KONTEN ARTIKEL: Paragraf dengan readability optimal
+   - Line height: 1.6-1.8
+   - Font size: 16-18px (mobile), 18-20px (desktop)
+   - Max width: 680px untuk kemudahan membaca
+8. GAMBAR PENDUKUNG: Foto/ilustrasi tambahan dalam konten
+9. TAGS: Label/hashtag terkait berita
+10. SIDEBAR (Desktop Only):
+    - Berita Populer (most viewed)
+    - Kategori dengan counter
+    - Agenda/Event mendatang
+    - Tautan quick links
+11. BERITA TERKAIT: Grid berita dengan kategori sama
+12. LAYOUT: 
+    - Mobile: Single column, stack vertical
+    - Desktop: 2 kolom (70% konten + 30% sidebar)
