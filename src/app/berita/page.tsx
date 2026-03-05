@@ -254,8 +254,8 @@ export default function BeritaPage() {
                     <div
                       key={news.id}
                       className={`transition-all duration-700 absolute inset-0 p-2 sm:p-6 lg:p-12 flex flex-col justify-center ${index === currentSlide
-                          ? 'opacity-100 z-10'
-                          : 'opacity-0 z-0 pointer-events-none'
+                        ? 'opacity-100 z-10'
+                        : 'opacity-0 z-0 pointer-events-none'
                         }`}
                     >
                       <span className="inline-block bg-blue-600 text-white px-2 py-0.5 rounded-full text-[10px] sm:text-sm font-medium mb-1.5 sm:mb-4 w-fit">
@@ -354,8 +354,8 @@ export default function BeritaPage() {
                       key={index}
                       onClick={() => goToSlide(index)}
                       className={`transition-all duration-300 rounded-full ${index === currentSlide
-                          ? 'w-8 h-3 bg-blue-600'
-                          : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                        ? 'w-8 h-3 bg-blue-600'
+                        : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
                         }`}
                       aria-label={`Pergi ke slide ${index + 1}`}
                     />
@@ -407,8 +407,8 @@ export default function BeritaPage() {
               key={category.id}
               onClick={() => setActiveFilter(category.id)}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${activeFilter === category.id
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                 }`}
             >
               {category.name}
@@ -532,8 +532,8 @@ export default function BeritaPage() {
                           key={pageNumber}
                           onClick={() => setCurrentPage(pageNumber)}
                           className={`px-4 py-2 rounded-lg font-medium ${currentPage === pageNumber
-                              ? 'bg-blue-600 text-white'
-                              : 'border border-gray-300 text-gray-600 hover:bg-gray-50'
+                            ? 'bg-blue-600 text-white'
+                            : 'border border-gray-300 text-gray-600 hover:bg-gray-50'
                             }`}
                         >
                           {pageNumber}

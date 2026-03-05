@@ -214,73 +214,8 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
 
               {/* Content */}
               <div className="prose prose-lg max-w-none mb-12 scroll-animate">
-                <div className="text-xl text-gray-700 mb-6 font-medium leading-relaxed">
+                <div className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
                   {news.excerpt}
-                </div>
-
-                <div className="text-gray-700 leading-relaxed space-y-4">
-                  <p>
-                    Padang - Dinas Pemuda dan Olahraga Provinsi Sumatera Barat terus berkomitmen dalam mengembangkan
-                    potensi pemuda dan prestasi olahraga di daerah. Melalui berbagai program strategis, kami berupaya
-                    menciptakan ekosistem yang kondusif bagi pertumbuhan dan pengembangan talenta muda.
-                  </p>
-
-                  <p>
-                    Kegiatan ini merupakan bagian dari upaya berkelanjutan untuk meningkatkan kualitas pembinaan atlet
-                    dan pengembangan infrastruktur olahraga di Sumatera Barat. Dengan dukungan penuh dari Pemerintah
-                    Provinsi, kami optimis dapat mencapai target yang telah ditetapkan.
-                  </p>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Tujuan dan Manfaat</h2>
-
-                  <p>
-                    Program ini dirancang dengan tujuan utama untuk memberikan kesempatan seluas-luasnya bagi para
-                    atlet muda berbakat dalam mengembangkan kemampuan mereka. Melalui pembinaan yang terstruktur dan
-                    sistematis, diharapkan dapat lahir atlet-atlet berprestasi yang mampu mengharumkan nama Sumatera
-                    Barat di tingkat nasional maupun internasional.
-                  </p>
-
-                  <ul className="list-disc pl-6 space-y-2">
-                    <li>Meningkatkan kualitas pembinaan atlet sejak dini</li>
-                    <li>Menyediakan fasilitas dan sarana prasarana yang memadai</li>
-                    <li>Mengembangkan program pelatihan yang terstandarisasi</li>
-                    <li>Membangun kerjasama dengan berbagai pihak terkait</li>
-                    <li>Menciptakan ekosistem olahraga yang berkelanjutan</li>
-                  </ul>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Pelaksanaan Program</h2>
-
-                  <p>
-                    Pelaksanaan kegiatan ini melibatkan berbagai stakeholder termasuk pelatih profesional,
-                    tenaga medis, dan ahli gizi untuk memastikan pembinaan yang komprehensif. Setiap atlet akan
-                    mendapatkan program latihan yang disesuaikan dengan kebutuhan dan potensi masing-masing.
-                  </p>
-
-                  <p>
-                    Tim teknis telah mempersiapkan segala sesuatunya dengan matang untuk memastikan kelancaran
-                    seluruh rangkaian kegiatan. Monitoring dan evaluasi akan dilakukan secara berkala untuk
-                    memastikan pencapaian target yang telah ditetapkan.
-                  </p>
-
-                  <blockquote className="border-l-4 border-blue-600 pl-6 italic text-gray-700 my-6">
-                    &quot;Investasi terbaik adalah investasi pada generasi muda. Melalui pembinaan olahraga yang baik,
-                    kita tidak hanya mencetak atlet juara, tetapi juga membangun karakter pemuda yang tangguh dan
-                    berprestasi.&quot;
-                  </blockquote>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Harapan ke Depan</h2>
-
-                  <p>
-                    Kedepannya, Dinas Pemuda dan Olahraga Provinsi Sumatera Barat akan terus meningkatkan kualitas
-                    program-program pembinaan. Kami berharap dengan dukungan semua pihak, visi untuk menjadikan
-                    Sumatera Barat sebagai salah satu pusat pengembangan olahraga prestasi di Indonesia dapat terwujud.
-                  </p>
-
-                  <p>
-                    Kami mengajak seluruh masyarakat, khususnya para orang tua yang memiliki anak berbakat di bidang
-                    olahraga, untuk tidak ragu memanfaatkan program-program yang telah kami sediakan. Mari bersama-sama
-                    membangun masa depan olahraga Sumatera Barat yang lebih gemilang.
-                  </p>
                 </div>
               </div>
 
