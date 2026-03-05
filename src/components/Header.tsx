@@ -43,7 +43,7 @@ const Header = () => {
           </Link>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={toggleMenu}
             className="lg:hidden flex items-center justify-center p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Toggle mobile menu"
@@ -129,10 +129,10 @@ const Header = () => {
                 <Link href="/ppid" className="block px-4 py-2.5 hover:bg-blue-800 transition-all duration-200 text-sm uppercase rounded" onClick={() => setIsMenuOpen(false)}>
                   PPID
                 </Link>
-                
+
                 {/* Unduh & Lapor Dropdown */}
                 <div>
-                  <button 
+                  <button
                     onClick={() => setIsUnduhOpen(!isUnduhOpen)}
                     className="w-full text-left px-4 py-2.5 hover:bg-blue-800 transition-all duration-200 font-medium text-sm uppercase tracking-wide flex items-center justify-between rounded"
                   >
