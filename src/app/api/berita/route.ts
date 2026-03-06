@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request: Request) {
     try {
-        const response = await fetch('https://beritabe.onrender.com/berita', {
+        const { searchParams } = new URL(request.url);
+        const page = searchParams.get('page') || '1';
+        const limit = searchParams.get('limit') || '100';
+
+        const response = await fetch(`https://beritabe.onrender.com/berita?page=${page}&limit=${limit}`, {
             headers: {
                 'Accept': 'application/json',
             },

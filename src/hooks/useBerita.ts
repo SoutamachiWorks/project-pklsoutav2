@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ApiBeritaItem, NewsItem } from '@/types/news';
+import { ApiBeritaItem, ApiBeritaResponse, NewsItem } from '@/types/news';
 
 const API_URL = '/api/berita';
 
@@ -62,16 +62,35 @@ export function useBerita() {
                 setLoading(true);
                 setError(null);
 
-                const response = await fetch(API_URL);
+                // Fetch halaman pertama dengan limit maksimal
+                const response = await fetch(`${API_URL}?page=1&limit=100`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                const data: ApiBeritaItem[] = await response.json();
+                const result: ApiBeritaResponse = await response.json();
+                let allData: ApiBeritaItem[] = result.data || [];
+
+                // Jika ada lebih dari 1 halaman, fetch sisa halaman secara paralel
+                if (result.totalPages > 1) {
+                    const remainingPages = [];
+                    for (let page = 2; page <= result.totalPages; page++) {
+                        remainingPages.push(
+                            fetch(`${API_URL}?page=${page}&limit=100`)
+                                .then(res => {
+                                    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                                    return res.json();
+                                })
+                                .then((res: ApiBeritaResponse) => res.data || [])
+                        );
+                    }
+                    const additionalData = await Promise.all(remainingPages);
+                    allData = [...allData, ...additionalData.flat()];
+                }
 
                 if (!isCancelled) {
-                    const transformedData = transformApiData(data);
+                    const transformedData = transformApiData(allData);
                     setBerita(transformedData);
                 }
             } catch (err) {

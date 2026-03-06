@@ -29,6 +29,15 @@ export interface NewsItem {
 }
 
 /**
+ * Interface untuk response API berita (format baru - paginated object)
+ */
+export interface ApiBeritaResponse {
+  data: ApiBeritaItem[];
+  totalPages: number;
+  currentPage: number;
+}
+
+/**
  * Type untuk array berita
  */
 export type NewsData = NewsItem[];
